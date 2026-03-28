@@ -29,24 +29,94 @@ export function plotTickFont(color: string): { family: string; size: number; col
   };
 }
 
-/** Shared axis grid / spine styling for Plotly (RGB + linewidth 3). */
-export function plotlyAxisStrokes(palette: ChartPalette): {
-  gridcolor: string;
-  zerolinecolor: string;
-  zerolinewidth: number;
+/** Plot frame: visible border on all sides (`mirror: "all"` on X draws top line too). */
+export function plotlyAxisFrameX(palette: ChartPalette): {
   linecolor: string;
   linewidth: number;
   tickwidth: number;
   tickcolor: string;
+  zerolinecolor: string;
+  zerolinewidth: number;
+  mirror: "all";
+  showline: boolean;
 } {
   return {
-    gridcolor: palette.rgbAxisGrid,
-    zerolinecolor: palette.rgbAxisGridStrong,
-    zerolinewidth: CHART_LINE_WIDTH,
-    linecolor: palette.rgbAxisGridStrong,
+    linecolor: palette.axisBorderRgb,
     linewidth: CHART_LINE_WIDTH,
     tickwidth: CHART_LINE_WIDTH,
-    tickcolor: palette.rgbAxisGridStrong,
+    tickcolor: palette.axisBorderRgb,
+    zerolinecolor: palette.axisGridBlackRgb,
+    zerolinewidth: CHART_LINE_WIDTH,
+    mirror: "all",
+    showline: true,
+  };
+}
+
+/**
+ * Y-axis frame. Use `mirror: false` when a second Y axis is drawn on the right
+ * so the primary axis does not duplicate the right spine.
+ */
+export function plotlyAxisFrameY(
+  palette: ChartPalette,
+  opts?: { mirror?: "all" | false },
+): {
+  linecolor: string;
+  linewidth: number;
+  tickwidth: number;
+  tickcolor: string;
+  zerolinecolor: string;
+  zerolinewidth: number;
+  mirror: "all" | false;
+  showline: boolean;
+} {
+  return {
+    linecolor: palette.axisBorderRgb,
+    linewidth: CHART_LINE_WIDTH,
+    tickwidth: CHART_LINE_WIDTH,
+    tickcolor: palette.axisBorderRgb,
+    zerolinecolor: palette.axisGridBlackRgb,
+    zerolinewidth: CHART_LINE_WIDTH,
+    mirror: opts?.mirror === false ? false : "all",
+    showline: true,
+  };
+}
+
+/** Plotly 3D scene axes: black border line, grey vs black grid. */
+export function plotlySceneAxis(
+  palette: ChartPalette,
+  grid: "grey" | "black",
+): {
+  backgroundcolor: string;
+  showbackground: boolean;
+  gridcolor: string;
+  gridwidth: number;
+  showgrid: boolean;
+  linecolor: string;
+  linewidth: number;
+  zerolinecolor: string;
+  zerolinewidth: number;
+} {
+  return {
+    backgroundcolor: "rgba(0,0,0,0)",
+    showbackground: true,
+    gridcolor: grid === "grey" ? palette.axisGridGreyRgb : palette.axisGridBlackRgb,
+    gridwidth: CHART_LINE_WIDTH,
+    showgrid: true,
+    linecolor: palette.axisBorderRgb,
+    linewidth: CHART_LINE_WIDTH,
+    zerolinecolor: palette.axisGridBlackRgb,
+    zerolinewidth: CHART_LINE_WIDTH,
+  };
+}
+
+/** ECharts `grid` rect: visible border on all four sides of the plotting area. */
+export function echartsGridBorder(palette: ChartPalette): {
+  borderColor: string;
+  borderWidth: number;
+} {
+  return {
+    borderColor: palette.axisBorderRgb,
+    borderWidth: CHART_LINE_WIDTH,
   };
 }
 
@@ -74,10 +144,12 @@ export type ChartPalette = {
   rgbAxisTitle: string;
   /** Tick / legend item labels (explicit RGB). */
   rgbAxisTick: string;
-  /** Major gridlines (explicit RGB). */
-  rgbAxisGrid: string;
-  /** Axis lines, zero lines, slider borders (explicit RGB). */
-  rgbAxisGridStrong: string;
+  /** Plot outer border + tick marks (black on light theme). */
+  axisBorderRgb: string;
+  /** Gridlines for one axis direction (grey). */
+  axisGridGreyRgb: string;
+  /** Gridlines for the other axis direction (black on light theme). */
+  axisGridBlackRgb: string;
   plotBg: string;
   accentOrange: string;
   tooltipBg: string;
@@ -92,8 +164,9 @@ const light: ChartPalette = {
   gridStrong: "#d2d2d7",
   rgbAxisTitle: "rgb(29, 29, 31)",
   rgbAxisTick: "rgb(110, 110, 115)",
-  rgbAxisGrid: "rgb(229, 229, 234)",
-  rgbAxisGridStrong: "rgb(210, 210, 215)",
+  axisBorderRgb: "rgb(0, 0, 0)",
+  axisGridGreyRgb: "rgb(180, 180, 180)",
+  axisGridBlackRgb: "rgb(0, 0, 0)",
   plotBg: "rgba(255,255,255,0)",
   accentOrange: "#ff9500",
   tooltipBg: "rgba(255, 255, 255, 0.96)",
@@ -108,8 +181,9 @@ const dark: ChartPalette = {
   gridStrong: "#3d4f66",
   rgbAxisTitle: "rgb(231, 236, 243)",
   rgbAxisTick: "rgb(139, 155, 180)",
-  rgbAxisGrid: "rgb(45, 58, 77)",
-  rgbAxisGridStrong: "rgb(61, 79, 102)",
+  axisBorderRgb: "rgb(220, 225, 235)",
+  axisGridGreyRgb: "rgb(90, 98, 115)",
+  axisGridBlackRgb: "rgb(160, 170, 190)",
   plotBg: "rgba(255,255,255,0)",
   accentOrange: "#ff9f4a",
   tooltipBg: "rgba(26, 35, 50, 0.96)",

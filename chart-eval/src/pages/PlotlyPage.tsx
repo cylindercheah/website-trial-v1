@@ -17,8 +17,10 @@ import {
   CHART_LINE_WIDTH,
   getChartPalette,
   plotFont,
-  plotlyAxisStrokes,
+  plotlyAxisFrameX,
+  plotlyAxisFrameY,
   plotlyBold,
+  plotlySceneAxis,
   plotTickFont,
 } from "../theme/chartPalette";
 import { useTheme } from "../theme/ThemeContext";
@@ -90,7 +92,12 @@ export function PlotlyPage(): JSX.Element {
     sankeyConfig,
   } = useMemo(() => {
       const palette = getChartPalette(theme);
-      const ax = plotlyAxisStrokes(palette);
+      const frameX = plotlyAxisFrameX(palette);
+      const frameY = plotlyAxisFrameY(palette);
+      const frameYDual = plotlyAxisFrameY(palette, { mirror: false });
+      const sceneAxX = plotlySceneAxis(palette, "grey");
+      const sceneAxY = plotlySceneAxis(palette, "black");
+      const sceneAxZ = plotlySceneAxis(palette, "grey");
       const mSize = (bw: number): number =>
         (narrow ? 4 : 0) + 8 + (bw / 64) * 10;
 
@@ -119,7 +126,8 @@ export function PlotlyPage(): JSX.Element {
           marker: {
             size: rows.map((r) => mSize(r.bitWidth)),
             color: architectureColor(arch),
-            line: { width: CHART_LINE_WIDTH, color: palette.markerOutline },
+            // Thin stroke so legend glyphs read as dots, not dot + heavy ring.
+            line: { width: 1, color: palette.markerOutline },
           },
         });
       }
@@ -130,29 +138,21 @@ export function PlotlyPage(): JSX.Element {
       const lineDataInner: Data[] = [
         {
           type: "scatter",
-          mode: "lines+markers",
+          mode: "lines",
           name: "Fmax (MHz)",
           x: ks.map((r) => r.bitWidth),
           y: ks.map((r) => r.fmaxMhz),
           yaxis: "y",
           line: { color: architectureColor("kogge_stone"), width: CHART_LINE_WIDTH },
-          marker: {
-            size: 12,
-            line: { width: CHART_LINE_WIDTH, color: architectureColor("kogge_stone") },
-          },
         },
         {
           type: "scatter",
-          mode: "lines+markers",
+          mode: "lines",
           name: "Area (µm²)",
           x: ks.map((r) => r.bitWidth),
           y: ks.map((r) => r.areaUm2),
           yaxis: "y2",
           line: { color: "rgb(139, 69, 19)", width: CHART_LINE_WIDTH, dash: "dot" },
-          marker: {
-            size: 12,
-            line: { width: CHART_LINE_WIDTH, color: "rgb(139, 69, 19)" },
-          },
         },
       ];
 
@@ -168,13 +168,15 @@ export function PlotlyPage(): JSX.Element {
               font: plotFont(palette.rgbAxisTitle),
             },
             xaxis: {
-              ...ax,
+              ...frameX,
+              gridcolor: palette.axisGridGreyRgb,
               title: { text: plotlyBold("Fmax (MHz)"), font: plotFont(palette.rgbAxisTitle) },
               tickfont: plotTickFont(palette.rgbAxisTick),
-              ...(narrow ? {} : { rangeslider: { visible: true, bordercolor: palette.rgbAxisGridStrong } }),
+              ...(narrow ? {} : { rangeslider: { visible: true, bordercolor: palette.axisBorderRgb } }),
             },
             yaxis: {
-              ...ax,
+              ...frameY,
+              gridcolor: palette.axisGridBlackRgb,
               title: { text: plotlyBold("Power (mW)"), font: plotFont(palette.rgbAxisTitle) },
               tickfont: plotTickFont(palette.rgbAxisTick),
             },
@@ -200,13 +202,15 @@ export function PlotlyPage(): JSX.Element {
               font: plotFont(palette.rgbAxisTitle),
             },
             xaxis: {
-              ...ax,
+              ...frameX,
+              gridcolor: palette.axisGridGreyRgb,
               title: { text: plotlyBold("Fmax (MHz)"), font: plotFont(palette.rgbAxisTitle) },
               tickfont: plotTickFont(palette.rgbAxisTick),
-              rangeslider: { visible: true, bordercolor: palette.rgbAxisGridStrong },
+              rangeslider: { visible: true, bordercolor: palette.axisBorderRgb },
             },
             yaxis: {
-              ...ax,
+              ...frameY,
+              gridcolor: palette.axisGridBlackRgb,
               title: { text: plotlyBold("Power (mW)"), font: plotFont(palette.rgbAxisTitle) },
               tickfont: plotTickFont(palette.rgbAxisTick),
             },
@@ -234,26 +238,28 @@ export function PlotlyPage(): JSX.Element {
               font: plotFont(palette.rgbAxisTitle),
             },
             xaxis: {
-              ...ax,
+              ...frameX,
+              gridcolor: palette.axisGridGreyRgb,
               title: { text: plotlyBold("Bit width"), font: plotFont(palette.rgbAxisTitle) },
               tickfont: plotTickFont(palette.rgbAxisTick),
               dtick: 32,
-              ...(narrow ? {} : { rangeslider: { visible: true, bordercolor: palette.rgbAxisGridStrong } }),
+              ...(narrow ? {} : { rangeslider: { visible: true, bordercolor: palette.axisBorderRgb } }),
             },
             yaxis: {
-              ...ax,
+              ...frameYDual,
+              gridcolor: palette.axisGridBlackRgb,
               title: { text: plotlyBold("Fmax (MHz)"), font: plotFont(palette.rgbAxisTitle) },
               tickfont: plotTickFont(palette.rgbAxisTick),
               side: "left",
             },
             yaxis2: {
-              ...ax,
+              ...frameYDual,
+              gridcolor: "rgba(0,0,0,0)",
+              showgrid: false,
               title: { text: plotlyBold("Area (µm²)"), font: plotFont(palette.rgbAxisTitle) },
               tickfont: plotTickFont(palette.rgbAxisTick),
               overlaying: "y",
               side: "right",
-              gridcolor: "transparent",
-              showgrid: false,
             },
             legend: {
               orientation: "h",
@@ -276,26 +282,28 @@ export function PlotlyPage(): JSX.Element {
               font: plotFont(palette.rgbAxisTitle),
             },
             xaxis: {
-              ...ax,
+              ...frameX,
+              gridcolor: palette.axisGridGreyRgb,
               title: { text: plotlyBold("Bit width"), font: plotFont(palette.rgbAxisTitle) },
               dtick: 32,
               tickfont: plotTickFont(palette.rgbAxisTick),
-              rangeslider: { visible: true, bordercolor: palette.rgbAxisGridStrong },
+              rangeslider: { visible: true, bordercolor: palette.axisBorderRgb },
             },
             yaxis: {
-              ...ax,
+              ...frameYDual,
+              gridcolor: palette.axisGridBlackRgb,
               title: { text: plotlyBold("Fmax (MHz)"), font: plotFont(palette.rgbAxisTitle) },
               side: "left",
               tickfont: plotTickFont(palette.rgbAxisTick),
             },
             yaxis2: {
-              ...ax,
+              ...frameYDual,
+              gridcolor: "rgba(0,0,0,0)",
+              showgrid: false,
               title: { text: plotlyBold("Area (µm²)"), font: plotFont(palette.rgbAxisTitle) },
               tickfont: plotTickFont(palette.rgbAxisTick),
               overlaying: "y",
               side: "right",
-              gridcolor: "transparent",
-              showgrid: false,
             },
             legend: {
               orientation: "h",
@@ -349,13 +357,15 @@ export function PlotlyPage(): JSX.Element {
               font: plotFont(palette.rgbAxisTitle),
             },
             xaxis: {
-              ...ax,
+              ...frameX,
+              gridcolor: palette.axisGridGreyRgb,
               title: { text: plotlyBold("Architecture"), font: plotFont(palette.rgbAxisTitle) },
               tickangle: -28,
               tickfont: plotTickFont(palette.rgbAxisTick),
             },
             yaxis: {
-              ...ax,
+              ...frameY,
+              gridcolor: palette.axisGridBlackRgb,
               title: { text: plotlyBold("Power (mW)"), font: plotFont(palette.rgbAxisTitle) },
               tickfont: plotTickFont(palette.rgbAxisTick),
             },
@@ -372,13 +382,15 @@ export function PlotlyPage(): JSX.Element {
               font: plotFont(palette.rgbAxisTitle),
             },
             xaxis: {
-              ...ax,
+              ...frameX,
+              gridcolor: palette.axisGridGreyRgb,
               title: { text: plotlyBold("Architecture"), font: plotFont(palette.rgbAxisTitle) },
               tickangle: -18,
               tickfont: plotTickFont(palette.rgbAxisTick),
             },
             yaxis: {
-              ...ax,
+              ...frameY,
+              gridcolor: palette.axisGridBlackRgb,
               title: { text: plotlyBold("Power (mW)"), font: plotFont(palette.rgbAxisTitle) },
               tickfont: plotTickFont(palette.rgbAxisTick),
             },
@@ -415,12 +427,14 @@ export function PlotlyPage(): JSX.Element {
               font: plotFont(palette.rgbAxisTitle),
             },
             xaxis: {
-              ...ax,
+              ...frameX,
+              gridcolor: palette.axisGridGreyRgb,
               title: { text: plotlyBold("Bit width"), font: plotFont(palette.rgbAxisTitle) },
               tickfont: plotTickFont(palette.rgbAxisTick),
             },
             yaxis: {
-              ...ax,
+              ...frameY,
+              gridcolor: palette.axisGridBlackRgb,
               title: { text: plotlyBold("Architecture"), font: plotFont(palette.rgbAxisTitle) },
               tickfont: plotTickFont(palette.rgbAxisTick),
             },
@@ -436,12 +450,14 @@ export function PlotlyPage(): JSX.Element {
               font: plotFont(palette.rgbAxisTitle),
             },
             xaxis: {
-              ...ax,
+              ...frameX,
+              gridcolor: palette.axisGridGreyRgb,
               title: { text: plotlyBold("Bit width"), font: plotFont(palette.rgbAxisTitle) },
               tickfont: plotTickFont(palette.rgbAxisTick),
             },
             yaxis: {
-              ...ax,
+              ...frameY,
+              gridcolor: palette.axisGridBlackRgb,
               title: { text: plotlyBold("Architecture"), font: plotFont(palette.rgbAxisTitle) },
               tickfont: plotTickFont(palette.rgbAxisTick),
             },
@@ -514,7 +530,7 @@ export function PlotlyPage(): JSX.Element {
           marker: {
             size: rows.map((r) => mSize(r.bitWidth)),
             color: architectureColor(arch),
-            line: { width: CHART_LINE_WIDTH, color: palette.markerOutline },
+            line: { width: 1, color: palette.markerOutline },
           },
         });
       }
@@ -536,17 +552,17 @@ export function PlotlyPage(): JSX.Element {
             scene: {
               bgcolor: "rgba(0,0,0,0)",
               xaxis: {
-                ...ax,
+                ...sceneAxX,
                 title: { text: plotlyBold("Fmax (MHz)"), font: plotFont(palette.rgbAxisTitle) },
                 tickfont: plotTickFont(palette.rgbAxisTick),
               },
               yaxis: {
-                ...ax,
+                ...sceneAxY,
                 title: { text: plotlyBold("Power (mW)"), font: plotFont(palette.rgbAxisTitle) },
                 tickfont: plotTickFont(palette.rgbAxisTick),
               },
               zaxis: {
-                ...ax,
+                ...sceneAxZ,
                 title: { text: plotlyBold("Area (µm²)"), font: plotFont(palette.rgbAxisTitle) },
                 tickfont: plotTickFont(palette.rgbAxisTick),
               },
@@ -568,17 +584,17 @@ export function PlotlyPage(): JSX.Element {
             scene: {
               bgcolor: "rgba(0,0,0,0)",
               xaxis: {
-                ...ax,
+                ...sceneAxX,
                 title: { text: plotlyBold("Fmax (MHz)"), font: plotFont(palette.rgbAxisTitle) },
                 tickfont: plotTickFont(palette.rgbAxisTick),
               },
               yaxis: {
-                ...ax,
+                ...sceneAxY,
                 title: { text: plotlyBold("Power (mW)"), font: plotFont(palette.rgbAxisTitle) },
                 tickfont: plotTickFont(palette.rgbAxisTick),
               },
               zaxis: {
-                ...ax,
+                ...sceneAxZ,
                 title: { text: plotlyBold("Area (µm²)"), font: plotFont(palette.rgbAxisTitle) },
                 tickfont: plotTickFont(palette.rgbAxisTick),
               },
@@ -588,7 +604,7 @@ export function PlotlyPage(): JSX.Element {
       const { labels: tmLabels, parents: tmParents, values: tmValues } =
         ppaTreemapFlat("areaUm2");
       const treemapColors = [
-        palette.rgbAxisGridStrong,
+        palette.axisBorderRgb,
         ...ADDER_DEMO_ROWS.map((r) => architectureColor(r.architecture)),
       ];
       const treemapDataInner: Data[] = [

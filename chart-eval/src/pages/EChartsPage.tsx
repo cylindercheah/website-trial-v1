@@ -16,6 +16,7 @@ import {
 } from "../data/samplePpa";
 import {
   CHART_LINE_WIDTH,
+  echartsGridBorder,
   echartsTextStyle,
   getChartPalette,
   type ChartPalette,
@@ -119,8 +120,22 @@ export function EChartsPage(): JSX.Element {
         textStyle: echartsTextStyle(palette.rgbAxisTitle),
       },
       grid: narrow
-        ? { left: "14%", right: "8%", top: "20%", bottom: "44%", containLabel: true }
-        : { left: "12%", right: "6%", top: "18%", bottom: "30%", containLabel: true },
+        ? {
+            left: "14%",
+            right: "8%",
+            top: "20%",
+            bottom: "44%",
+            containLabel: true,
+            ...echartsGridBorder(palette),
+          }
+        : {
+            left: "12%",
+            right: "6%",
+            top: "18%",
+            bottom: "30%",
+            containLabel: true,
+            ...echartsGridBorder(palette),
+          },
       toolbox: echartsToolbox(palette, theme, narrow, "echarts-pareto", {
         dataZoom: { xAxisIndex: [0], yAxisIndex: [0] },
       }),
@@ -144,6 +159,7 @@ export function EChartsPage(): JSX.Element {
       legend: {
         bottom: 0,
         type: "scroll",
+        icon: "circle",
         textStyle: echartsTextStyle(palette.rgbAxisTick),
       },
       xAxis: {
@@ -155,11 +171,11 @@ export function EChartsPage(): JSX.Element {
         axisLabel: echartsTextStyle(palette.rgbAxisTick),
         nameTextStyle: echartsTextStyle(palette.rgbAxisTitle),
         axisLine: {
-          lineStyle: { color: palette.rgbAxisGridStrong, width: CHART_LINE_WIDTH },
+          lineStyle: { color: palette.axisBorderRgb, width: CHART_LINE_WIDTH },
         },
         splitLine: {
           lineStyle: {
-            color: palette.rgbAxisGrid,
+            color: palette.axisGridGreyRgb,
             width: CHART_LINE_WIDTH,
             type: "dashed",
           },
@@ -174,11 +190,11 @@ export function EChartsPage(): JSX.Element {
         axisLabel: echartsTextStyle(palette.rgbAxisTick),
         nameTextStyle: echartsTextStyle(palette.rgbAxisTitle),
         axisLine: {
-          lineStyle: { color: palette.rgbAxisGridStrong, width: CHART_LINE_WIDTH },
+          lineStyle: { color: palette.axisBorderRgb, width: CHART_LINE_WIDTH },
         },
         splitLine: {
           lineStyle: {
-            color: palette.rgbAxisGrid,
+            color: palette.axisGridBlackRgb,
             width: CHART_LINE_WIDTH,
             type: "dashed",
           },
@@ -201,7 +217,12 @@ export function EChartsPage(): JSX.Element {
         {
           query: { maxWidth: 640 },
           option: {
-            grid: { bottom: "46%", left: "16%", right: "10%" },
+            grid: {
+              bottom: "46%",
+              left: "16%",
+              right: "10%",
+              ...echartsGridBorder(palette),
+            },
             legend: {
               bottom: 4,
               type: "scroll",
@@ -231,8 +252,22 @@ export function EChartsPage(): JSX.Element {
         textStyle: echartsTextStyle(palette.rgbAxisTitle),
       },
       grid: narrow
-        ? { left: "16%", right: "18%", top: "20%", bottom: "42%", containLabel: true }
-        : { left: "12%", right: "14%", top: "18%", bottom: "24%", containLabel: true },
+        ? {
+            left: "16%",
+            right: "18%",
+            top: "20%",
+            bottom: "42%",
+            containLabel: true,
+            ...echartsGridBorder(palette),
+          }
+        : {
+            left: "12%",
+            right: "14%",
+            top: "18%",
+            bottom: "24%",
+            containLabel: true,
+            ...echartsGridBorder(palette),
+          },
       toolbox: echartsToolbox(palette, theme, narrow, "echarts-scaling", {
         dataZoom: { xAxisIndex: [0], yAxisIndex: false },
       }),
@@ -256,7 +291,15 @@ export function EChartsPage(): JSX.Element {
         nameTextStyle: echartsTextStyle(palette.rgbAxisTitle),
         axisLabel: echartsTextStyle(palette.rgbAxisTick),
         axisLine: {
-          lineStyle: { color: palette.rgbAxisGridStrong, width: CHART_LINE_WIDTH },
+          lineStyle: { color: palette.axisBorderRgb, width: CHART_LINE_WIDTH },
+        },
+        splitLine: {
+          show: true,
+          lineStyle: {
+            color: palette.axisGridGreyRgb,
+            width: CHART_LINE_WIDTH,
+            type: "dashed",
+          },
         },
       },
       yAxis: [
@@ -275,7 +318,7 @@ export function EChartsPage(): JSX.Element {
           },
           splitLine: {
             lineStyle: {
-              color: palette.rgbAxisGrid,
+              color: palette.axisGridBlackRgb,
               width: CHART_LINE_WIDTH,
               type: "dashed",
             },
@@ -301,8 +344,7 @@ export function EChartsPage(): JSX.Element {
           yAxisIndex: 0,
           data: ks.map((r) => r.fmaxMhz),
           smooth: true,
-          symbol: "circle",
-          symbolSize: narrow ? 11 : 8,
+          showSymbol: false,
           lineStyle: { width: CHART_LINE_WIDTH, color: architectureColor("kogge_stone") },
         },
         {
@@ -311,8 +353,7 @@ export function EChartsPage(): JSX.Element {
           yAxisIndex: 1,
           data: ks.map((r) => r.areaUm2),
           smooth: true,
-          symbol: "diamond",
-          symbolSize: narrow ? 11 : 8,
+          showSymbol: false,
           lineStyle: {
             width: CHART_LINE_WIDTH,
             type: "dashed",
@@ -335,7 +376,7 @@ export function EChartsPage(): JSX.Element {
         {
           query: { maxWidth: 480 },
           option: {
-            grid: { bottom: "44%" },
+            grid: { bottom: "44%", ...echartsGridBorder(palette) },
             dataZoom: [
               { type: "inside", xAxisIndex: 0, filterMode: "none" },
               {
@@ -364,8 +405,22 @@ export function EChartsPage(): JSX.Element {
         textStyle: echartsTextStyle(palette.rgbAxisTitle),
       },
       grid: narrow
-        ? { left: "14%", right: "10%", top: "22%", bottom: "32%", containLabel: true }
-        : { left: "10%", right: "8%", top: "18%", bottom: "20%", containLabel: true },
+        ? {
+            left: "14%",
+            right: "10%",
+            top: "22%",
+            bottom: "32%",
+            containLabel: true,
+            ...echartsGridBorder(palette),
+          }
+        : {
+            left: "10%",
+            right: "8%",
+            top: "18%",
+            bottom: "20%",
+            containLabel: true,
+            ...echartsGridBorder(palette),
+          },
       toolbox: echartsToolbox(palette, theme, narrow, "echarts-bar-64", {
         dataZoom: { xAxisIndex: [0], yAxisIndex: false },
         magicType: { type: ["line", "bar"] },
@@ -388,7 +443,15 @@ export function EChartsPage(): JSX.Element {
           rotate: narrow ? 28 : 16,
         },
         axisLine: {
-          lineStyle: { color: palette.rgbAxisGridStrong, width: CHART_LINE_WIDTH },
+          lineStyle: { color: palette.axisBorderRgb, width: CHART_LINE_WIDTH },
+        },
+        splitLine: {
+          show: true,
+          lineStyle: {
+            color: palette.axisGridGreyRgb,
+            width: CHART_LINE_WIDTH,
+            type: "dashed",
+          },
         },
       },
       yAxis: {
@@ -396,9 +459,12 @@ export function EChartsPage(): JSX.Element {
         name: "Power (mW)",
         nameTextStyle: echartsTextStyle(palette.rgbAxisTitle),
         axisLabel: echartsTextStyle(palette.rgbAxisTick),
+        axisLine: {
+          lineStyle: { color: palette.axisBorderRgb, width: CHART_LINE_WIDTH },
+        },
         splitLine: {
           lineStyle: {
-            color: palette.rgbAxisGrid,
+            color: palette.axisGridBlackRgb,
             width: CHART_LINE_WIDTH,
             type: "dashed",
           },
@@ -461,8 +527,22 @@ export function EChartsPage(): JSX.Element {
         textStyle: echartsTextStyle(palette.rgbAxisTitle),
       },
       grid: narrow
-        ? { left: "12%", right: "18%", top: "22%", bottom: "28%", containLabel: true }
-        : { left: "10%", right: "22%", top: "18%", bottom: "18%", containLabel: true },
+        ? {
+            left: "12%",
+            right: "18%",
+            top: "22%",
+            bottom: "28%",
+            containLabel: true,
+            ...echartsGridBorder(palette),
+          }
+        : {
+            left: "10%",
+            right: "22%",
+            top: "18%",
+            bottom: "18%",
+            containLabel: true,
+            ...echartsGridBorder(palette),
+          },
       toolbox: echartsToolbox(palette, theme, narrow, "echarts-heatmap", {
         dataZoom: { xAxisIndex: [0], yAxisIndex: [0] },
       }),
@@ -490,7 +570,17 @@ export function EChartsPage(): JSX.Element {
         nameGap: narrow ? 24 : 28,
         nameTextStyle: echartsTextStyle(palette.rgbAxisTitle),
         axisLabel: echartsTextStyle(palette.rgbAxisTick),
+        axisLine: {
+          lineStyle: { color: palette.axisBorderRgb, width: CHART_LINE_WIDTH },
+        },
         splitArea: { show: true },
+        splitLine: {
+          show: true,
+          lineStyle: {
+            color: palette.axisGridGreyRgb,
+            width: CHART_LINE_WIDTH,
+          },
+        },
       },
       yAxis: {
         type: "category",
@@ -498,7 +588,17 @@ export function EChartsPage(): JSX.Element {
         name: "Architecture",
         nameTextStyle: echartsTextStyle(palette.rgbAxisTitle),
         axisLabel: echartsTextStyle(palette.rgbAxisTick),
+        axisLine: {
+          lineStyle: { color: palette.axisBorderRgb, width: CHART_LINE_WIDTH },
+        },
         splitArea: { show: true },
+        splitLine: {
+          show: true,
+          lineStyle: {
+            color: palette.axisGridBlackRgb,
+            width: CHART_LINE_WIDTH,
+          },
+        },
       },
       visualMap: {
         min: vmin,
@@ -643,7 +743,7 @@ export function EChartsPage(): JSX.Element {
           label: { show: true, ...echartsTextStyle(palette.rgbAxisTitle) },
           upperLabel: { show: true, ...echartsTextStyle(palette.rgbAxisTick) },
           itemStyle: {
-            borderColor: palette.rgbAxisGridStrong,
+            borderColor: palette.axisBorderRgb,
             borderWidth: CHART_LINE_WIDTH,
             gapWidth: 2,
           },
@@ -674,8 +774,11 @@ export function EChartsPage(): JSX.Element {
         indicator: indicators,
         radius: narrow ? "58%" : "62%",
         center: ["50%", "46%"],
+        axisLine: {
+          lineStyle: { color: palette.axisBorderRgb, width: CHART_LINE_WIDTH },
+        },
         splitLine: {
-          lineStyle: { color: palette.rgbAxisGrid, width: CHART_LINE_WIDTH },
+          lineStyle: { color: palette.axisGridGreyRgb, width: CHART_LINE_WIDTH },
         },
         splitArea: { show: true },
         axisName: echartsTextStyle(palette.rgbAxisTick),
@@ -745,8 +848,22 @@ export function EChartsPage(): JSX.Element {
         textStyle: echartsTextStyle(palette.rgbAxisTitle),
       },
       grid: narrow
-        ? { left: "14%", right: "10%", top: "22%", bottom: "32%", containLabel: true }
-        : { left: "12%", right: "8%", top: "18%", bottom: "22%", containLabel: true },
+        ? {
+            left: "14%",
+            right: "10%",
+            top: "22%",
+            bottom: "32%",
+            containLabel: true,
+            ...echartsGridBorder(palette),
+          }
+        : {
+            left: "12%",
+            right: "8%",
+            top: "18%",
+            bottom: "22%",
+            containLabel: true,
+            ...echartsGridBorder(palette),
+          },
       toolbox: echartsToolbox(palette, theme, narrow, "echarts-boxplot", {
         dataZoom: { xAxisIndex: [0], yAxisIndex: false },
       }),
@@ -764,16 +881,29 @@ export function EChartsPage(): JSX.Element {
         name: "Architecture",
         nameTextStyle: echartsTextStyle(palette.rgbAxisTitle),
         axisLabel: echartsTextStyle(palette.rgbAxisTick),
-        splitLine: { show: false },
+        axisLine: {
+          lineStyle: { color: palette.axisBorderRgb, width: CHART_LINE_WIDTH },
+        },
+        splitLine: {
+          show: true,
+          lineStyle: {
+            color: palette.axisGridGreyRgb,
+            width: CHART_LINE_WIDTH,
+            type: "dashed",
+          },
+        },
       },
       yAxis: {
         type: "value",
         name: "Power (mW)",
         nameTextStyle: echartsTextStyle(palette.rgbAxisTitle),
         axisLabel: echartsTextStyle(palette.rgbAxisTick),
+        axisLine: {
+          lineStyle: { color: palette.axisBorderRgb, width: CHART_LINE_WIDTH },
+        },
         splitLine: {
           lineStyle: {
-            color: palette.rgbAxisGrid,
+            color: palette.axisGridBlackRgb,
             width: CHART_LINE_WIDTH,
             type: "dashed",
           },
