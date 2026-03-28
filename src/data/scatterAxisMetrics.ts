@@ -40,6 +40,64 @@ export function scatterAxisTitle(metric: ScatterAxisMetric): string {
   return unit ? `${label} (${unit})` : label;
 }
 
+/**
+ * Fixed design fields for scatter hovers (matches row data, not axis mapping).
+ * Uses HTML snippets for Plotly `hoverlabel` (bold labels).
+ */
+export function designRowStaticHoverHtml(row: DesignRow): string {
+  return [
+    `<b>Architecture:</b> ${formatArchLabel(row.architecture)}`,
+    `<b>Bit width:</b> ${row.bitWidth} b`,
+    `<b>Area:</b> ${row.areaUm2} µm²`,
+    `<b>Freq:</b> ${row.fmaxMhz} MHz`,
+    `<b>Power:</b> ${row.powerMw} mW`,
+    `<b>Process:</b> ${row.processNode}`,
+  ].join("<br>");
+}
+
+/**
+ * Human-readable value for one metric on a row (architecture name, not index).
+ */
+export function scatterMetricHoverDisplay(metric: ScatterAxisMetric, row: DesignRow): string {
+  if (metric === "architecture") {
+    return formatArchLabel(row.architecture);
+  }
+  const raw = row[metric];
+  if (typeof raw !== "number") {
+    return String(raw);
+  }
+  if (metric === "bitWidth" || Number.isInteger(raw)) {
+    return String(raw);
+  }
+  return raw.toPrecision(4);
+}
+
+/** Full 2D scatter hover: static row facts plus labeled X/Y axis quantities. */
+export function scatter2dPointHoverHtml(
+  row: DesignRow,
+  xMetric: ScatterAxisMetric,
+  yMetric: ScatterAxisMetric,
+): string {
+  const base = designRowStaticHoverHtml(row);
+  const xDisp = scatterMetricHoverDisplay(xMetric, row);
+  const yDisp = scatterMetricHoverDisplay(yMetric, row);
+  return `${base}<br><b>${scatterAxisTitle(xMetric)} (X):</b> ${xDisp}<br><b>${scatterAxisTitle(yMetric)} (Y):</b> ${yDisp}`;
+}
+
+/** Full 3D scatter hover: static row facts plus labeled X/Y/Z axis quantities. */
+export function scatter3dPointHoverHtml(
+  row: DesignRow,
+  xMetric: ScatterAxisMetric,
+  yMetric: ScatterAxisMetric,
+  zMetric: ScatterAxisMetric,
+): string {
+  const base = designRowStaticHoverHtml(row);
+  const xDisp = scatterMetricHoverDisplay(xMetric, row);
+  const yDisp = scatterMetricHoverDisplay(yMetric, row);
+  const zDisp = scatterMetricHoverDisplay(zMetric, row);
+  return `${base}<br><b>${scatterAxisTitle(xMetric)} (X):</b> ${xDisp}<br><b>${scatterAxisTitle(yMetric)} (Y):</b> ${yDisp}<br><b>${scatterAxisTitle(zMetric)} (Z):</b> ${zDisp}`;
+}
+
 /** Short label for HTML `<option>` text. */
 export function scatterAxisOptionLabel(metric: ScatterAxisMetric): string {
   return scatterAxisTitle(metric);
@@ -126,20 +184,42 @@ export function designCategoryLabel(id: DesignCategoryId): string {
 export type ExploreAxisKey = "x" | "y" | "z";
 
 /**
- * What bar and donut charts hold fixed vs sweep on the category axis.
- * - `architecture`: one bar per architecture at the selected process and bit width.
- * - `bitWidth`: tech baseline — fixed process; X = bit widths; grouped by architecture.
- * - `processNode`: bit baseline — fixed bit width; X = process / PDK; grouped by architecture.
+ * What bar, donut, Pareto, and 3D scatter hold fixed vs sweep.
+ * - `architecture`: fixed process + fixed bit width → one value per architecture.
+ * - `bitWidth`: fixed process; sweep bit widths (bar X / scatter points per width).
+ * - `processNode`: fixed bit width; sweep process / PDK (bar X / scatter points per corner).
  */
 export type BarDonutBaselineMode = "architecture" | "bitWidth" | "processNode";
+
+/** Linear vs log₁₀ for numeric chart axes and magnitudes (architecture index stays linear). */
+export type NumericScaleMode = "linear" | "log";
+
+export const NUMERIC_SCALE_OPTIONS: readonly { value: NumericScaleMode; label: string }[] = [
+  { value: "linear", label: "Linear" },
+  { value: "log", label: "Log (base 10)" },
+] as const;
+
+/** True for quantities that can use a positive log axis (excludes architecture index). */
+export function metricSupportsLogScale(metric: ScatterAxisMetric): boolean {
+  return metric !== "architecture";
+}
+
+/** Plotly axis `type` for 2D/3D numeric axes. */
+export function plotlyAxisTypeForMetric(
+  metric: ScatterAxisMetric,
+  scale: NumericScaleMode,
+): "linear" | "log" {
+  if (scale !== "log" || !metricSupportsLogScale(metric)) return "linear";
+  return "log";
+}
 
 export const BAR_DONUT_BASELINE_OPTIONS: readonly {
   value: BarDonutBaselineMode;
   label: string;
 }[] = [
   { value: "architecture", label: "Architectures (fixed tech & bit width)" },
-  { value: "bitWidth", label: "Bit widths (baseline: technology)" },
-  { value: "processNode", label: "Tech / PDK (baseline: bit width)" },
+  { value: "bitWidth", label: "Bit widths (tech baseline)" },
+  { value: "processNode", label: "Tech / PDK (bit-width baseline)" },
 ] as const;
 
 /**
@@ -150,8 +230,10 @@ export type ExploreAxesState = {
   /** Process / PDK slice for charts that need a single corner (heatmap, bar, etc.). */
   processNode: string;
   bitWidth: number;
-  /** Bar and donut: fixed tech vs fixed bit width vs both fixed (see `BarDonutBaselineMode`). */
+  /** Bar, donut, Pareto, 3D scatter: which dimension is fixed vs swept (see `BarDonutBaselineMode`). */
   barDonutBaseline: BarDonutBaselineMode;
+  /** Linear vs log₁₀ for Pareto, 3D, heatmap color, treemap sizes, grouped bar Y. */
+  numericScale: NumericScaleMode;
   x: ScatterAxisMetric;
   y: ScatterAxisMetric;
   z: ScatterAxisMetric;
@@ -169,6 +251,7 @@ export const DEFAULT_EXPLORE_AXES: ExploreAxesState = {
   processNode: DEFAULT_PROCESS_NODE,
   bitWidth: 64,
   barDonutBaseline: "architecture",
+  numericScale: "linear",
   x: "fmaxMhz",
   y: "powerMw",
   z: "areaUm2",
@@ -176,7 +259,7 @@ export const DEFAULT_EXPLORE_AXES: ExploreAxesState = {
 
 /**
  * Updates one of X/Y/Z and reassigns duplicates so the three metrics stay distinct.
- * Preserves `category`, `processNode`, `bitWidth`, and `barDonutBaseline`.
+ * Preserves `category`, `processNode`, `bitWidth`, `barDonutBaseline`, and `numericScale`.
  */
 export function syncExploreAxes(
   prev: ExploreAxesState,
