@@ -126,8 +126,8 @@ export function PlotlyPage(): JSX.Element {
           marker: {
             size: rows.map((r) => mSize(r.bitWidth)),
             color: architectureColor(arch),
-            // Thin stroke so legend glyphs read as dots, not dot + heavy ring.
-            line: { width: 1, color: palette.markerOutline },
+            opacity: 1,
+            line: { width: 1, color: palette.axisBorderRgb },
           },
         });
       }
@@ -156,70 +156,61 @@ export function PlotlyPage(): JSX.Element {
         },
       ];
 
+      const paretoPlotBg =
+        theme === "dark" ? "rgb(22, 28, 38)" : "rgb(255, 255, 255)";
+
       const paretoLayoutInner: Partial<Layout> = narrow
         ? {
             autosize: true,
-            margin: { l: 42, r: 14, t: 20, b: 92 },
+            margin: { l: 42, r: 14, t: 20, b: 56 },
             paper_bgcolor: "transparent",
-            plot_bgcolor: "transparent",
+            plot_bgcolor: paretoPlotBg,
             font: plotFont(palette.rgbAxisTitle),
             title: {
               text: plotlyBold("Fmax vs power (demo)"),
               font: plotFont(palette.rgbAxisTitle),
             },
+            showlegend: false,
             xaxis: {
               ...frameX,
+              layer: "below traces",
               gridcolor: palette.axisGridGreyRgb,
               title: { text: plotlyBold("Fmax (MHz)"), font: plotFont(palette.rgbAxisTitle) },
               tickfont: plotTickFont(palette.axisValueLabelRgb),
             },
             yaxis: {
               ...frameY,
+              layer: "below traces",
               gridcolor: palette.axisGridBlackRgb,
               title: { text: plotlyBold("Power (mW)"), font: plotFont(palette.rgbAxisTitle) },
               tickfont: plotTickFont(palette.axisValueLabelRgb),
-            },
-            legend: {
-              orientation: "h",
-              yanchor: "top",
-              y: -0.15,
-              x: 0.5,
-              xanchor: "center",
-              font: plotTickFont(palette.rgbAxisTick),
-              itemsizing: "constant",
             },
             hovermode: "closest",
           }
         : {
             autosize: true,
-            margin: { l: 48, r: 24, t: 32, b: 48 },
+            margin: { l: 48, r: 24, t: 32, b: 56 },
             paper_bgcolor: "transparent",
-            plot_bgcolor: "transparent",
+            plot_bgcolor: paretoPlotBg,
             font: plotFont(palette.rgbAxisTitle),
             title: {
               text: plotlyBold("Pareto-style: Fmax vs power (demo data)"),
               font: plotFont(palette.rgbAxisTitle),
             },
+            showlegend: false,
             xaxis: {
               ...frameX,
+              layer: "below traces",
               gridcolor: palette.axisGridGreyRgb,
               title: { text: plotlyBold("Fmax (MHz)"), font: plotFont(palette.rgbAxisTitle) },
               tickfont: plotTickFont(palette.axisValueLabelRgb),
             },
             yaxis: {
               ...frameY,
+              layer: "below traces",
               gridcolor: palette.axisGridBlackRgb,
               title: { text: plotlyBold("Power (mW)"), font: plotFont(palette.rgbAxisTitle) },
               tickfont: plotTickFont(palette.axisValueLabelRgb),
-            },
-            legend: {
-              orientation: "h",
-              yanchor: "bottom",
-              y: -0.28,
-              x: 0.5,
-              xanchor: "center",
-              font: plotTickFont(palette.rgbAxisTick),
-              itemsizing: "constant",
             },
             hovermode: "closest",
           };
@@ -526,7 +517,8 @@ export function PlotlyPage(): JSX.Element {
           marker: {
             size: rows.map((r) => mSize(r.bitWidth)),
             color: architectureColor(arch),
-            line: { width: 1, color: palette.markerOutline },
+            opacity: 1,
+            line: { width: 1, color: palette.axisBorderRgb },
           },
         });
       }
@@ -776,7 +768,8 @@ export function PlotlyPage(): JSX.Element {
       <div className="chart-card">
         <h2>Pareto scatter</h2>
         <p className="hint">
-          Pinch/drag or mode-bar zoom; larger markers = wider adder (bubble-style).{" "}
+          Pinch/drag or mode-bar zoom; larger markers = wider adder (bubble-style). Legend is
+          hidden to avoid overlapping the axis title — architecture color appears in the hover card.{" "}
           <code>plotly.js-dist-min</code> browser bundle.
         </p>
         <div className="plot-host">

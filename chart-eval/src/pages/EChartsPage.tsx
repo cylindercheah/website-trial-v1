@@ -88,6 +88,7 @@ export function EChartsPage(): JSX.Element {
     }
 
     const bump = narrow ? 5 : 0;
+    const chartPlotBg = theme === "dark" ? "rgb(22, 28, 38)" : "rgb(255, 255, 255)";
 
     // Numeric x + y require value axes (default xAxis is "category", which hides scatter).
     const series = DEMO_ARCH_ORDER.flatMap((arch) => {
@@ -98,7 +99,13 @@ export function EChartsPage(): JSX.Element {
         {
           name: label,
           type: "scatter" as const,
-          itemStyle: { color: architectureColor(arch) },
+          z: 10,
+          itemStyle: {
+            color: architectureColor(arch),
+            opacity: 1,
+            borderColor: palette.axisBorderRgb,
+            borderWidth: 1,
+          },
           emphasis: { focus: "series" as const },
           data: rows.map((r) => ({
             value: [r.fmaxMhz, r.powerMw] as [number, number],
@@ -112,7 +119,7 @@ export function EChartsPage(): JSX.Element {
     });
 
     return {
-      backgroundColor: "transparent",
+      backgroundColor: chartPlotBg,
       textStyle: echartsTextStyle(palette.rgbAxisTitle),
       title: {
         text: narrow ? "Fmax vs power (demo)" : "Pareto-style: Fmax vs power (demo data)",
@@ -124,7 +131,7 @@ export function EChartsPage(): JSX.Element {
             left: "14%",
             right: "8%",
             top: "20%",
-            bottom: "44%",
+            bottom: "34%",
             containLabel: true,
             ...echartsGridBorder(palette),
           }
@@ -132,7 +139,7 @@ export function EChartsPage(): JSX.Element {
             left: "12%",
             right: "6%",
             top: "18%",
-            bottom: "30%",
+            bottom: "22%",
             containLabel: true,
             ...echartsGridBorder(palette),
           },
@@ -156,12 +163,7 @@ export function EChartsPage(): JSX.Element {
           return `${p.seriesName}<br/>Fmax: ${fmax} MHz<br/>Power: ${pwr} mW<br/>Width: ${d.bitWidth} b<br/>Area: ${d.areaUm2} µm²`;
         },
       },
-      legend: {
-        bottom: 0,
-        type: "scroll",
-        icon: "circle",
-        textStyle: echartsTextStyle(palette.rgbAxisTick),
-      },
+      legend: { show: false },
       xAxis: {
         type: "value",
         name: "Fmax (MHz)",
@@ -218,18 +220,12 @@ export function EChartsPage(): JSX.Element {
           query: { maxWidth: 640 },
           option: {
             grid: {
-              bottom: "46%",
+              bottom: "36%",
               left: "16%",
               right: "10%",
               ...echartsGridBorder(palette),
             },
-            legend: {
-              bottom: 4,
-              type: "scroll",
-              itemWidth: 12,
-              itemHeight: 10,
-              textStyle: echartsTextStyle(palette.rgbAxisTick),
-            },
+            legend: { show: false },
           },
         },
       ],
@@ -945,8 +941,9 @@ export function EChartsPage(): JSX.Element {
       <div className="chart-card">
         <h2>Pareto scatter</h2>
         <p className="hint">
-          Toolbox: rectangle <strong>dataZoom</strong>, <strong>reset</strong>, PNG. Chart:
-          inside zoom + bottom slider (x). Legend scrolls on small screens.
+          Toolbox: rectangle <strong>dataZoom</strong>, <strong>reset</strong>, PNG. Inside zoom +
+          bottom slider (x). Legend is hidden so it does not cover the axis title — use the hover
+          card for architecture and metrics.
         </p>
         <div className="plot-host">
           <ReactECharts
