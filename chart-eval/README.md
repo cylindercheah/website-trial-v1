@@ -5,12 +5,23 @@ Small **Vite + React** app under `websites/chart-eval` to compare **Plotly.js** 
 ## Run locally
 
 ```bash
-cd websites/chart-eval
+cd chart-eval   # or your clone path
 ./run.sh install   # once
 ./run.sh dev       # starts dev server
 ```
 
 Or use `npm install` / `npm run dev` directly.
+
+### If `npm install` fails with `ERESOLVE` (Vite vs `@vitejs/plugin-react`)
+
+**Vite 8** needs **`@vitejs/plugin-react@^5.2.0`** (this repo uses that pair). If you still see conflicts:
+
+```bash
+rm -f package-lock.json
+npm install
+```
+
+**Optional (fewer Vite 8 / Rolldown warnings):** use **Vite 5** + **`@vitejs/plugin-react@^4.3.4`** instead; change `package.json` and regenerate the lockfile as above.
 
 ### How to view in the browser
 
@@ -47,12 +58,15 @@ After deployment, the site URL will be:
 
 ### One-time setup
 
-1. Put **this folder’s contents at the root** of `website-trial-v1` (include `.github/`, `package.json`, `package-lock.json`, `src/`, `index.html`, `vite.config.ts`, etc.).  
-   If the repo already has other files, either use a dedicated branch/folder layout and adjust the workflow `working-directory`, or keep the trial repo focused on this app only.
-2. On GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions** (not “Deploy from branch” unless you switch strategies).
-3. Push to **`main`** (or **`master`** — both are listed in the workflow). The workflow **Deploy to GitHub Pages** builds with `npm ci` / `npm run build` and publishes `dist/`.
+Full checklist: **`GITHUB_PAGES_SETUP.md`** in this folder.
 
-`vite.config.ts` uses **`base: "./"`** so asset URLs work as a **project site** under `/website-trial-v1/` without hardcoding the repo name.
+Summary:
+
+1. GitHub only reads **`.github/workflows/` at the repository root**. In this monorepo layout, the workflow lives in **`website-trial-v1/.github/workflows/deploy-pages.yml`** and builds the app in **`chart-eval/`**.
+2. On GitHub: **Settings → Pages → Source: GitHub Actions**.
+3. Push **`main`** or **`master`**. CI runs `npm ci` + `npm run build` inside **`chart-eval/`** and deploys **`chart-eval/dist`**.
+
+`vite.config.ts` uses **`base: "./"`** so assets work on **`/website-trial-v1/`** project Pages.
 
 ### Local build check
 
