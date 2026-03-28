@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "generate:data": "node scripts/generate-design-data.mjs",
-    "synthesize:data": "node scripts/synthesize-design-json.mjs",
     "build": "npm run generate:data && vite build",
     "preview": "vite preview"
   },

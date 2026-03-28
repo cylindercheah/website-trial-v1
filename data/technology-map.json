@@ -1,0 +1,24 @@
+{
+  "defaultProcessNode": "7nm",
+  "effectiveNmByProcessNode": {
+    "3nm": 3,
+    "5nm": 5,
+    "7nm": 7,
+    "10nm": 10,
+    "14nm": 14,
+    "16nm": 16,
+    "22nm": 22,
+    "28nm": 28,
+    "40nm": 40,
+    "65nm": 65,
+    "90nm": 90,
+    "130nm": 130,
+    "180nm": 180,
+    "250nm": 250,
+    "350nm": 350,
+    "gf180": 180,
+    "sky130": 130,
+    "ihpsg13g2": 130
+  },
+  "namedKitIds": ["gf180", "sky130", "ihpsg13g2"]
+}
