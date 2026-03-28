@@ -19,7 +19,7 @@ export const CHART_SCATTER_MARKER_LINE_WIDTH = 2.5;
  * 3D scatter marker stroke (px). Plotly `scatter3d` (WebGL) draws edges thinner than 2D scatter at the
  * same numeric width — set higher so outlines match the Pareto plot visually.
  */
-export const CHART_SCATTER3D_MARKER_LINE_WIDTH = 4;
+export const CHART_SCATTER3D_MARKER_LINE_WIDTH = 5;
 
 /**
  * Heavy face for axis titles + ticks so numbering matches label weight (Plotly has no tick fontWeight).
