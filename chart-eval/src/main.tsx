@@ -1,16 +1,32 @@
+import { Buffer } from "buffer";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { HashRouter } from "react-router-dom";
 import App from "./App";
+import { RootErrorBoundary } from "./components/RootErrorBoundary";
 import { ThemeProvider } from "./theme/ThemeContext";
 import "./index.css";
 
-createRoot(document.getElementById("root")!).render(
+declare global {
+  interface Window {
+    Buffer: typeof Buffer;
+  }
+}
+window.Buffer = Buffer;
+
+const rootEl = document.getElementById("root");
+if (!rootEl) {
+  throw new Error("Missing #root element");
+}
+
+createRoot(rootEl).render(
   <StrictMode>
-    <HashRouter>
-      <ThemeProvider>
-        <App />
-      </ThemeProvider>
-    </HashRouter>
+    <RootErrorBoundary>
+      <HashRouter>
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
+      </HashRouter>
+    </RootErrorBoundary>
   </StrictMode>,
 );

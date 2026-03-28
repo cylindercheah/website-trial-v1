@@ -22,9 +22,8 @@ export default defineConfig(({ mode }) => ({
       "buffer/": bufferPkgDir,
     },
   },
-  define: {
-    global: "globalThis",
-  },
+  // Do not use `define: { global: "globalThis" }` — it can corrupt identifiers inside
+  // dependencies and yield a blank page. Use index.html + main.tsx shims instead.
   optimizeDeps: {
     include: ["plotly.js", "buffer"],
   },
