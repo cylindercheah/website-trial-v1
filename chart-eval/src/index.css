@@ -1,0 +1,146 @@
+:root {
+  color-scheme: light dark;
+  --bg: #0f1419;
+  --surface: #1a2332;
+  --text: #e7ecf3;
+  --muted: #8b9bb4;
+  --accent: #3d8bfd;
+  --border: #2d3a4d;
+  font-family: system-ui, "Segoe UI", Roboto, Ubuntu, sans-serif;
+  line-height: 1.5;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-tap-highlight-color: transparent;
+}
+
+#root {
+  min-height: 100dvh;
+}
+
+a {
+  color: var(--accent);
+}
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.75rem 1rem 2rem;
+}
+
+@media (min-width: 768px) {
+  .app-shell {
+    padding: 1.25rem 1.5rem 2.5rem;
+  }
+}
+
+header {
+  margin-bottom: 1rem;
+}
+
+header h1 {
+  font-size: clamp(1.15rem, 4vw, 1.5rem);
+  font-weight: 600;
+  margin: 0 0 0.35rem;
+}
+
+header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+nav a {
+  padding: 0.5rem 0.85rem;
+  border-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text);
+  font-size: 0.9rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+nav a:hover,
+nav a:focus-visible {
+  border-color: var(--accent);
+  outline: none;
+}
+
+nav a.active {
+  background: #243044;
+  border-color: var(--accent);
+}
+
+main {
+  flex: 1;
+}
+
+.chart-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .chart-card {
+    padding: 1rem 1.25rem;
+  }
+}
+
+.chart-card h2 {
+  font-size: 1rem;
+  margin: 0 0 0.5rem;
+}
+
+.chart-card p.hint {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0 0 0.75rem;
+}
+
+/* Plotly / ECharts containers: min height for mobile readability */
+.plot-host {
+  width: 100%;
+  min-height: 280px;
+  height: min(55vh, 420px);
+}
+
+@media (min-width: 768px) {
+  .plot-host {
+    min-height: 360px;
+    height: 420px;
+  }
+}
+
+.note {
+  font-size: 0.85rem;
+  color: var(--muted);
+  border-left: 3px solid var(--accent);
+  padding-left: 0.75rem;
+  margin-top: 1rem;
+}
