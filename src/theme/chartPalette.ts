@@ -232,15 +232,15 @@ export function plotInsetBackground(theme: ThemeMode): string {
 }
 
 /**
- * Plotly heatmap colorscale: pure blue → green → red (same ramp in light and dark themes).
+ * Plotly heatmap colorscale: dark blue → dark green → dark red (same ramp in light and dark themes).
  */
 export function plotlyHeatmapColorscale(
   _palette: ChartPalette,
   _theme: ThemeMode,
 ): [number, string][] {
   return [
-    [0, "rgb(0, 0, 255)"],
-    [0.5, "rgb(0, 255, 0)"],
-    [1, "rgb(255, 0, 0)"],
+    [0, "rgb(0, 0, 140)"],
+    [0.5, "rgb(0, 95, 52)"],
+    [1, "rgb(165, 0, 0)"],
   ];
 }

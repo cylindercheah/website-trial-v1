@@ -89,26 +89,26 @@ export function findDesignRow(
 }
 
 /**
- * RGB series palette: pure primaries and secondaries (full 0/255 channels), then mixed
- * saturated corners so many architectures stay distinct. Shared across scatter, bar, donut, treemap, 3D.
+ * Dark-tone RGB series palette (deep red/blue/magenta/cyan plus dark green, mustard yellow,
+ * dark orange, olive). Shared across scatter, bar, donut, treemap, 3D.
  */
 export const ARCHITECTURE_SERIES_RGB: readonly string[] = [
-  "rgb(255, 0, 0)",
-  "rgb(0, 255, 0)",
-  "rgb(0, 0, 255)",
-  "rgb(255, 255, 0)",
-  "rgb(255, 0, 255)",
-  "rgb(0, 255, 255)",
-  "rgb(255, 128, 0)",
-  "rgb(128, 0, 255)",
-  "rgb(0, 128, 255)",
-  "rgb(255, 0, 128)",
-  "rgb(128, 255, 0)",
-  "rgb(0, 255, 128)",
-  "rgb(192, 0, 0)",
-  "rgb(0, 192, 0)",
-  "rgb(0, 0, 192)",
-  "rgb(255, 192, 0)",
+  "rgb(175, 0, 0)",
+  "rgb(0, 95, 48)",
+  "rgb(0, 0, 165)",
+  "rgb(145, 118, 12)",
+  "rgb(125, 0, 105)",
+  "rgb(0, 105, 118)",
+  "rgb(160, 78, 0)",
+  "rgb(72, 0, 132)",
+  "rgb(0, 82, 145)",
+  "rgb(145, 0, 78)",
+  "rgb(88, 118, 0)",
+  "rgb(0, 108, 72)",
+  "rgb(130, 0, 0)",
+  "rgb(0, 72, 38)",
+  "rgb(0, 0, 118)",
+  "rgb(138, 92, 0)",
 ];
 
 /** Color for the i-th series (donut slices by category index, etc.). */
