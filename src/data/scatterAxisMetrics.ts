@@ -307,6 +307,14 @@ export function scatterAxisExtent(
 }
 
 function formatScene3dTickValue(v: number): string {
+  const rounded = Math.round(v);
+  if (Math.abs(v - rounded) < 1e-6 * Math.max(1, Math.abs(v))) {
+    const a = Math.abs(rounded);
+    if (a >= 1000) {
+      return `${Math.round(rounded / 1000)}k`;
+    }
+    return String(rounded);
+  }
   const a = Math.abs(v);
   if (a >= 1000) {
     return `${Math.round(v / 1000)}k`;
@@ -319,6 +327,94 @@ function formatScene3dTickValue(v: number): string {
     return Number.isInteger(t) ? String(t) : t.toFixed(1);
   }
   return v.toFixed(2);
+}
+
+/**
+ * Human-friendly tick step (multiples of 1, 2, or 5 in the current decade).
+ *
+ * @param rawStep Target minimum step size.
+ * @returns A step >= rawStep on a "nice" grid.
+ */
+function niceLinearTickStep(rawStep: number): number {
+  if (!Number.isFinite(rawStep) || rawStep <= 0) {
+    return 1;
+  }
+  const exp = Math.floor(Math.log10(rawStep));
+  const p10 = 10 ** exp;
+  const f = rawStep / p10;
+  let nf: number;
+  if (f < 1.5) {
+    nf = 1;
+  } else if (f < 3) {
+    nf = 2;
+  } else if (f < 7) {
+    nf = 5;
+  } else {
+    nf = 10;
+  }
+  return nf * p10;
+}
+
+/**
+ * Linear axis ticks on round values (e.g. 200, 400, 600) instead of even splits (e.g. 233, 514).
+ */
+function niceLinearTickvalsForScene(
+  lo0: number,
+  hi0: number,
+  padFraction: number,
+  targetTicks: number,
+): { tickvals: number[]; range: [number, number] } {
+  const span = hi0 - lo0 || 1;
+  const pad = span * padFraction;
+  const loP = lo0 - pad;
+  const hiP = hi0 + pad;
+  const spanP = hiP - loP;
+  const target = Math.max(3, Math.min(targetTicks, 12));
+  let roughStep = spanP / Math.max(2, target - 1);
+  let step = niceLinearTickStep(roughStep);
+  let tickStart = Math.floor(loP / step + 1e-9) * step;
+  let tickEnd = Math.ceil(hiP / step - 1e-9) * step;
+  let estTicks = Math.floor((tickEnd - tickStart) / step + 1.5);
+  while (estTicks > 18 && step > 0) {
+    step = niceLinearTickStep(step * 2);
+    tickStart = Math.floor(loP / step + 1e-9) * step;
+    tickEnd = Math.ceil(hiP / step - 1e-9) * step;
+    estTicks = Math.floor((tickEnd - tickStart) / step + 1.5);
+  }
+  if (tickEnd < tickStart) {
+    tickStart = loP;
+    tickEnd = hiP;
+  }
+  const tickvals: number[] = [];
+  for (let v = tickStart, n = 0; v <= tickEnd + step * 1e-9 && n < 22; v += step, n += 1) {
+    tickvals.push(Number.parseFloat(v.toPrecision(12)));
+  }
+  if (tickvals.length < 2) {
+    const mid = (lo0 + hi0) / 2;
+    return {
+      tickvals: [mid - step, mid, mid + step],
+      range: [mid - step * 1.2, mid + step * 1.2],
+    };
+  }
+  const margin = step * 0.04;
+  const range: [number, number] = [
+    Math.min(loP, tickvals[0]!) - margin,
+    Math.max(hiP, tickvals[tickvals.length - 1]!) + margin,
+  ];
+  return { tickvals, range };
+}
+
+/** Decade ticks (…, 0.1, 1, 10, …) for log scene axes. */
+function logDecadeTickvals(loP: number, hiP: number): number[] {
+  const lo = Math.max(loP, 1e-300);
+  const hi = Math.max(hiP, lo * 1.0001);
+  const a = Math.floor(Math.log10(lo));
+  const b = Math.ceil(Math.log10(hi));
+  const out: number[] = [];
+  for (let k = a; k <= b; k += 1) {
+    out.push(10 ** k);
+  }
+  return out.length >= 2 ? out : [lo, hi];
 }
 
 function tickTextsWithOptionalHiddenEnds(
@@ -337,6 +433,8 @@ function tickTextsWithOptionalHiddenEnds(
 /**
  * Plotly `scene` axis ticks: fixed positions with empty labels on the first and last tick
  * (when there are at least three ticks) so corner labels do not pile up in 3D views.
+ *
+ * @param numericScale Linear axes use rounded "nice" tick steps; log uses decade ticks.
  */
 export function scene3dAxisTickHideEnds(
   metric: ScatterAxisMetric,
@@ -344,6 +442,7 @@ export function scene3dAxisTickHideEnds(
   tickCount: number = 6,
   archOrder: readonly string[] = DESIGN_ARCH_ORDER,
   bitWidths: readonly number[] = DESIGN_BIT_WIDTHS,
+  numericScale: NumericScaleMode = "linear",
 ): {
   tickmode: "array";
   tickvals: number[];
@@ -378,14 +477,23 @@ export function scene3dAxisTickHideEnds(
   }
 
   const [lo0, hi0] = scatterAxisExtent(rows, metric, archOrder);
-  const span = hi0 - lo0 || 1;
-  const pad = span * 0.08;
-  const lo = lo0 - pad;
-  const hi = hi0 + pad;
-  const n = Math.max(3, Math.min(tickCount, 12));
-  const tickvals = Array.from({ length: n }, (_, i) => lo + ((hi - lo) * i) / (n - 1));
+  if (
+    numericScale === "log" &&
+    metricSupportsLogScale(metric) &&
+    lo0 > 0 &&
+    hi0 > 0
+  ) {
+    const loP = lo0 / 1.12;
+    const hiP = hi0 * 1.12;
+    const tickvals = logDecadeTickvals(loP, hiP);
+    const ticktext = tickTextsWithOptionalHiddenEnds(tickvals, (v) => formatScene3dTickValue(v));
+    const range: [number, number] = [loP * 0.92, hiP * 1.08];
+    return { tickmode: "array", tickvals, ticktext, range };
+  }
+
+  const { tickvals, range } = niceLinearTickvalsForScene(lo0, hi0, 0.08, tickCount);
   const ticktext = tickTextsWithOptionalHiddenEnds(tickvals, (v) => formatScene3dTickValue(v));
-  return { tickmode: "array", tickvals, ticktext, range: [lo, hi] };
+  return { tickmode: "array", tickvals, ticktext, range };
 }
 
 /** Plotly icicle/treemap flat encoding from a chosen leaf value metric. */

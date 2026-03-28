@@ -790,6 +790,7 @@ export function PlotlyPage(): JSX.Element {
           6,
           categoryArchOrder,
           categoryBitWidths,
+          scale,
         ),
         type: plotlyAxisTypeForMetric(metric, scale),
       });
