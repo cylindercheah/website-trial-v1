@@ -31,7 +31,7 @@ export function HomePage(): JSX.Element {
       <p className="note">
         <strong>Mobile:</strong> Both libraries support touch (pan/zoom). ECharts tends
         to feel snappier on low-end phones if you enable{" "}
-        <code>dataZoom</code> sliders; the full <code>plotly.js</code> bundle is larger
+        <code>dataZoom</code> sliders; the Plotly <code>plotly.js-dist-min</code> bundle is larger
         (slower first load) than <code>echarts</code>.
         Try both routes on a real device.
       </p>

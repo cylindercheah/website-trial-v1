@@ -81,13 +81,12 @@ Output: `dist/` (same artifact CI uploads).
 | Topic | Plotly (this demo) | ECharts (this demo) |
 |--------|--------------------|----------------------|
 | Touch | Pinch zoom, drag | Inside zoom + **slider** `dataZoom` on line chart |
-| Bundle | Lazy-loaded route; **full** `plotly.js` (3D, sankey, parcoords, …) | Smaller than Plotly route; canvas rendering |
+| Bundle | Lazy-loaded route; **`plotly.js-dist-min`** (full Plotly, browser build) | Smaller than Plotly route; canvas rendering |
 | Layout | `ResizeObserver` + `Plots.resize` | `media` queries in options for legend/grid |
 
 Try both routes on a phone; ECharts often feels snappier on low-end devices.
 
 ## Dependencies note
 
-- `plotly.js` — full bundle (3D WebGL, sankey, parcoords, treemap, optional geo, etc.); much larger than `plotly.js-basic-dist`. Run `npm install` in this folder and commit `package-lock.json` when you want pinned CI installs (`npm ci`).
-- `buffer` — direct dependency + `vite.config.ts` `resolve.alias` so Vite 8 / Rolldown can resolve Plotly’s `require('buffer/')` (image trace helper). If the build still complains about `stream` or `assert`, add `stream-browserify` / `assert` and matching aliases.
+- `plotly.js-dist-min` — official **pre-minified browser bundle** (same feature set as full `plotly.js`, including 3D / sankey / parcoords / treemap). We import this instead of `plotly.js` so Vite does not bundle Node-only trace code that breaks at runtime under Rolldown. Types still come from `@types/plotly.js`.
 - `echarts` + `echarts-for-react` — full ECharts; for production you can switch to **tree-shaken** ECharts core imports to trim size further.

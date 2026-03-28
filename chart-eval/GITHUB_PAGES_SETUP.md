@@ -67,7 +67,7 @@ Then open **`http://localhost:4173/website-trial-v1/#/plotly`** (note the **`/we
 
 1. **Open DevTools → Console and Network.** If the **main** or **chunk** `.js` request is **404**, the **`base`** in `vite.config.ts` must match the repo name segment in the URL (`/website-trial-v1/` for this repo). After changing `base`, rebuild and redeploy.
 
-2. **`ReferenceError: global is not defined` / `Buffer is not defined`** — full `plotly.js` expects Node-style globals. This project sets `window.global` in `index.html` and `window.Buffer` from the `buffer` package in `main.tsx`. Do **not** re-enable `define: { global: "globalThis" }` in Vite; it can break bundled code and still show a blank page.
+2. **Plotly runtime errors (e.g. `Cannot read properties of undefined (reading 'prototype')`)** — bundling the full **`plotly.js` source** through Vite pulls Node-only helpers (`stream`, image probes, `inherits`, …). This app imports the prebuilt **`plotly.js-dist-min`** bundle instead so the browser gets a self-contained file. Do **not** switch `PlotlyPage.tsx` back to `import from "plotly.js"` unless you add full Node polyfills.
 
 3. If you see **“This page hit a runtime error”** (from `RootErrorBoundary`), read the message/stack and fix the underlying import or chunk URL.
 

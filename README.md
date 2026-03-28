@@ -10,6 +10,6 @@ Front-end demos and experiments that are **not** necessarily the production `dig
 
 | Script | Purpose |
 |--------|---------|
-| [`build-and-push.sh`](build-and-push.sh) | `npm install` + `npm run build` in `chart-eval/`, then `git add -A`, commit if there are changes, and `git push`. Run from repo root: `./build-and-push.sh` or `./build-and-push.sh "feat: update charts"`. |
+| [`build-and-push.sh`](build-and-push.sh) | **`npm ci`** if `chart-eval/package-lock.json` exists (else **`npm install`**), optional **`--typecheck`** / **`--clean-dist`**, **`NODE_ENV=production npm run build`**, verify **`dist/`** vs **`/website-trial-v1/`** (override with **`GH_PAGES_BASE`**), then git. Flags: `--use-install`, `--skip-install`, `--no-verify`, `--no-push`, `-n`, `-v`. |
 
 See `docs/WEBSITE_DESIGN.md` for the intended production information architecture.

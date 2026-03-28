@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, type RefObject } from "react";
-import type { Data, Layout, Config } from "plotly.js";
-import Plotly from "plotly.js";
+import type { Config, Data, Layout } from "plotly.js";
+// Pre-minified browser build — avoids Vite bundling plotly's Node-only trace helpers.
+import Plotly from "plotly.js-dist-min";
 import { useNarrowScreen } from "../hooks/useNarrowScreen";
 import {
   ADDER_DEMO_ROWS,
@@ -722,7 +723,8 @@ export function PlotlyPage(): JSX.Element {
         <h2>Pareto scatter</h2>
         <p className="hint">
           Pinch/zoom on mobile; wide layout adds an x-axis <strong>rangeslider</strong>.
-          Larger markers = wider adder (bubble-style). Full <code>plotly.js</code> bundle.
+          Larger markers = wider adder (bubble-style).{" "}
+          <code>plotly.js-dist-min</code> browser bundle.
         </p>
         <div className="plot-host">
           <div ref={paretoRef} style={{ width: "100%", height: "100%" }} />
@@ -798,11 +800,10 @@ export function PlotlyPage(): JSX.Element {
         </div>
       </div>
       <p className="note">
-        This page imports the <strong>full</strong> <code>plotly.js</code> entry (3D WebGL,
-        sankey, parcoords, treemap, optional geo traces, etc.) — larger than{" "}
-        <code>plotly.js-basic-dist</code> and a heavier dev-server cold start. For production,
-        consider dynamic import of Plotly only on this route if you need a smaller landing
-        bundle elsewhere.
+        This page loads the official <strong>plotly.js-dist-min</strong> bundle (3D WebGL,
+        sankey, parcoords, treemap, geo-capable, etc.) — large download, but avoids bundling
+        raw <code>plotly.js</code> source through Vite (fewer Node-polyfill runtime bugs).
+        For a smaller first paint elsewhere, lazy-load this route only (already done).
       </p>
     </div>
   );
