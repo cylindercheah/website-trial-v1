@@ -13,7 +13,7 @@ export default function App(): ReactElement {
     <div className="app-shell">
       <header className="app-header">
         <div className="app-header__titles">
-          <h1>Plotly.js charts</h1>
+          <h1>Design Analytics</h1>
           <p>Vite + React · analytics gallery · touch-friendly defaults</p>
         </div>
         <ThemeToggle />
@@ -30,7 +30,7 @@ export default function App(): ReactElement {
           to="/plotly"
           className={({ isActive }) => (isActive ? "active" : "")}
         >
-          Plotly.js
+          Digital Circuits
         </NavLink>
       </nav>
       <main>

@@ -7,11 +7,13 @@ import {
   ADDER_DEMO_ROWS,
   architectureColor,
   DEMO_ARCH_ORDER,
+  DEMO_BIT_WIDTHS,
   formatArchLabel,
   rowsByBitWidthOrdered,
 } from "../data/samplePpa";
 import {
   DEFAULT_EXPLORE_AXES,
+  DEMO_CATEGORIES,
   SCATTER_AXIS_METRICS,
   scatterArchitectureTickAxis,
   scatterAxisHeatmapGrid,
@@ -21,7 +23,9 @@ import {
   scatterAxisTreemapFlat,
   scatterAxisValue,
   syncExploreAxes,
+  type DemoCategoryId,
   type ExploreAxesState,
+  type ExploreAxisKey,
   type ScatterAxisMetric,
 } from "../data/scatterAxisMetrics";
 import {
@@ -76,7 +80,7 @@ export function PlotlyPage(): JSX.Element {
   const { theme } = useTheme();
   const [exploreAxes, setExploreAxes] = useState<ExploreAxesState>(DEFAULT_EXPLORE_AXES);
 
-  const onExploreAxisChange = (key: keyof ExploreAxesState, m: ScatterAxisMetric) => {
+  const onExploreAxisChange = (key: ExploreAxisKey, m: ScatterAxisMetric) => {
     setExploreAxes((prev) => syncExploreAxes(prev, key, m));
   };
 
@@ -104,6 +108,9 @@ export function PlotlyPage(): JSX.Element {
       const paretoXMetric = ex.x;
       const paretoYMetric = ex.y;
       const paretoZMetric = ex.z;
+      const plotBitWidth = (DEMO_BIT_WIDTHS as readonly number[]).includes(ex.bitWidth)
+        ? ex.bitWidth
+        : DEMO_BIT_WIDTHS[0];
       const palette = getChartPalette(theme);
       const hoverLabel = plotlyHoverLabel(palette, narrow);
       const frameX = plotlyAxisFrameX(palette);
@@ -246,17 +253,17 @@ export function PlotlyPage(): JSX.Element {
         toImageButtonOptions: { format: "png", filename: "plotly-chart" },
       };
 
-      const rows64 = rowsByBitWidthOrdered(64);
+      const rowsAtBw = rowsByBitWidthOrdered(plotBitWidth);
       const barDataInner: Data[] = [
         {
           type: "bar",
-          name: "Metric @ 64b",
-          x: rows64.map((r) => formatArchLabel(r.architecture)),
-          y: rows64.map((r) => scatterAxisValue(paretoYMetric, r)),
-          text: rows64.map((r) => String(scatterAxisValue(paretoYMetric, r))),
+          name: `Metric @ ${plotBitWidth}b`,
+          x: rowsAtBw.map((r) => formatArchLabel(r.architecture)),
+          y: rowsAtBw.map((r) => scatterAxisValue(paretoYMetric, r)),
+          text: rowsAtBw.map((r) => String(scatterAxisValue(paretoYMetric, r))),
           textposition: "auto",
           marker: {
-            color: rows64.map((r) => architectureColor(r.architecture)),
+            color: rowsAtBw.map((r) => architectureColor(r.architecture)),
             line: { width: CHART_LINE_WIDTH, color: CHART_MARKER_OUTLINE_RGB },
           },
           hovertemplate:
@@ -272,7 +279,7 @@ export function PlotlyPage(): JSX.Element {
             plot_bgcolor: "transparent",
             font: plotFont(palette.rgbAxisTitle),
             title: {
-              text: plotlyBold(`${scatterAxisTitle(paretoYMetric)} @ 64b (bar)`),
+              text: plotlyBold(`${scatterAxisTitle(paretoYMetric)} @ ${plotBitWidth}b (bar)`),
               font: plotFont(palette.rgbAxisTitle),
             },
             xaxis: {
@@ -301,7 +308,7 @@ export function PlotlyPage(): JSX.Element {
             font: plotFont(palette.rgbAxisTitle),
             title: {
               text: plotlyBold(
-                `${scatterAxisTitle(paretoYMetric)} at 64-bit width (by architecture)`,
+                `${scatterAxisTitle(paretoYMetric)} at ${plotBitWidth}-bit width (by architecture)`,
               ),
               font: plotFont(palette.rgbAxisTitle),
             },
@@ -401,10 +408,10 @@ export function PlotlyPage(): JSX.Element {
       const pieDataInner: Data[] = [
         {
           type: "pie",
-          labels: rows64.map((r) => formatArchLabel(r.architecture)),
-          values: rows64.map((r) => scatterAxisValue(paretoYMetric, r)),
+          labels: rowsAtBw.map((r) => formatArchLabel(r.architecture)),
+          values: rowsAtBw.map((r) => scatterAxisValue(paretoYMetric, r)),
           marker: {
-            colors: rows64.map((r) => architectureColor(r.architecture)),
+            colors: rowsAtBw.map((r) => architectureColor(r.architecture)),
             line: { color: CHART_MARKER_OUTLINE_RGB, width: CHART_LINE_WIDTH },
           },
           hole: 0.38,
@@ -423,7 +430,7 @@ export function PlotlyPage(): JSX.Element {
             plot_bgcolor: "transparent",
             font: plotFont(palette.rgbAxisTitle),
             title: {
-              text: plotlyBold(`${scatterAxisTitle(paretoYMetric)} share @ 64b`),
+              text: plotlyBold(`${scatterAxisTitle(paretoYMetric)} share @ ${plotBitWidth}b`),
               font: plotFont(palette.rgbAxisTitle),
             },
             showlegend: false,
@@ -437,7 +444,7 @@ export function PlotlyPage(): JSX.Element {
             font: plotFont(palette.rgbAxisTitle),
             title: {
               text: plotlyBold(
-                `${scatterAxisTitle(paretoYMetric)} share at 64-bit width (donut)`,
+                `${scatterAxisTitle(paretoYMetric)} share at ${plotBitWidth}-bit width (donut)`,
               ),
               font: plotFont(palette.rgbAxisTitle),
             },
@@ -588,38 +595,41 @@ export function PlotlyPage(): JSX.Element {
     }, [narrow, theme, exploreAxes]);
 
   const paretoRef = usePlotlyChart(paretoData, paretoLayout, paretoConfig);
-  const barRef = usePlotlyChart(barData, barLayout, barConfig);
-  const heatmapRef = usePlotlyChart(heatmapData, heatmapLayout, heatmapConfig);
-  const pieRef = usePlotlyChart(pieData, pieLayout, pieConfig);
   const scatter3dRef = usePlotlyChart(scatter3dData, scatter3dLayout, scatter3dConfig);
+  const heatmapRef = usePlotlyChart(heatmapData, heatmapLayout, heatmapConfig);
   const treemapRef = usePlotlyChart(treemapData, treemapLayout, treemapConfig);
+  const pieRef = usePlotlyChart(pieData, pieLayout, pieConfig);
+  const barRef = usePlotlyChart(barData, barLayout, barConfig);
 
   return (
     <div>
       <div className="chart-card">
         <h2>Explore metrics</h2>
         <p className="hint">
-          <strong>X</strong> / <strong>Y</strong> drive the 2D scatter, bar @64b, donut, and treemap.{" "}
-          <strong>Z</strong> colors the heatmap.{" "}
-          <strong>3D scatter</strong> uses all three (each axis must be a different metric).
+          <strong>Category</strong> selects the dataset family (more coming later).{" "}
+          <strong>X</strong> / <strong>Y</strong> / <strong>Z</strong> are distinct quantities: scatter and 3D use all
+          three; bar and donut use <strong>Y</strong> at the chosen <strong>bit width</strong>; treemap uses{" "}
+          <strong>Y</strong> across all designs; heatmap grids architecture × bit width with <strong>Z</strong> as color.
         </p>
         <div className="axis-pickers">
           <label className="axis-picker">
-            X (horizontal / depth)
+            Category
             <select
-              value={exploreAxes.x}
-              aria-label="Explore metric X"
-              onChange={(e) => onExploreAxisChange("x", e.target.value as ScatterAxisMetric)}
+              value={exploreAxes.category}
+              aria-label="Dataset category"
+              onChange={(e) =>
+                setExploreAxes((p) => ({ ...p, category: e.target.value as DemoCategoryId }))
+              }
             >
-              {SCATTER_AXIS_METRICS.map((m) => (
-                <option key={m} value={m}>
-                  {scatterAxisOptionLabel(m)}
+              {DEMO_CATEGORIES.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.label}
                 </option>
               ))}
             </select>
           </label>
           <label className="axis-picker">
-            Y (vertical / bar &amp; pie)
+            Y (bar, donut, treemap value)
             <select
               value={exploreAxes.y}
               aria-label="Explore metric Y"
@@ -633,7 +643,21 @@ export function PlotlyPage(): JSX.Element {
             </select>
           </label>
           <label className="axis-picker">
-            Z (heatmap color)
+            X (horizontal / 3D depth)
+            <select
+              value={exploreAxes.x}
+              aria-label="Explore metric X"
+              onChange={(e) => onExploreAxisChange("x", e.target.value as ScatterAxisMetric)}
+            >
+              {SCATTER_AXIS_METRICS.map((m) => (
+                <option key={m} value={m}>
+                  {scatterAxisOptionLabel(m)}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="axis-picker">
+            Z (heatmap color / 3D vertical)
             <select
               value={exploreAxes.z}
               aria-label="Explore metric Z"
@@ -642,6 +666,25 @@ export function PlotlyPage(): JSX.Element {
               {SCATTER_AXIS_METRICS.map((m) => (
                 <option key={m} value={m}>
                   {scatterAxisOptionLabel(m)}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="axis-picker">
+            Bit width (bar &amp; donut)
+            <select
+              value={exploreAxes.bitWidth}
+              aria-label="Bit width for bar and donut charts"
+              onChange={(e) => {
+                const v = Number(e.target.value);
+                setExploreAxes((p) =>
+                  (DEMO_BIT_WIDTHS as readonly number[]).includes(v) ? { ...p, bitWidth: v } : p,
+                );
+              }}
+            >
+              {DEMO_BIT_WIDTHS.map((bw) => (
+                <option key={bw} value={bw}>
+                  {bw}b
                 </option>
               ))}
             </select>
@@ -660,12 +703,13 @@ export function PlotlyPage(): JSX.Element {
         </div>
       </div>
       <div className="chart-card">
-        <h2>Grouped bar</h2>
+        <h2>3D scatter</h2>
         <p className="hint">
-          64-bit rows: <strong>Y</strong> metric by architecture. Mode bar: zoom, pan, autoscale, PNG.
+          WebGL cloud using <strong>X</strong> × <strong>Y</strong> × <strong>Z</strong> from above. Drag to rotate; mode bar
+          for PNG / reset camera.
         </p>
-        <div className="plot-host">
-          <div ref={barRef} style={{ width: "100%", height: "100%" }} />
+        <div className="plot-host plot-host--tall">
+          <div ref={scatter3dRef} style={{ width: "100%", height: "100%" }} />
         </div>
       </div>
       <div className="chart-card">
@@ -678,31 +722,31 @@ export function PlotlyPage(): JSX.Element {
         </div>
       </div>
       <div className="chart-card">
-        <h2>Donut (pie)</h2>
-        <p className="hint">
-          Relative <strong>Y</strong> at 64b (same slice as the bar chart).
-        </p>
-        <div className="plot-host plot-host--short">
-          <div ref={pieRef} style={{ width: "100%", height: "100%" }} />
-        </div>
-      </div>
-      <div className="chart-card">
-        <h2>3D scatter</h2>
-        <p className="hint">
-          WebGL cloud using <strong>X</strong> × <strong>Y</strong> × <strong>Z</strong> from above. Drag to rotate; mode bar
-          for PNG / reset camera.
-        </p>
-        <div className="plot-host plot-host--tall">
-          <div ref={scatter3dRef} style={{ width: "100%", height: "100%" }} />
-        </div>
-      </div>
-      <div className="chart-card">
         <h2>Treemap</h2>
         <p className="hint">
           Tile size from <strong>Y</strong> metric — root → each architecture×width leaf.
         </p>
         <div className="plot-host plot-host--short">
           <div ref={treemapRef} style={{ width: "100%", height: "100%" }} />
+        </div>
+      </div>
+      <div className="chart-card">
+        <h2>Donut (pie)</h2>
+        <p className="hint">
+          Relative <strong>Y</strong> at the selected <strong>bit width</strong> (same slice as the bar chart).
+        </p>
+        <div className="plot-host plot-host--short">
+          <div ref={pieRef} style={{ width: "100%", height: "100%" }} />
+        </div>
+      </div>
+      <div className="chart-card">
+        <h2>Grouped bar</h2>
+        <p className="hint">
+          Rows at the selected <strong>bit width</strong>: <strong>Y</strong> metric by architecture. Mode bar: zoom,
+          pan, autoscale, PNG.
+        </p>
+        <div className="plot-host">
+          <div ref={barRef} style={{ width: "100%", height: "100%" }} />
         </div>
       </div>
       <p className="note">

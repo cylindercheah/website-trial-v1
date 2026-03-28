@@ -81,25 +81,47 @@ export function scatterArchitectureTickAxis(): {
   };
 }
 
-/** X / Y / Z selections for charts that share explore axes (all three must differ). */
+/** Demo dataset family (expand when more categories ship). */
+export type DemoCategoryId = "adder";
+
+export const DEMO_CATEGORIES: readonly { id: DemoCategoryId; label: string }[] = [
+  { id: "adder", label: "Adder (PPA demo)" },
+];
+
+export function demoCategoryLabel(id: DemoCategoryId): string {
+  const row = DEMO_CATEGORIES.find((c) => c.id === id);
+  return row?.label ?? id;
+}
+
+/** Keys for X / Y / Z only (`category` and `bitWidth` are set separately). */
+export type ExploreAxisKey = "x" | "y" | "z";
+
+/**
+ * Explore panel: dataset category, Cartesian metrics (must differ), and slice bit width for bar/pie.
+ */
 export type ExploreAxesState = {
+  category: DemoCategoryId;
+  bitWidth: number;
   x: ScatterAxisMetric;
   y: ScatterAxisMetric;
   z: ScatterAxisMetric;
 };
 
 export const DEFAULT_EXPLORE_AXES: ExploreAxesState = {
+  category: "adder",
+  bitWidth: 64,
   x: "fmaxMhz",
   y: "powerMw",
   z: "areaUm2",
 };
 
 /**
- * Updates one explore axis and reassigns duplicates so `x`, `y`, and `z` stay distinct.
+ * Updates one of X/Y/Z and reassigns duplicates so the three metrics stay distinct.
+ * Preserves `category` and `bitWidth`.
  */
 export function syncExploreAxes(
   prev: ExploreAxesState,
-  key: keyof ExploreAxesState,
+  key: ExploreAxisKey,
   m: ScatterAxisMetric,
 ): ExploreAxesState {
   const next: ExploreAxesState =
@@ -113,7 +135,7 @@ export function syncExploreAxes(
   if (x === z) z = pick(new Set([x, y]));
   if (y === z) z = pick(new Set([x, y]));
   if (x === y) y = pick(new Set([x, z]));
-  return { x, y, z };
+  return { ...next, x, y, z };
 }
 
 /** Heatmap cell values: rows = architectures, cols = bit widths. */
