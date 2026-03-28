@@ -12,6 +12,9 @@ export const CHART_LINE_WIDTH = 3;
 /** Marker edge and pie/donut slice outline — black in both themes. */
 export const CHART_MARKER_OUTLINE_RGB = "rgb(0, 0, 0)";
 
+/** Scatter / 3D point marker stroke (px); thicker than default 1 so bubbles read clearly on busy plots. */
+export const CHART_SCATTER_MARKER_LINE_WIDTH = 2.5;
+
 /**
  * Heavy face for axis titles + ticks so numbering matches label weight (Plotly has no tick fontWeight).
  */

@@ -71,6 +71,7 @@ import {
 import {
   CHART_LINE_WIDTH,
   CHART_MARKER_OUTLINE_RGB,
+  CHART_SCATTER_MARKER_LINE_WIDTH,
   chartAxisFontSizePx,
   getChartPalette,
   plotInsetBackground,
@@ -251,7 +252,7 @@ export function PlotlyPage(): JSX.Element {
             size: scatterMarkerSize,
             color: architectureColor(arch),
             opacity: 1,
-            line: { width: 1, color: CHART_MARKER_OUTLINE_RGB },
+            line: { width: CHART_SCATTER_MARKER_LINE_WIDTH, color: CHART_MARKER_OUTLINE_RGB },
           },
         });
       }
@@ -269,23 +270,6 @@ export function PlotlyPage(): JSX.Element {
         `Pareto-style: ${scatterAxisTitle(paretoYMetric)} vs ${scatterAxisTitle(paretoXMetric)}`,
       );
 
-      const paretoThickZeroX =
-        paretoXAxisType === "linear"
-          ? {
-              zeroline: true,
-              zerolinewidth: 6,
-              zerolinecolor: palette.axisBorderRgb,
-            }
-          : {};
-      const paretoThickZeroY =
-        paretoYAxisType === "linear"
-          ? {
-              zeroline: true,
-              zerolinewidth: 6,
-              zerolinecolor: palette.axisBorderRgb,
-            }
-          : {};
-
       const paretoLayoutInner: Partial<Layout> = narrow
         ? {
             autosize: true,
@@ -300,7 +284,7 @@ export function PlotlyPage(): JSX.Element {
             showlegend: false,
             xaxis: {
               ...frameX,
-              ...paretoThickZeroX,
+              zeroline: false,
               type: paretoXAxisType,
               layer: "below traces",
               automargin: true,
@@ -312,7 +296,7 @@ export function PlotlyPage(): JSX.Element {
             },
             yaxis: {
               ...frameY,
-              ...paretoThickZeroY,
+              zeroline: false,
               type: paretoYAxisType,
               layer: "below traces",
               automargin: true,
@@ -338,7 +322,7 @@ export function PlotlyPage(): JSX.Element {
             showlegend: false,
             xaxis: {
               ...frameX,
-              ...paretoThickZeroX,
+              zeroline: false,
               type: paretoXAxisType,
               layer: "below traces",
               automargin: true,
@@ -350,7 +334,7 @@ export function PlotlyPage(): JSX.Element {
             },
             yaxis: {
               ...frameY,
-              ...paretoThickZeroY,
+              zeroline: false,
               type: paretoYAxisType,
               layer: "below traces",
               automargin: true,
@@ -812,7 +796,7 @@ export function PlotlyPage(): JSX.Element {
             size: scatterMarkerSize,
             color: architectureColor(arch),
             opacity: 1,
-            line: { width: 1, color: CHART_MARKER_OUTLINE_RGB },
+            line: { width: CHART_SCATTER_MARKER_LINE_WIDTH, color: CHART_MARKER_OUTLINE_RGB },
           },
         });
       }
