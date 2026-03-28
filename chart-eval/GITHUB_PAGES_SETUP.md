@@ -11,7 +11,10 @@
 
 1. Push this repository to  
    `https://github.com/SJTU-YONGFU-RESEARCH-GRP/website-trial-v1`  
-   (including **`chart-eval/package-lock.json`** so `npm ci` works in CI).
+
+   **Recommended:** run `npm install` locally inside `chart-eval/`, then **commit `chart-eval/package-lock.json`**. That makes CI use `npm ci` (reproducible installs). If the lockfile is missing, the workflow falls back to `npm install`.
+
+   **Optional speed-up:** after the lockfile is in git, you can add npm caching back to `setup-node` in `.github/workflows/deploy-pages.yml` (see comments in that file).
 
 2. In the repo on GitHub: **Settings → Pages**
 
