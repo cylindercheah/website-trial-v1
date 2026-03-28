@@ -1,6 +1,6 @@
-# Chart demo (Plotly.js)
+# Plotly.js chart gallery
 
-Small **Vite + React** app (**website-trial-v1**) showcasing **Plotly.js** with a synthetic PPA-style dataset: Pareto scatter, bar, heatmap, donut, 3D scatter, and treemap.
+Small **Vite + React** app (**website-trial-v1**) showcasing **Plotly.js** with a synthetic design-metrics dataset: Pareto scatter, bar, heatmap, donut, 3D scatter, and treemap.
 
 ## Run locally
 

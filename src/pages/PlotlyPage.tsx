@@ -4,16 +4,16 @@ import type { Config, Data, Layout } from "plotly.js";
 import Plotly from "plotly.js-dist-min";
 import { useNarrowScreen } from "../hooks/useNarrowScreen";
 import {
-  ADDER_DEMO_ROWS,
+  DESIGN_ROWS,
+  DESIGN_ARCH_ORDER,
+  DESIGN_BIT_WIDTHS,
   architectureColor,
-  DEMO_ARCH_ORDER,
-  DEMO_BIT_WIDTHS,
   formatArchLabel,
   rowsByBitWidthOrdered,
-} from "../data/samplePpa";
+} from "../data/sampleDesign";
 import {
   DEFAULT_EXPLORE_AXES,
-  DEMO_CATEGORIES,
+  DESIGN_CATEGORIES,
   SCATTER_AXIS_METRICS,
   scatterArchitectureTickAxis,
   scatterAxisHeatmapGrid,
@@ -22,9 +22,10 @@ import {
   scatterAxisTitle,
   scatterAxisTreemapFlat,
   scatterAxisValue,
+  scene3dAxisTickHideEnds,
   syncExploreAxes,
-  type DemoCategoryId,
   type ExploreAxesState,
+  type DesignCategoryId,
   type ExploreAxisKey,
   type ScatterAxisMetric,
 } from "../data/scatterAxisMetrics";
@@ -108,9 +109,9 @@ export function PlotlyPage(): JSX.Element {
       const paretoXMetric = ex.x;
       const paretoYMetric = ex.y;
       const paretoZMetric = ex.z;
-      const plotBitWidth = (DEMO_BIT_WIDTHS as readonly number[]).includes(ex.bitWidth)
+      const plotBitWidth = (DESIGN_BIT_WIDTHS as readonly number[]).includes(ex.bitWidth)
         ? ex.bitWidth
-        : DEMO_BIT_WIDTHS[0];
+        : DESIGN_BIT_WIDTHS[0];
       const palette = getChartPalette(theme);
       const hoverLabel = plotlyHoverLabel(palette, narrow);
       const frameX = plotlyAxisFrameX(palette);
@@ -127,15 +128,15 @@ export function PlotlyPage(): JSX.Element {
       const mSize = (bw: number): number =>
         (narrow ? 4 : 0) + 8 + (bw / 64) * 10;
 
-      const byArch = new Map<string, typeof ADDER_DEMO_ROWS>();
-      for (const row of ADDER_DEMO_ROWS) {
+      const byArch = new Map<string, typeof DESIGN_ROWS>();
+      for (const row of DESIGN_ROWS) {
         const list = byArch.get(row.architecture) ?? [];
         list.push(row);
         byArch.set(row.architecture, list);
       }
 
       const paretoDataInner: Data[] = [];
-      for (const arch of DEMO_ARCH_ORDER) {
+      for (const arch of DESIGN_ARCH_ORDER) {
         const rows = byArch.get(arch);
         if (!rows?.length) continue;
         const label = formatArchLabel(arch);
@@ -452,22 +453,15 @@ export function PlotlyPage(): JSX.Element {
             hoverlabel: hoverLabel,
           };
 
-      const sceneAxisFor = (
-        base: typeof sceneAxX,
-        metric: ScatterAxisMetric,
-      ) => {
-        const r = scatterAxisRange(metric);
-        return {
-          ...base,
-          title: axTitle(scatterAxisTitle(metric)),
-          tickfont: axTick,
-          ...(metric === "architecture" ? scatterArchitectureTickAxis() : {}),
-          ...(r ? { range: r as [number, number] } : {}),
-        };
-      };
+      const sceneAxisFor = (base: typeof sceneAxX, metric: ScatterAxisMetric) => ({
+        ...base,
+        title: axTitle(scatterAxisTitle(metric)),
+        tickfont: axTick,
+        ...scene3dAxisTickHideEnds(metric, DESIGN_ROWS),
+      });
 
       const scatter3dDataInner: Data[] = [];
-      for (const arch of DEMO_ARCH_ORDER) {
+      for (const arch of DESIGN_ARCH_ORDER) {
         const rows = byArch.get(arch);
         if (!rows?.length) continue;
         scatter3dDataInner.push({
@@ -540,7 +534,7 @@ export function PlotlyPage(): JSX.Element {
         scatterAxisTreemapFlat(paretoYMetric);
       const treemapColors = [
         palette.axisBorderRgb,
-        ...ADDER_DEMO_ROWS.map((r) => architectureColor(r.architecture)),
+        ...DESIGN_ROWS.map((r) => architectureColor(r.architecture)),
       ];
       const treemapDataInner: Data[] = [
         {
@@ -618,10 +612,10 @@ export function PlotlyPage(): JSX.Element {
               value={exploreAxes.category}
               aria-label="Dataset category"
               onChange={(e) =>
-                setExploreAxes((p) => ({ ...p, category: e.target.value as DemoCategoryId }))
+                setExploreAxes((p) => ({ ...p, category: e.target.value as DesignCategoryId }))
               }
             >
-              {DEMO_CATEGORIES.map((c) => (
+              {DESIGN_CATEGORIES.map((c) => (
                 <option key={c.id} value={c.id}>
                   {c.label}
                 </option>
@@ -678,11 +672,11 @@ export function PlotlyPage(): JSX.Element {
               onChange={(e) => {
                 const v = Number(e.target.value);
                 setExploreAxes((p) =>
-                  (DEMO_BIT_WIDTHS as readonly number[]).includes(v) ? { ...p, bitWidth: v } : p,
+                  (DESIGN_BIT_WIDTHS as readonly number[]).includes(v) ? { ...p, bitWidth: v } : p,
                 );
               }}
             >
-              {DEMO_BIT_WIDTHS.map((bw) => (
+              {DESIGN_BIT_WIDTHS.map((bw) => (
                 <option key={bw} value={bw}>
                   {bw}b
                 </option>
@@ -694,7 +688,7 @@ export function PlotlyPage(): JSX.Element {
       <div className="chart-card">
         <h2>Pareto scatter</h2>
         <p className="hint">
-          Pinch/drag or mode-bar zoom; larger markers = wider adder (bubble-style). Uses{" "}
+          Pinch/drag or mode-bar zoom; larger markers = wider bit width (bubble-style). Uses{" "}
           <strong>X</strong> × <strong>Y</strong> from above — hover points for details.{" "}
           <code>plotly.js-dist-min</code> browser bundle.
         </p>

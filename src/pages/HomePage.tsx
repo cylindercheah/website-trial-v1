@@ -2,9 +2,9 @@ export function HomePage(): JSX.Element {
   return (
     <div>
       <div className="chart-card">
-        <h2>Why this demo</h2>
+        <h2>Overview</h2>
         <p className="hint" style={{ marginBottom: "0.75rem" }}>
-          A synthetic <strong>PPA-style</strong> dataset rendered with{" "}
+          A synthetic <strong>design-metrics</strong> dataset rendered with{" "}
           <strong>Plotly.js</strong> (<code>plotly.js-dist-min</code>): Cartesian charts plus
           analytics views (3D scatter, treemap). Built with{" "}
           <strong>Vite + React</strong> for GitHub Pages.
