@@ -38,6 +38,7 @@ import {
   plotlyAxisFrameX,
   plotlyAxisFrameY,
   plotlyBold,
+  plotlyHeatmapColorscale,
   plotlyHoverLabel,
   plotlySceneAxis,
 } from "../theme/chartPalette";
@@ -340,7 +341,7 @@ export function PlotlyPage(): JSX.Element {
           x: colLabels,
           y: rowLabels,
           z: heatZ,
-          colorscale: "Viridis",
+          colorscale: plotlyHeatmapColorscale(palette, theme),
           hovertemplate:
             `<b>Bit width %{x}</b><br><b>%{y}</b><br><b>${scatterAxisTitle(paretoZMetric)}:</b> %{z}<extra></extra>`,
           colorbar: {

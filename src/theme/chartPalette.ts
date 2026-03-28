@@ -222,3 +222,26 @@ export type ThemeMode = "light" | "dark";
 export function getChartPalette(theme: ThemeMode): ChartPalette {
   return theme === "dark" ? dark : light;
 }
+
+/**
+ * Plotly heatmap colorscale: low values cool blue, high values accent orange (matches site palette).
+ */
+export function plotlyHeatmapColorscale(
+  palette: ChartPalette,
+  theme: ThemeMode,
+): [number, string][] {
+  if (theme === "dark") {
+    return [
+      [0, "rgb(18, 24, 36)"],
+      [0.35, "rgb(40, 70, 120)"],
+      [0.65, "rgb(70, 140, 210)"],
+      [1, palette.accentOrange],
+    ];
+  }
+  return [
+    [0, "rgb(236, 244, 255)"],
+    [0.35, "rgb(147, 197, 253)"],
+    [0.65, "rgb(37, 99, 235)"],
+    [1, palette.accentOrange],
+  ];
+}
