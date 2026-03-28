@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, type RefObject } from "react";
+import { useEffect, useMemo, useRef, useState, type RefObject } from "react";
 import type { Config, Data, Layout } from "plotly.js";
 // Pre-minified browser build — avoids Vite bundling plotly's Node-only trace helpers.
 import Plotly from "plotly.js-dist-min";
@@ -13,6 +13,15 @@ import {
   ppaTreemapFlat,
   rowsByBitWidthOrdered,
 } from "../data/samplePpa";
+import {
+  SCATTER_AXIS_METRICS,
+  scatterArchitectureTickAxis,
+  scatterAxisOptionLabel,
+  scatterAxisRange,
+  scatterAxisTitle,
+  scatterAxisValue,
+  type ScatterAxisMetric,
+} from "../data/scatterAxisMetrics";
 import {
   CHART_LINE_WIDTH,
   getChartPalette,
@@ -61,6 +70,23 @@ function usePlotlyChart(
 export function PlotlyPage(): JSX.Element {
   const narrow = useNarrowScreen(640);
   const { theme } = useTheme();
+  const [paretoXMetric, setParetoXMetric] = useState<ScatterAxisMetric>("fmaxMhz");
+  const [paretoYMetric, setParetoYMetric] = useState<ScatterAxisMetric>("powerMw");
+
+  const onParetoXMetricChange = (m: ScatterAxisMetric) => {
+    setParetoXMetric(m);
+    if (m === paretoYMetric) {
+      const next = SCATTER_AXIS_METRICS.find((x) => x !== m);
+      if (next) setParetoYMetric(next);
+    }
+  };
+  const onParetoYMetricChange = (m: ScatterAxisMetric) => {
+    setParetoYMetric(m);
+    if (m === paretoXMetric) {
+      const next = SCATTER_AXIS_METRICS.find((x) => x !== m);
+      if (next) setParetoXMetric(next);
+    }
+  };
 
   const {
     paretoData,
@@ -117,8 +143,8 @@ export function PlotlyPage(): JSX.Element {
           type: "scatter",
           mode: "markers",
           name: label,
-          x: rows.map((r) => r.fmaxMhz),
-          y: rows.map((r) => r.powerMw),
+          x: rows.map((r) => scatterAxisValue(paretoXMetric, r)),
+          y: rows.map((r) => scatterAxisValue(paretoYMetric, r)),
           text: rows.map(
             (r) => `${label}<br>${r.bitWidth}b<br>${r.areaUm2} µm²`,
           ),
@@ -158,6 +184,18 @@ export function PlotlyPage(): JSX.Element {
 
       const paretoPlotBg =
         theme === "dark" ? "rgb(22, 28, 38)" : "rgb(255, 255, 255)";
+      const paretoXRange = scatterAxisRange(paretoXMetric);
+      const paretoYRange = scatterAxisRange(paretoYMetric);
+      const paretoXArchTicks =
+        paretoXMetric === "architecture" ? scatterArchitectureTickAxis() : {};
+      const paretoYArchTicks =
+        paretoYMetric === "architecture" ? scatterArchitectureTickAxis() : {};
+      const paretoTitleNarrow = plotlyBold(
+        `${scatterAxisTitle(paretoXMetric)} vs ${scatterAxisTitle(paretoYMetric)} (demo)`,
+      );
+      const paretoTitleWide = plotlyBold(
+        `Pareto-style: ${scatterAxisTitle(paretoXMetric)} vs ${scatterAxisTitle(paretoYMetric)} (demo data)`,
+      );
 
       const paretoLayoutInner: Partial<Layout> = narrow
         ? {
@@ -167,7 +205,7 @@ export function PlotlyPage(): JSX.Element {
             plot_bgcolor: paretoPlotBg,
             font: plotFont(palette.rgbAxisTitle),
             title: {
-              text: plotlyBold("Fmax vs power (demo)"),
+              text: paretoTitleNarrow,
               font: plotFont(palette.rgbAxisTitle),
             },
             showlegend: false,
@@ -175,15 +213,25 @@ export function PlotlyPage(): JSX.Element {
               ...frameX,
               layer: "below traces",
               gridcolor: palette.axisGridGreyRgb,
-              title: { text: plotlyBold("Fmax (MHz)"), font: plotFont(palette.rgbAxisTitle) },
+              title: {
+                text: plotlyBold(scatterAxisTitle(paretoXMetric)),
+                font: plotFont(palette.rgbAxisTitle),
+              },
               tickfont: plotTickFont(palette.axisValueLabelRgb),
+              ...paretoXArchTicks,
+              ...(paretoXRange ? { range: paretoXRange } : {}),
             },
             yaxis: {
               ...frameY,
               layer: "below traces",
               gridcolor: palette.axisGridBlackRgb,
-              title: { text: plotlyBold("Power (mW)"), font: plotFont(palette.rgbAxisTitle) },
+              title: {
+                text: plotlyBold(scatterAxisTitle(paretoYMetric)),
+                font: plotFont(palette.rgbAxisTitle),
+              },
               tickfont: plotTickFont(palette.axisValueLabelRgb),
+              ...paretoYArchTicks,
+              ...(paretoYRange ? { range: paretoYRange } : {}),
             },
             hovermode: "closest",
           }
@@ -194,7 +242,7 @@ export function PlotlyPage(): JSX.Element {
             plot_bgcolor: paretoPlotBg,
             font: plotFont(palette.rgbAxisTitle),
             title: {
-              text: plotlyBold("Pareto-style: Fmax vs power (demo data)"),
+              text: paretoTitleWide,
               font: plotFont(palette.rgbAxisTitle),
             },
             showlegend: false,
@@ -202,15 +250,25 @@ export function PlotlyPage(): JSX.Element {
               ...frameX,
               layer: "below traces",
               gridcolor: palette.axisGridGreyRgb,
-              title: { text: plotlyBold("Fmax (MHz)"), font: plotFont(palette.rgbAxisTitle) },
+              title: {
+                text: plotlyBold(scatterAxisTitle(paretoXMetric)),
+                font: plotFont(palette.rgbAxisTitle),
+              },
               tickfont: plotTickFont(palette.axisValueLabelRgb),
+              ...paretoXArchTicks,
+              ...(paretoXRange ? { range: paretoXRange } : {}),
             },
             yaxis: {
               ...frameY,
               layer: "below traces",
               gridcolor: palette.axisGridBlackRgb,
-              title: { text: plotlyBold("Power (mW)"), font: plotFont(palette.rgbAxisTitle) },
+              title: {
+                text: plotlyBold(scatterAxisTitle(paretoYMetric)),
+                font: plotFont(palette.rgbAxisTitle),
+              },
               tickfont: plotTickFont(palette.axisValueLabelRgb),
+              ...paretoYArchTicks,
+              ...(paretoYRange ? { range: paretoYRange } : {}),
             },
             hovermode: "closest",
           };
@@ -751,7 +809,7 @@ export function PlotlyPage(): JSX.Element {
         sankeyLayout: sankeyLayoutInner,
         sankeyConfig: commonConfig,
       };
-    }, [narrow, theme]);
+    }, [narrow, theme, paretoXMetric, paretoYMetric]);
 
   const paretoRef = usePlotlyChart(paretoData, paretoLayout, paretoConfig);
   const lineRef = usePlotlyChart(lineData, lineLayout, lineConfig);
@@ -768,10 +826,41 @@ export function PlotlyPage(): JSX.Element {
       <div className="chart-card">
         <h2>Pareto scatter</h2>
         <p className="hint">
-          Pinch/drag or mode-bar zoom; larger markers = wider adder (bubble-style). Legend is
-          hidden to avoid overlapping the axis title — architecture color appears in the hover card.{" "}
+          Pinch/drag or mode-bar zoom; larger markers = wider adder (bubble-style). Choose
+          horizontal and vertical metrics below. Legend is hidden to avoid overlapping the axis
+          title — architecture color appears in the hover card.{" "}
           <code>plotly.js-dist-min</code> browser bundle.
         </p>
+        <div className="axis-pickers">
+          <label className="axis-picker">
+            Horizontal
+            <select
+              value={paretoXMetric}
+              aria-label="Pareto chart horizontal axis"
+              onChange={(e) => onParetoXMetricChange(e.target.value as ScatterAxisMetric)}
+            >
+              {SCATTER_AXIS_METRICS.map((m) => (
+                <option key={m} value={m}>
+                  {scatterAxisOptionLabel(m)}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="axis-picker">
+            Vertical
+            <select
+              value={paretoYMetric}
+              aria-label="Pareto chart vertical axis"
+              onChange={(e) => onParetoYMetricChange(e.target.value as ScatterAxisMetric)}
+            >
+              {SCATTER_AXIS_METRICS.filter((m) => m !== paretoXMetric).map((m) => (
+                <option key={m} value={m}>
+                  {scatterAxisOptionLabel(m)}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
         <div className="plot-host">
           <div ref={paretoRef} style={{ width: "100%", height: "100%" }} />
         </div>

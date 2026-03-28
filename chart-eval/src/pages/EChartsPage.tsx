@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import ReactECharts from "echarts-for-react";
 import type { EChartsOption, ToolboxComponentOption } from "echarts";
 import { useNarrowScreen } from "../hooks/useNarrowScreen";
@@ -14,6 +14,15 @@ import {
   rowsByBitWidthOrdered,
   syntheticPowerBoxByArch64,
 } from "../data/samplePpa";
+import {
+  SCATTER_AXIS_METRICS,
+  scatterAxisDisplayValue,
+  scatterAxisOptionLabel,
+  scatterAxisRange,
+  scatterAxisTitle,
+  scatterAxisValue,
+  type ScatterAxisMetric,
+} from "../data/scatterAxisMetrics";
 import {
   CHART_LINE_WIDTH,
   echartsGridBorder,
@@ -77,6 +86,23 @@ type ScatterDatum = {
 export function EChartsPage(): JSX.Element {
   const narrow = useNarrowScreen(640);
   const { theme } = useTheme();
+  const [paretoXMetric, setParetoXMetric] = useState<ScatterAxisMetric>("fmaxMhz");
+  const [paretoYMetric, setParetoYMetric] = useState<ScatterAxisMetric>("powerMw");
+
+  const onParetoXMetricChange = (m: ScatterAxisMetric) => {
+    setParetoXMetric(m);
+    if (m === paretoYMetric) {
+      const next = SCATTER_AXIS_METRICS.find((x) => x !== m);
+      if (next) setParetoYMetric(next);
+    }
+  };
+  const onParetoYMetricChange = (m: ScatterAxisMetric) => {
+    setParetoYMetric(m);
+    if (m === paretoXMetric) {
+      const next = SCATTER_AXIS_METRICS.find((x) => x !== m);
+      if (next) setParetoXMetric(next);
+    }
+  };
 
   const paretoOption = useMemo((): EChartsOption => {
     const palette = getChartPalette(theme);
@@ -108,7 +134,10 @@ export function EChartsPage(): JSX.Element {
           },
           emphasis: { focus: "series" as const },
           data: rows.map((r) => ({
-            value: [r.fmaxMhz, r.powerMw] as [number, number],
+            value: [
+              scatterAxisValue(paretoXMetric, r),
+              scatterAxisValue(paretoYMetric, r),
+            ] as [number, number],
             // Per-point size: symbolSize callbacks receive [x,y], not this object (bitWidth was undefined → broken plot).
             symbolSize: bump + 10 + (r.bitWidth / 64) * 14,
             bitWidth: r.bitWidth,
@@ -118,11 +147,16 @@ export function EChartsPage(): JSX.Element {
       ];
     });
 
+    const paretoXAxisRange = scatterAxisRange(paretoXMetric);
+    const paretoYAxisRange = scatterAxisRange(paretoYMetric);
+
     return {
       backgroundColor: chartPlotBg,
       textStyle: echartsTextStyle(palette.rgbAxisTitle),
       title: {
-        text: narrow ? "Fmax vs power (demo)" : "Pareto-style: Fmax vs power (demo data)",
+        text: narrow
+          ? `${scatterAxisTitle(paretoXMetric)} vs ${scatterAxisTitle(paretoYMetric)} (demo)`
+          : `Pareto-style: ${scatterAxisTitle(paretoXMetric)} vs ${scatterAxisTitle(paretoYMetric)} (demo data)`,
         left: "center",
         textStyle: echartsTextStyle(palette.rgbAxisTitle),
       },
@@ -159,18 +193,25 @@ export function EChartsPage(): JSX.Element {
           };
           const d = p.data;
           if (!d?.value) return "";
-          const [fmax, pwr] = d.value;
-          return `${p.seriesName}<br/>Fmax: ${fmax} MHz<br/>Power: ${pwr} mW<br/>Width: ${d.bitWidth} b<br/>Area: ${d.areaUm2} µm²`;
+          const [vx, vy] = d.value;
+          return `${p.seriesName ?? ""}<br/>${scatterAxisTitle(paretoXMetric)}: ${scatterAxisDisplayValue(paretoXMetric, vx)}<br/>${scatterAxisTitle(paretoYMetric)}: ${scatterAxisDisplayValue(paretoYMetric, vy)}<br/>Width: ${d.bitWidth} b<br/>Area: ${d.areaUm2} µm²`;
         },
       },
       legend: { show: false },
       xAxis: {
         type: "value",
-        name: "Fmax (MHz)",
+        name: scatterAxisTitle(paretoXMetric),
         nameLocation: "middle",
         nameGap: narrow ? 22 : 28,
         scale: true,
-        axisLabel: echartsTextStyle(palette.axisValueLabelRgb),
+        axisLabel: {
+          ...echartsTextStyle(palette.axisValueLabelRgb),
+          ...(paretoXMetric === "architecture"
+            ? {
+                formatter: (v: number) => scatterAxisDisplayValue("architecture", v),
+              }
+            : {}),
+        },
         nameTextStyle: echartsTextStyle(palette.rgbAxisTitle),
         axisLine: {
           lineStyle: { color: palette.axisBorderRgb, width: CHART_LINE_WIDTH },
@@ -182,14 +223,24 @@ export function EChartsPage(): JSX.Element {
             type: "dashed",
           },
         },
+        ...(paretoXAxisRange
+          ? { min: paretoXAxisRange[0], max: paretoXAxisRange[1] }
+          : {}),
       },
       yAxis: {
         type: "value",
-        name: "Power (mW)",
+        name: scatterAxisTitle(paretoYMetric),
         nameLocation: "middle",
         nameGap: narrow ? 32 : 40,
         scale: true,
-        axisLabel: echartsTextStyle(palette.axisValueLabelRgb),
+        axisLabel: {
+          ...echartsTextStyle(palette.axisValueLabelRgb),
+          ...(paretoYMetric === "architecture"
+            ? {
+                formatter: (v: number) => scatterAxisDisplayValue("architecture", v),
+              }
+            : {}),
+        },
         nameTextStyle: echartsTextStyle(palette.rgbAxisTitle),
         axisLine: {
           lineStyle: { color: palette.axisBorderRgb, width: CHART_LINE_WIDTH },
@@ -201,6 +252,9 @@ export function EChartsPage(): JSX.Element {
             type: "dashed",
           },
         },
+        ...(paretoYAxisRange
+          ? { min: paretoYAxisRange[0], max: paretoYAxisRange[1] }
+          : {}),
       },
       series,
       dataZoom: [
@@ -934,20 +988,50 @@ export function EChartsPage(): JSX.Element {
         },
       ],
     };
-  }, [narrow, theme]);
+  }, [narrow, theme, paretoXMetric, paretoYMetric]);
 
   return (
     <div>
       <div className="chart-card">
         <h2>Pareto scatter</h2>
         <p className="hint">
-          Toolbox: rectangle <strong>dataZoom</strong>, <strong>reset</strong>, PNG. Inside zoom +
-          bottom slider (x). Legend is hidden so it does not cover the axis title — use the hover
-          card for architecture and metrics.
+          Choose horizontal and vertical metrics below. Toolbox: rectangle <strong>dataZoom</strong>,{" "}
+          <strong>reset</strong>, PNG. Inside zoom + bottom slider (x). Legend is hidden so it does
+          not cover the axis title — use the hover card for architecture and metrics.
         </p>
+        <div className="axis-pickers">
+          <label className="axis-picker">
+            Horizontal
+            <select
+              value={paretoXMetric}
+              aria-label="Pareto chart horizontal axis"
+              onChange={(e) => onParetoXMetricChange(e.target.value as ScatterAxisMetric)}
+            >
+              {SCATTER_AXIS_METRICS.map((m) => (
+                <option key={m} value={m}>
+                  {scatterAxisOptionLabel(m)}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="axis-picker">
+            Vertical
+            <select
+              value={paretoYMetric}
+              aria-label="Pareto chart vertical axis"
+              onChange={(e) => onParetoYMetricChange(e.target.value as ScatterAxisMetric)}
+            >
+              {SCATTER_AXIS_METRICS.filter((m) => m !== paretoXMetric).map((m) => (
+                <option key={m} value={m}>
+                  {scatterAxisOptionLabel(m)}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
         <div className="plot-host">
           <ReactECharts
-            key={narrow ? "pareto-narrow" : "pareto-wide"}
+            key={`pareto-${narrow ? "n" : "w"}-${paretoXMetric}-${paretoYMetric}`}
             option={paretoOption}
             style={{ height: "100%", width: "100%" }}
             opts={{ renderer: "canvas" }}
