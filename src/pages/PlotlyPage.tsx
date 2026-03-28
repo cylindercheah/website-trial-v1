@@ -979,33 +979,35 @@ export function PlotlyPage(): JSX.Element {
     <div>
       <div className="chart-card">
         <h2>Explore metrics</h2>
-        <p className="hint">
-          <strong>Category</strong> filters the dataset to one design family; all charts below use only that
-          family&apos;s architectures and rows.
-        </p>
-        <p className="hint">
-          <strong>Bar / donut / scatter baseline</strong> chooses what stays fixed: architectures at one tech &amp;
-          width; sweep <strong>bit widths</strong> with <strong>technology</strong> fixed; or sweep{" "}
-          <strong>technology</strong> with <strong>bit width</strong> fixed. Pareto and 3D scatter use the same slice.{" "}
-          <strong>Technology</strong> also anchors heatmap and treemap.
-        </p>
-        <p className="hint">
-          <strong>X</strong> / <strong>Y</strong> / <strong>Z</strong> are distinct metrics: scatter and 3D use all
-          three; bar and donut use <strong>Y</strong>; treemap uses <strong>Y</strong> at the selected technology; heatmap
-          uses <strong>Z</strong> on an architecture × bit-width grid.
-        </p>
-        <p className="hint">
-          At the bottom of the panel: <strong>X</strong>, <strong>Y</strong>, and <strong>Z numeric scale</strong> each
-          choose linear vs log₁₀ independently (<strong>X</strong>/<strong>Y</strong> for Pareto and 3D;{" "}
-          <strong>Y</strong> also for bar and treemap; <strong>Z</strong> for heatmap color — hover still shows raw
-          values).
-        </p>
-        <p className="hint">
-          <strong>Plot aspect</strong> (last control) sets the frame for every chart for PNG exports (e.g.{" "}
-          <strong>4:3</strong>, <strong>16:9</strong>); <strong>Flexible</strong> uses viewport-based heights. Heatmap
-          and treemap min-heights grow with row / leaf count; full height locking applies in{" "}
-          <strong>Flexible</strong> mode.
-        </p>
+        <div className="hint-block">
+          <p className="hint">
+            <strong>Category</strong> filters the dataset to one design family; all charts below use only that
+            family&apos;s architectures and rows.
+          </p>
+          <p className="hint">
+            <strong>Bar / donut / scatter baseline</strong> chooses what stays fixed: architectures at one tech &amp;
+            width; sweep <strong>bit widths</strong> with <strong>technology</strong> fixed; or sweep{" "}
+            <strong>technology</strong> with <strong>bit width</strong> fixed. Pareto and 3D scatter use the same slice.{" "}
+            <strong>Technology</strong> also anchors heatmap and treemap.
+          </p>
+          <p className="hint">
+            <strong>X</strong> / <strong>Y</strong> / <strong>Z</strong> are distinct metrics: scatter and 3D use all
+            three; bar and donut use <strong>Y</strong>; treemap uses <strong>Y</strong> at the selected technology;
+            heatmap uses <strong>Z</strong> on an architecture × bit-width grid.
+          </p>
+          <p className="hint">
+            At the bottom of the panel: <strong>X</strong>, <strong>Y</strong>, and <strong>Z numeric scale</strong>{" "}
+            each choose linear vs log₁₀ independently (<strong>X</strong>/<strong>Y</strong> for Pareto and 3D;{" "}
+            <strong>Y</strong> also for bar and treemap; <strong>Z</strong> for heatmap color — hover still shows raw
+            values).
+          </p>
+          <p className="hint">
+            <strong>Plot aspect</strong> (last control) sets the frame for every chart for PNG exports (e.g.{" "}
+            <strong>4:3</strong>, <strong>16:9</strong>); <strong>Flexible</strong> uses viewport-based heights. Heatmap
+            and treemap min-heights grow with row / leaf count; full height locking applies in{" "}
+            <strong>Flexible</strong> mode.
+          </p>
+        </div>
         <div className="axis-pickers">
           <label className="axis-picker">
             Category

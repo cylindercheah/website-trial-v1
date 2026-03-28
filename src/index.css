@@ -181,9 +181,27 @@ main {
   line-height: 1.45;
 }
 
+/* Stacked hints in one block: no extra gap between lines (single visual paragraph). */
+.chart-card .hint-block p.hint {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.chart-card .hint-block {
+  margin: 0 0 0.5rem;
+}
+
 @media (min-width: 768px) {
   .chart-card p.hint {
     margin-bottom: 0.75rem;
+  }
+
+  .chart-card .hint-block {
+    margin-bottom: 0.75rem;
+  }
+
+  .chart-card .hint-block p.hint {
+    margin-bottom: 0;
   }
 }
 
