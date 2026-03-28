@@ -1,0 +1,6 @@
+[
+  { "architecture": "rca", "bitWidth": 32, "fmaxMhz": 420, "powerMw": 2.1, "areaUm2": 2100 },
+  { "architecture": "rca", "bitWidth": 64, "fmaxMhz": 310, "powerMw": 3.8, "areaUm2": 4100 },
+  { "architecture": "cla", "bitWidth": 32, "fmaxMhz": 680, "powerMw": 3.2, "areaUm2": 3400 },
+  { "architecture": "cla", "bitWidth": 64, "fmaxMhz": 520, "powerMw": 5.9, "areaUm2": 6500 }
+]

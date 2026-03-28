@@ -1,23 +1,28 @@
 /** Synthetic design-metric rows for Pareto / scaling charts (not real silicon). */
 
-export type DesignRow = {
-  architecture: string;
-  bitWidth: number;
-  fmaxMhz: number;
-  powerMw: number;
-  areaUm2: number;
-};
+import type { DesignRow } from "./designTypes";
+import { DESIGN_ROWS } from "./generatedDesignRows";
 
-export const DESIGN_ROWS: DesignRow[] = [
-  { architecture: "rca", bitWidth: 32, fmaxMhz: 420, powerMw: 2.1, areaUm2: 2100 },
-  { architecture: "rca", bitWidth: 64, fmaxMhz: 310, powerMw: 3.8, areaUm2: 4100 },
-  { architecture: "cla", bitWidth: 32, fmaxMhz: 680, powerMw: 3.2, areaUm2: 3400 },
-  { architecture: "cla", bitWidth: 64, fmaxMhz: 520, powerMw: 5.9, areaUm2: 6500 },
-  { architecture: "kogge_stone", bitWidth: 32, fmaxMhz: 920, powerMw: 4.8, areaUm2: 5200 },
-  { architecture: "kogge_stone", bitWidth: 64, fmaxMhz: 780, powerMw: 8.4, areaUm2: 9800 },
-  { architecture: "brent_kung", bitWidth: 32, fmaxMhz: 850, powerMw: 4.1, areaUm2: 4800 },
-  { architecture: "brent_kung", bitWidth: 64, fmaxMhz: 710, powerMw: 7.2, areaUm2: 9100 },
-];
+export type { DesignRow } from "./designTypes";
+export { DESIGN_ROWS };
+
+/** First-seen order of architectures across combined JSON datasets. */
+function uniqueArchitecturesInOrder(rows: readonly DesignRow[]): string[] {
+  const seen = new Set<string>();
+  const order: string[] = [];
+  for (const r of rows) {
+    if (!seen.has(r.architecture)) {
+      seen.add(r.architecture);
+      order.push(r.architecture);
+    }
+  }
+  return order;
+}
+
+/** Sorted unique bit widths present in the data. */
+function uniqueBitWidthsSorted(rows: readonly DesignRow[]): number[] {
+  return [...new Set(rows.map((r) => r.bitWidth))].sort((a, b) => a - b);
+}
 
 /** Architecture colors as explicit RGB (order: blue, green, red, purple). */
 const colors: Record<string, string> = {
@@ -31,15 +36,10 @@ export function architectureColor(arch: string): string {
   return colors[arch] ?? "rgb(139, 69, 19)";
 }
 
-/** Stable row order for matrices and grouped bars (matches `colors` keys used in charts). */
-export const DESIGN_ARCH_ORDER: readonly string[] = [
-  "rca",
-  "cla",
-  "kogge_stone",
-  "brent_kung",
-];
+/** Stable row order for matrices and grouped bars (first appearance in merged JSON order). */
+export const DESIGN_ARCH_ORDER: readonly string[] = uniqueArchitecturesInOrder(DESIGN_ROWS);
 
-export const DESIGN_BIT_WIDTHS: readonly number[] = [32, 64];
+export const DESIGN_BIT_WIDTHS: readonly number[] = uniqueBitWidthsSorted(DESIGN_ROWS);
 
 /** Human-readable label for legend / category axes (e.g. `kogge_stone` → Kogge Stone). */
 export function formatArchLabel(arch: string): string {

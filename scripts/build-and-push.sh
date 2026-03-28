@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 # website-trial-v1: Vite + React + plotly.js-dist-min → GitHub Pages at /website-trial-v1/
 #
-# Runs npm ci|install, optional TypeScript check, production vite build, dist verification,
+# Runs npm ci|install, optional TypeScript check, production npm run build
+# (generate:data from data/*.json → src/data/generatedDesignRows.ts, then vite build),
+# dist verification,
 # then git commit + push.
 #
 # Usage:
@@ -25,6 +27,7 @@ Usage: ./scripts/build-and-push.sh [OPTIONS] [COMMIT_MESSAGE]
                (unless --skip-install or --use-install)
     [typecheck] optional: npx tsc --noEmit (--typecheck)
     [build]    rm -rf dist first if --clean-dist; NODE_ENV=production npm run build
+               (includes JSON→TS generate:data before Vite)
     [verify]   dist/index.html exists and has GitHub Pages asset paths (unless --no-verify)
     [git]      git add -A, commit if dirty, git push (unless --no-push)
 

@@ -1,0 +1,4 @@
+[
+  { "architecture": "brent_kung", "bitWidth": 32, "fmaxMhz": 850, "powerMw": 4.1, "areaUm2": 4800 },
+  { "architecture": "brent_kung", "bitWidth": 64, "fmaxMhz": 710, "powerMw": 7.2, "areaUm2": 9100 }
+]

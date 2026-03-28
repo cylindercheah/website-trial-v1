@@ -1,0 +1,4 @@
+[
+  { "architecture": "kogge_stone", "bitWidth": 32, "fmaxMhz": 920, "powerMw": 4.8, "areaUm2": 5200 },
+  { "architecture": "kogge_stone", "bitWidth": 64, "fmaxMhz": 780, "powerMw": 8.4, "areaUm2": 9800 }
+]
