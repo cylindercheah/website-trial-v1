@@ -9,8 +9,8 @@ import {
   DESIGN_ROWS,
   DESIGN_ARCH_ORDER,
   DESIGN_BIT_WIDTHS,
-  DEFAULT_PROCESS_NODE,
-  designRowsForProcess,
+  DEFAULT_TECHNOLOGY_NODE,
+  designRowsForTechnology,
   designBitWidthsForRows,
   formatArchLabel,
   DESIGN_ROOT_LABEL,
@@ -44,6 +44,14 @@ export function scatterAxisTitle(metric: ScatterAxisMetric): string {
  * Fixed design fields for scatter hovers (matches row data, not axis mapping).
  * Uses HTML snippets for Plotly `hoverlabel` (bold labels).
  */
+function technologyHoverLine(row: DesignRow): string {
+  const { processNode, canonicalTechnology } = row;
+  if (canonicalTechnology !== processNode) {
+    return `<b>Technology:</b> ${processNode} → ${canonicalTechnology}`;
+  }
+  return `<b>Technology:</b> ${processNode}`;
+}
+
 export function designRowStaticHoverHtml(row: DesignRow): string {
   return [
     `<b>Architecture:</b> ${formatArchLabel(row.architecture)}`,
@@ -51,51 +59,18 @@ export function designRowStaticHoverHtml(row: DesignRow): string {
     `<b>Area:</b> ${row.areaUm2} µm²`,
     `<b>Freq:</b> ${row.fmaxMhz} MHz`,
     `<b>Power:</b> ${row.powerMw} mW`,
-    `<b>Process:</b> ${row.processNode}`,
+    technologyHoverLine(row),
   ].join("<br>");
 }
 
-/**
- * Human-readable value for one metric on a row (architecture name, not index).
- */
-export function scatterMetricHoverDisplay(metric: ScatterAxisMetric, row: DesignRow): string {
-  if (metric === "architecture") {
-    return formatArchLabel(row.architecture);
-  }
-  const raw = row[metric];
-  if (typeof raw !== "number") {
-    return String(raw);
-  }
-  if (metric === "bitWidth" || Number.isInteger(raw)) {
-    return String(raw);
-  }
-  return raw.toPrecision(4);
+/** Pareto / 2D scatter hover: design row fields only (chosen X/Y are on the axes). */
+export function scatter2dPointHoverHtml(row: DesignRow): string {
+  return designRowStaticHoverHtml(row);
 }
 
-/** Full 2D scatter hover: static row facts plus labeled X/Y axis quantities. */
-export function scatter2dPointHoverHtml(
-  row: DesignRow,
-  xMetric: ScatterAxisMetric,
-  yMetric: ScatterAxisMetric,
-): string {
-  const base = designRowStaticHoverHtml(row);
-  const xDisp = scatterMetricHoverDisplay(xMetric, row);
-  const yDisp = scatterMetricHoverDisplay(yMetric, row);
-  return `${base}<br><b>${scatterAxisTitle(xMetric)} (X):</b> ${xDisp}<br><b>${scatterAxisTitle(yMetric)} (Y):</b> ${yDisp}`;
-}
-
-/** Full 3D scatter hover: static row facts plus labeled X/Y/Z axis quantities. */
-export function scatter3dPointHoverHtml(
-  row: DesignRow,
-  xMetric: ScatterAxisMetric,
-  yMetric: ScatterAxisMetric,
-  zMetric: ScatterAxisMetric,
-): string {
-  const base = designRowStaticHoverHtml(row);
-  const xDisp = scatterMetricHoverDisplay(xMetric, row);
-  const yDisp = scatterMetricHoverDisplay(yMetric, row);
-  const zDisp = scatterMetricHoverDisplay(zMetric, row);
-  return `${base}<br><b>${scatterAxisTitle(xMetric)} (X):</b> ${xDisp}<br><b>${scatterAxisTitle(yMetric)} (Y):</b> ${yDisp}<br><b>${scatterAxisTitle(zMetric)} (Z):</b> ${zDisp}`;
+/** 3D scatter hover: same static row facts as 2D. */
+export function scatter3dPointHoverHtml(row: DesignRow): string {
+  return designRowStaticHoverHtml(row);
 }
 
 /** Short label for HTML `<option>` text. */
@@ -185,11 +160,11 @@ export type ExploreAxisKey = "x" | "y" | "z";
 
 /**
  * What bar, donut, Pareto, and 3D scatter hold fixed vs sweep.
- * - `architecture`: fixed process + fixed bit width → one value per architecture.
- * - `bitWidth`: fixed process; sweep bit widths (bar X / scatter points per width).
- * - `processNode`: fixed bit width; sweep process / PDK (bar X / scatter points per corner).
+ * - `architecture`: fixed technology node + fixed bit width → one value per architecture.
+ * - `bitWidth`: fixed technology; sweep bit widths (bar X / scatter points per width).
+ * - `technology`: fixed bit width; sweep technology nodes (bar X / scatter points per node).
  */
-export type BarDonutBaselineMode = "architecture" | "bitWidth" | "processNode";
+export type BarDonutBaselineMode = "architecture" | "bitWidth" | "technology";
 
 /** Linear vs log₁₀ for numeric chart axes and magnitudes (architecture index stays linear). */
 export type NumericScaleMode = "linear" | "log";
@@ -217,9 +192,9 @@ export const BAR_DONUT_BASELINE_OPTIONS: readonly {
   value: BarDonutBaselineMode;
   label: string;
 }[] = [
-  { value: "architecture", label: "Architectures (fixed tech & bit width)" },
-  { value: "bitWidth", label: "Bit widths (tech baseline)" },
-  { value: "processNode", label: "Tech / PDK (bit-width baseline)" },
+  { value: "architecture", label: "Architectures (fixed technology & bit width)" },
+  { value: "bitWidth", label: "Bit widths (technology baseline)" },
+  { value: "technology", label: "Technology nodes (bit-width baseline)" },
 ] as const;
 
 /**
@@ -227,13 +202,15 @@ export const BAR_DONUT_BASELINE_OPTIONS: readonly {
  */
 export type ExploreAxesState = {
   category: DesignCategoryId;
-  /** Process / PDK slice for charts that need a single corner (heatmap, bar, etc.). */
-  processNode: string;
+  /** Selected technology node for charts that slice one corner (heatmap, bar, etc.). */
+  technologyNode: string;
   bitWidth: number;
   /** Bar, donut, Pareto, 3D scatter: which dimension is fixed vs swept (see `BarDonutBaselineMode`). */
   barDonutBaseline: BarDonutBaselineMode;
-  /** Linear vs log₁₀ for Pareto, 3D, heatmap color, treemap sizes, grouped bar Y. */
-  numericScale: NumericScaleMode;
+  /** Linear vs log₁₀ per Cartesian axis (architecture indices stay linear). */
+  numericScaleX: NumericScaleMode;
+  numericScaleY: NumericScaleMode;
+  numericScaleZ: NumericScaleMode;
   x: ScatterAxisMetric;
   y: ScatterAxisMetric;
   z: ScatterAxisMetric;
@@ -248,10 +225,12 @@ function defaultExploreCategory(): DesignCategoryId {
 
 export const DEFAULT_EXPLORE_AXES: ExploreAxesState = {
   category: defaultExploreCategory(),
-  processNode: DEFAULT_PROCESS_NODE,
+  technologyNode: DEFAULT_TECHNOLOGY_NODE,
   bitWidth: 64,
   barDonutBaseline: "architecture",
-  numericScale: "linear",
+  numericScaleX: "linear",
+  numericScaleY: "linear",
+  numericScaleZ: "linear",
   x: "fmaxMhz",
   y: "powerMw",
   z: "areaUm2",
@@ -259,7 +238,7 @@ export const DEFAULT_EXPLORE_AXES: ExploreAxesState = {
 
 /**
  * Updates one of X/Y/Z and reassigns duplicates so the three metrics stay distinct.
- * Preserves `category`, `processNode`, `bitWidth`, `barDonutBaseline`, and `numericScale`.
+ * Preserves `category`, `technologyNode`, `bitWidth`, `barDonutBaseline`, and numeric scales (X/Y/Z).
  */
 export function syncExploreAxes(
   prev: ExploreAxesState,
@@ -283,7 +262,7 @@ export function syncExploreAxes(
 /** Heatmap cell values: rows = architectures, cols = bit widths. */
 export function scatterAxisHeatmapGrid(
   metric: ScatterAxisMetric,
-  processNode: string = DEFAULT_PROCESS_NODE,
+  technologyNode: string = DEFAULT_TECHNOLOGY_NODE,
   sliceOpts: {
     sourceRows?: readonly DesignRow[];
     archOrder?: readonly string[];
@@ -297,10 +276,10 @@ export function scatterAxisHeatmapGrid(
   const sourceRows = sliceOpts.sourceRows ?? DESIGN_ROWS;
   const archOrder = sliceOpts.archOrder ?? DESIGN_ARCH_ORDER;
   const bitWidths = sliceOpts.bitWidths ?? DESIGN_BIT_WIDTHS;
-  const procSlice = designRowsForProcess(sourceRows, processNode);
+  const techSlice = designRowsForTechnology(sourceRows, technologyNode);
   const z = archOrder.map((arch) =>
     bitWidths.map((bw) => {
-      const row = procSlice.find((r) => r.architecture === arch && r.bitWidth === bw);
+      const row = techSlice.find((r) => r.architecture === arch && r.bitWidth === bw);
       return row ? scatterAxisValue(metric, row, archOrder) : 0;
     }),
   );
@@ -412,7 +391,7 @@ export function scene3dAxisTickHideEnds(
 /** Plotly icicle/treemap flat encoding from a chosen leaf value metric. */
 export function scatterAxisTreemapFlat(
   metric: ScatterAxisMetric,
-  processNode: string = DEFAULT_PROCESS_NODE,
+  technologyNode: string = DEFAULT_TECHNOLOGY_NODE,
   sourceRows: readonly DesignRow[] = DESIGN_ROWS,
   archOrder: readonly string[] = DESIGN_ARCH_ORDER,
 ): {
@@ -420,7 +399,7 @@ export function scatterAxisTreemapFlat(
   parents: string[];
   values: number[];
 } {
-  const slice = designRowsForProcess(sourceRows, processNode);
+  const slice = designRowsForTechnology(sourceRows, technologyNode);
   const root = DESIGN_ROOT_LABEL;
   const leafLabels = slice.map(
     (r) => `${formatArchLabel(r.architecture)} · ${r.bitWidth}b`,

@@ -1,6 +1,6 @@
 /**
  * Writes one `data/<name>.json` per entry in `FAMILY_CONFIG` (synthetic metrics:
- * bit widths, five architectures per family, process nodes / PDK labels).
+ * bit widths, five architectures per family, technology nodes (nm + kit ids).
  *
  * To add a generated family: extend `FAMILY_CONFIG`, then run `npm run generate:data`.
  * For hand-authored datasets, add any other `data/*.json` file; the merge step picks
@@ -21,10 +21,10 @@ const dataDir = path.join(root, "data");
 const BIT_WIDTHS = [8, 16, 32, 64, 128, 256, 1024];
 
 /**
- * Finer nodes near leading edge, coarser in mature nodes, plus named PDKs.
+ * Finer nodes near leading edge, coarser in mature nodes, plus named kit ids.
  * @type {readonly string[]}
  */
-const PROCESS_LABELS = [
+const TECHNOLOGY_LABELS = [
   "3nm",
   "5nm",
   "7nm",
@@ -45,7 +45,7 @@ const PROCESS_LABELS = [
   "ihpsg13g2",
 ];
 
-/** Map process label to an effective feature size (nm) for scaling. */
+/** Map technology label to an effective feature size (nm) for scaling. */
 const EFFECTIVE_NM = {
   "3nm": 3,
   "5nm": 5,
@@ -67,6 +67,9 @@ const EFFECTIVE_NM = {
   ihpsg13g2: 130,
 };
 
+/** Kit-style `processNode` ids (not plain Nnm labels). Keep in sync with `design.ts` TECH_KIT_IDS. */
+const NAMED_PDK_IDS = new Set(["gf180", "sky130", "ihpsg13g2"]);
+
 /**
  * @param {string} label
  * @returns {number}
@@ -74,9 +77,25 @@ const EFFECTIVE_NM = {
 function effectiveNm(label) {
   const v = EFFECTIVE_NM[label];
   if (v === undefined) {
-    throw new Error(`Unknown process label: ${label}`);
+    throw new Error(`Unknown technology label: ${label}`);
   }
   return v;
+}
+
+/**
+ * @param {string} technology
+ * @returns {string}
+ */
+function canonicalTechnologyLabel(technology) {
+  return `${effectiveNm(technology)}nm`;
+}
+
+/**
+ * @param {string} technology
+ * @returns {boolean}
+ */
+function isNamedPdk(technology) {
+  return NAMED_PDK_IDS.has(technology);
 }
 
 /**
@@ -96,12 +115,12 @@ function round3(x) {
  * @param {object} args
  * @param {string} args.arch
  * @param {number} args.bw
- * @param {string} args.process
+ * @param {string} args.technology
  * @param {ArchFactors} args.archFactors
  * @param {FamilyBase} args.familyBase
  */
-function synthRow({ arch, bw, process, archFactors, familyBase }) {
-  const nm = effectiveNm(process);
+function synthRow({ arch, bw, technology, archFactors, familyBase }) {
+  const nm = effectiveNm(technology);
   const refNm = 7;
   const bwRef = 32;
 
@@ -127,7 +146,9 @@ function synthRow({ arch, bw, process, archFactors, familyBase }) {
   return {
     architecture: arch,
     bitWidth: bw,
-    processNode: process,
+    processNode: technology,
+    canonicalTechnology: canonicalTechnologyLabel(technology),
+    isNamedPdk: isNamedPdk(technology),
     fmaxMhz: round3(fmax),
     powerMw: round3(power),
     areaUm2: round3(area),
@@ -204,12 +225,12 @@ function buildFamilyRows(familyKey) {
   const rows = [];
   for (const archName of Object.keys(arch)) {
     for (const bw of BIT_WIDTHS) {
-      for (const proc of PROCESS_LABELS) {
+      for (const technology of TECHNOLOGY_LABELS) {
         rows.push(
           synthRow({
             arch: archName,
             bw,
-            process: proc,
+            technology,
             archFactors: arch[archName],
             familyBase: base,
           }),

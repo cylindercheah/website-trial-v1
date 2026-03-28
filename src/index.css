@@ -281,6 +281,26 @@ main {
   }
 }
 
+/* 3D scatter: taller canvas than generic plots */
+.plot-host--3d {
+  min-height: min(78dvh, 640px);
+  height: min(82dvh, 680px);
+}
+
+@media (max-width: 640px) {
+  .plot-host--3d {
+    min-height: 400px;
+    height: min(72dvh, 520px);
+  }
+}
+
+@media (min-width: 768px) {
+  .plot-host--3d {
+    min-height: 520px;
+    height: 600px;
+  }
+}
+
 .plot-host > div {
   width: 100% !important;
   height: 100% !important;
@@ -294,7 +314,8 @@ main {
 .plot-host.plot-host--aspect-4x3,
 .plot-host.plot-host--aspect-1x1 {
   height: auto !important;
-  min-height: 0 !important;
+  /* No !important on min-height so inline min-height (heatmap / treemap by row count) can apply. */
+  min-height: 0;
   max-height: none !important;
 }
 

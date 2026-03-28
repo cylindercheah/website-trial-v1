@@ -1,4 +1,11 @@
-import { useEffect, useMemo, useRef, useState, type RefObject } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+  type RefObject,
+} from "react";
 import type { Config, Data, Layout } from "plotly.js";
 // Pre-minified browser build — avoids Vite bundling plotly's Node-only trace helpers.
 import Plotly from "plotly.js-dist-min";
@@ -23,12 +30,14 @@ import { useNarrowScreen } from "../hooks/useNarrowScreen";
 import {
   type DesignRow,
   DESIGN_ROWS,
-  DESIGN_PROCESS_NODES,
+  DESIGN_TECHNOLOGY_NODES,
   architectureColor,
+  seriesRgbByIndex,
   designArchOrderForRows,
   designBitWidthsForRows,
   designRowsForFamily,
-  designRowsForProcess,
+  designRowsForTechnology,
+  designTechnologyNodesForRows,
   findDesignRow,
   formatArchLabel,
   rowsByBitWidthOrderedIn,
@@ -119,6 +128,11 @@ export function PlotlyPage(): JSX.Element {
     ? exploreAxes.category
     : DESIGN_CATEGORIES[0].id;
   const bitWidthOptions = designBitWidthsForRows(designRowsForFamily(DESIGN_ROWS, categoryForUi));
+  const barDonutBaselineUi: BarDonutBaselineMode =
+    exploreAxes.barDonutBaseline === "bitWidth" || exploreAxes.barDonutBaseline === "technology"
+      ? exploreAxes.barDonutBaseline
+      : "architecture";
+  const barSectionHeading = barDonutBaselineUi === "architecture" ? "Bar chart" : "Grouped bar";
 
   const onExploreAxisChange = (key: ExploreAxisKey, m: ScatterAxisMetric) => {
     setExploreAxes((prev) => syncExploreAxes(prev, key, m));
@@ -143,21 +157,25 @@ export function PlotlyPage(): JSX.Element {
     treemapData,
     treemapLayout,
     treemapConfig,
+    flexibleHeatmapHostPx,
+    flexibleTreemapHostPx,
   } = useMemo(() => {
       const ex = exploreAxes;
       const paretoXMetric = ex.x;
       const paretoYMetric = ex.y;
       const paretoZMetric = ex.z;
-      const numericScale: NumericScaleMode = ex.numericScale === "log" ? "log" : "linear";
-      const paretoXAxisType = plotlyAxisTypeForMetric(paretoXMetric, numericScale);
-      const paretoYAxisType = plotlyAxisTypeForMetric(paretoYMetric, numericScale);
-      const barYAxisType = plotlyAxisTypeForMetric(paretoYMetric, numericScale);
+      const numericScaleX: NumericScaleMode = ex.numericScaleX === "log" ? "log" : "linear";
+      const numericScaleY: NumericScaleMode = ex.numericScaleY === "log" ? "log" : "linear";
+      const numericScaleZ: NumericScaleMode = ex.numericScaleZ === "log" ? "log" : "linear";
+      const paretoXAxisType = plotlyAxisTypeForMetric(paretoXMetric, numericScaleX);
+      const paretoYAxisType = plotlyAxisTypeForMetric(paretoYMetric, numericScaleY);
+      const barYAxisType = plotlyAxisTypeForMetric(paretoYMetric, numericScaleY);
       const barHoverYToken =
-        numericScale === "log" && metricSupportsLogScale(paretoYMetric)
+        numericScaleY === "log" && metricSupportsLogScale(paretoYMetric)
           ? "%{customdata:.3g}"
           : "%{y:.3g}";
       const barYWithLog = (raw: number[]): { y: number[]; customdata?: number[] } => {
-        if (numericScale !== "log" || !metricSupportsLogScale(paretoYMetric)) {
+        if (numericScaleY !== "log" || !metricSupportsLogScale(paretoYMetric)) {
           return { y: raw };
         }
         return {
@@ -165,32 +183,33 @@ export function PlotlyPage(): JSX.Element {
           customdata: raw,
         };
       };
-      const processNode = (DESIGN_PROCESS_NODES as readonly string[]).includes(ex.processNode)
-        ? ex.processNode
-        : DESIGN_PROCESS_NODES[0];
+      const techNode = (DESIGN_TECHNOLOGY_NODES as readonly string[]).includes(ex.technologyNode)
+        ? ex.technologyNode
+        : DESIGN_TECHNOLOGY_NODES[0];
       const category = DESIGN_CATEGORIES.some((c) => c.id === ex.category)
         ? ex.category
         : DESIGN_CATEGORIES[0].id;
       const categoryRowsAll = designRowsForFamily(DESIGN_ROWS, category);
       const categoryArchOrder = designArchOrderForRows(categoryRowsAll);
       const categoryBitWidths = designBitWidthsForRows(categoryRowsAll);
+      const categoryTechnologyNodes = designTechnologyNodesForRows(categoryRowsAll);
       const plotBitWidth = (categoryBitWidths as readonly number[]).includes(ex.bitWidth)
         ? ex.bitWidth
         : categoryBitWidths[0];
       const barBaseline: BarDonutBaselineMode =
-        ex.barDonutBaseline === "bitWidth" || ex.barDonutBaseline === "processNode"
+        ex.barDonutBaseline === "bitWidth" || ex.barDonutBaseline === "technology"
           ? ex.barDonutBaseline
           : "architecture";
       /** Rows shown in Pareto + 3D scatter — same slice semantics as bar/donut baseline. */
       const scatterRows: DesignRow[] =
         barBaseline === "architecture"
           ? categoryRowsAll.filter(
-              (r) => r.processNode === processNode && r.bitWidth === plotBitWidth,
+              (r) => r.processNode === techNode && r.bitWidth === plotBitWidth,
             )
           : barBaseline === "bitWidth"
-            ? designRowsForProcess(categoryRowsAll, processNode)
+            ? designRowsForTechnology(categoryRowsAll, techNode)
             : categoryRowsAll.filter((r) => r.bitWidth === plotBitWidth);
-      const rowsFiltered = designRowsForProcess(categoryRowsAll, processNode);
+      const rowsFiltered = designRowsForTechnology(categoryRowsAll, techNode);
       const palette = getChartPalette(theme);
       const plotSurfaceBg = plotInsetBackground(theme);
       const hoverLabel = plotlyHoverLabel(palette, narrow);
@@ -226,7 +245,7 @@ export function PlotlyPage(): JSX.Element {
           name: label,
           x: rows.map((r) => scatterAxisValue(paretoXMetric, r, categoryArchOrder)),
           y: rows.map((r) => scatterAxisValue(paretoYMetric, r, categoryArchOrder)),
-          text: rows.map((r) => scatter2dPointHoverHtml(r, paretoXMetric, paretoYMetric)),
+          text: rows.map((r) => scatter2dPointHoverHtml(r)),
           hovertemplate: "%{text}<extra></extra>",
           marker: {
             size: scatterMarkerSize,
@@ -250,6 +269,23 @@ export function PlotlyPage(): JSX.Element {
         `Pareto-style: ${scatterAxisTitle(paretoYMetric)} vs ${scatterAxisTitle(paretoXMetric)}`,
       );
 
+      const paretoThickZeroX =
+        paretoXAxisType === "linear"
+          ? {
+              zeroline: true,
+              zerolinewidth: 6,
+              zerolinecolor: palette.axisBorderRgb,
+            }
+          : {};
+      const paretoThickZeroY =
+        paretoYAxisType === "linear"
+          ? {
+              zeroline: true,
+              zerolinewidth: 6,
+              zerolinecolor: palette.axisBorderRgb,
+            }
+          : {};
+
       const paretoLayoutInner: Partial<Layout> = narrow
         ? {
             autosize: true,
@@ -264,6 +300,7 @@ export function PlotlyPage(): JSX.Element {
             showlegend: false,
             xaxis: {
               ...frameX,
+              ...paretoThickZeroX,
               type: paretoXAxisType,
               layer: "below traces",
               automargin: true,
@@ -275,6 +312,7 @@ export function PlotlyPage(): JSX.Element {
             },
             yaxis: {
               ...frameY,
+              ...paretoThickZeroY,
               type: paretoYAxisType,
               layer: "below traces",
               automargin: true,
@@ -300,6 +338,7 @@ export function PlotlyPage(): JSX.Element {
             showlegend: false,
             xaxis: {
               ...frameX,
+              ...paretoThickZeroX,
               type: paretoXAxisType,
               layer: "below traces",
               automargin: true,
@@ -311,6 +350,7 @@ export function PlotlyPage(): JSX.Element {
             },
             yaxis: {
               ...frameY,
+              ...paretoThickZeroY,
               type: paretoYAxisType,
               layer: "below traces",
               automargin: true,
@@ -341,16 +381,13 @@ export function PlotlyPage(): JSX.Element {
       };
 
       const pieSliceColors = (count: number): string[] =>
-        Array.from({ length: count }, (_, i) => {
-          const h = Math.round((i * 360) / Math.max(count, 1)) % 360;
-          return `hsl(${h}, 50%, 52%)`;
-        });
+        Array.from({ length: count }, (_, i) => seriesRgbByIndex(i));
 
       const rowsAtBw = rowsByBitWidthOrderedIn(
         categoryRowsAll,
         categoryArchOrder,
         plotBitWidth,
-        processNode,
+        techNode,
       );
       const barGrouped = barBaseline !== "architecture";
 
@@ -402,7 +439,7 @@ export function PlotlyPage(): JSX.Element {
         const xCat = categoryBitWidths.map((bw) => `${bw}b`);
         barDataInner = categoryArchOrder.map((arch) => {
           const label = formatArchLabel(arch);
-          const rawY = categoryBitWidths.map((bw) => metricAtArchBwProc(arch, bw, processNode));
+          const rawY = categoryBitWidths.map((bw) => metricAtArchBwProc(arch, bw, techNode));
           const { y: yPlot, customdata: cd } = barYWithLog(rawY);
           return {
             type: "bar" as const,
@@ -422,13 +459,13 @@ export function PlotlyPage(): JSX.Element {
           };
         });
         barXTitle = "Bit width";
-        barTitleNarrow = `${scatterAxisTitle(paretoYMetric)} vs bit width @ ${processNode}`;
-        barTitleWide = `${scatterAxisTitle(paretoYMetric)} by bit width (tech baseline ${processNode})`;
+        barTitleNarrow = `${scatterAxisTitle(paretoYMetric)} vs bit width @ ${techNode}`;
+        barTitleWide = `${scatterAxisTitle(paretoYMetric)} by bit width (technology baseline ${techNode})`;
       } else {
-        const xCat = [...DESIGN_PROCESS_NODES];
+        const xCat = [...categoryTechnologyNodes];
         barDataInner = categoryArchOrder.map((arch) => {
           const label = formatArchLabel(arch);
-          const rawY = DESIGN_PROCESS_NODES.map((proc) =>
+          const rawY = categoryTechnologyNodes.map((proc) =>
             metricAtArchBwProc(arch, plotBitWidth, proc),
           );
           const { y: yPlot, customdata: cd } = barYWithLog(rawY);
@@ -449,9 +486,9 @@ export function PlotlyPage(): JSX.Element {
               `<b>${label}</b><br>%{x}<br><b>${scatterAxisTitle(paretoYMetric)}:</b> ${barHoverYToken}<extra></extra>`,
           };
         });
-        barXTitle = "Process / PDK";
-        barTitleNarrow = `${scatterAxisTitle(paretoYMetric)} vs process @ ${plotBitWidth}b`;
-        barTitleWide = `${scatterAxisTitle(paretoYMetric)} by process (bit baseline ${plotBitWidth}b)`;
+        barXTitle = "Technology";
+        barTitleNarrow = `${scatterAxisTitle(paretoYMetric)} vs technology @ ${plotBitWidth}b`;
+        barTitleWide = `${scatterAxisTitle(paretoYMetric)} by technology (bit-width baseline ${plotBitWidth}b)`;
       }
 
       const barLegendWide = barGrouped
@@ -499,7 +536,7 @@ export function PlotlyPage(): JSX.Element {
               automargin: true,
               gridcolor: palette.axisGridGreyRgb,
               title: axTitle(barXTitle),
-              tickangle: barBaseline === "processNode" ? -42 : -28,
+              tickangle: barBaseline === "technology" ? -42 : -28,
               tickfont: axTick,
             },
             yaxis: {
@@ -532,7 +569,7 @@ export function PlotlyPage(): JSX.Element {
               automargin: true,
               gridcolor: palette.axisGridGreyRgb,
               title: axTitle(barXTitle),
-              tickangle: barBaseline === "processNode" ? -35 : -18,
+              tickangle: barBaseline === "technology" ? -35 : -18,
               tickfont: axTick,
             },
             yaxis: {
@@ -574,7 +611,7 @@ export function PlotlyPage(): JSX.Element {
       } else if (barBaseline === "bitWidth") {
         const pieLabels = categoryBitWidths.map((bw) => `${bw}b`);
         const pieValues = categoryBitWidths.map((bw) =>
-          categoryArchOrder.reduce((s, arch) => s + metricAtArchBwProc(arch, bw, processNode), 0),
+          categoryArchOrder.reduce((s, arch) => s + metricAtArchBwProc(arch, bw, techNode), 0),
         );
         pieDataInner = [
           {
@@ -592,11 +629,11 @@ export function PlotlyPage(): JSX.Element {
               "<b>%{label}</b><br><b>Σ architectures:</b> %{value:.3g}<br><b>Share:</b> %{percent}<extra></extra>",
           },
         ];
-        pieTitleNarrow = `Σ ${scatterAxisTitle(paretoYMetric)} by bit width @ ${processNode}`;
-        pieTitleWide = `${scatterAxisTitle(paretoYMetric)} pooled across architectures @ ${processNode}`;
+        pieTitleNarrow = `Σ ${scatterAxisTitle(paretoYMetric)} by bit width @ ${techNode}`;
+        pieTitleWide = `${scatterAxisTitle(paretoYMetric)} pooled across architectures @ ${techNode}`;
       } else {
-        const pieLabels = [...DESIGN_PROCESS_NODES];
-        const pieValues = DESIGN_PROCESS_NODES.map((proc) =>
+        const pieLabels = [...DESIGN_TECHNOLOGY_NODES];
+        const pieValues = DESIGN_TECHNOLOGY_NODES.map((proc) =>
           categoryArchOrder.reduce((s, arch) => s + metricAtArchBwProc(arch, plotBitWidth, proc), 0),
         );
         pieDataInner = [
@@ -615,7 +652,7 @@ export function PlotlyPage(): JSX.Element {
               "<b>%{label}</b><br><b>Σ architectures:</b> %{value:.3g}<br><b>Share:</b> %{percent}<extra></extra>",
           },
         ];
-        pieTitleNarrow = `Σ ${scatterAxisTitle(paretoYMetric)} by process @ ${plotBitWidth}b`;
+        pieTitleNarrow = `Σ ${scatterAxisTitle(paretoYMetric)} by technology @ ${plotBitWidth}b`;
         pieTitleWide = `${scatterAxisTitle(paretoYMetric)} pooled across architectures @ ${plotBitWidth}b`;
       }
 
@@ -649,7 +686,7 @@ export function PlotlyPage(): JSX.Element {
 
       const { z: heatZ, colLabels, rowLabels } = scatterAxisHeatmapGrid(
         paretoZMetric,
-        processNode,
+        techNode,
         {
           sourceRows: categoryRowsAll,
           archOrder: categoryArchOrder,
@@ -657,7 +694,7 @@ export function PlotlyPage(): JSX.Element {
         },
       );
       const heatmapLogZ =
-        numericScale === "log" && metricSupportsLogScale(paretoZMetric);
+        numericScaleZ === "log" && metricSupportsLogScale(paretoZMetric);
       const heatZPlot = heatmapLogZ
         ? heatZ.map((row) => row.map((v) => (v > 0 ? Math.log10(v) : Number.NaN)))
         : heatZ;
@@ -739,7 +776,11 @@ export function PlotlyPage(): JSX.Element {
             hoverlabel: hoverLabel,
           };
 
-      const sceneAxisFor = (base: typeof sceneAxX, metric: ScatterAxisMetric) => ({
+      const sceneAxisFor = (
+        base: typeof sceneAxX,
+        metric: ScatterAxisMetric,
+        scale: NumericScaleMode,
+      ) => ({
         ...base,
         title: axTitle(scatterAxisTitle(metric)),
         tickfont: axTick,
@@ -750,7 +791,7 @@ export function PlotlyPage(): JSX.Element {
           categoryArchOrder,
           categoryBitWidths,
         ),
-        type: plotlyAxisTypeForMetric(metric, numericScale),
+        type: plotlyAxisTypeForMetric(metric, scale),
       });
 
       const scatter3dDataInner: Data[] = [];
@@ -764,9 +805,7 @@ export function PlotlyPage(): JSX.Element {
           x: rows.map((r) => scatterAxisValue(paretoXMetric, r, categoryArchOrder)),
           y: rows.map((r) => scatterAxisValue(paretoYMetric, r, categoryArchOrder)),
           z: rows.map((r) => scatterAxisValue(paretoZMetric, r, categoryArchOrder)),
-          text: rows.map((r) =>
-            scatter3dPointHoverHtml(r, paretoXMetric, paretoYMetric, paretoZMetric),
-          ),
+          text: rows.map((r) => scatter3dPointHoverHtml(r)),
           hovertemplate: "%{text}<extra></extra>",
           marker: {
             size: scatterMarkerSize,
@@ -792,9 +831,11 @@ export function PlotlyPage(): JSX.Element {
             showlegend: false,
             scene: {
               bgcolor: plotSurfaceBg,
-              xaxis: sceneAxisFor(sceneAxX, paretoXMetric),
-              yaxis: sceneAxisFor(sceneAxY, paretoYMetric),
-              zaxis: sceneAxisFor(sceneAxZ, paretoZMetric),
+              aspectmode: "cube",
+              aspectratio: { x: 1, y: 1, z: 1.15 },
+              xaxis: sceneAxisFor(sceneAxX, paretoXMetric, numericScaleX),
+              yaxis: sceneAxisFor(sceneAxY, paretoYMetric, numericScaleY),
+              zaxis: sceneAxisFor(sceneAxZ, paretoZMetric, numericScaleZ),
             },
             hoverlabel: hoverLabel,
           }
@@ -812,9 +853,11 @@ export function PlotlyPage(): JSX.Element {
             showlegend: false,
             scene: {
               bgcolor: plotSurfaceBg,
-              xaxis: sceneAxisFor(sceneAxX, paretoXMetric),
-              yaxis: sceneAxisFor(sceneAxY, paretoYMetric),
-              zaxis: sceneAxisFor(sceneAxZ, paretoZMetric),
+              aspectmode: "cube",
+              aspectratio: { x: 1, y: 1, z: 1.15 },
+              xaxis: sceneAxisFor(sceneAxX, paretoXMetric, numericScaleX),
+              yaxis: sceneAxisFor(sceneAxY, paretoYMetric, numericScaleY),
+              zaxis: sceneAxisFor(sceneAxZ, paretoZMetric, numericScaleZ),
             },
             hoverlabel: hoverLabel,
           };
@@ -822,12 +865,12 @@ export function PlotlyPage(): JSX.Element {
       const { labels: tmLabels, parents: tmParents, values: tmValues } =
         scatterAxisTreemapFlat(
           paretoYMetric,
-          processNode,
+          techNode,
           categoryRowsAll,
           categoryArchOrder,
         );
       const treemapLog =
-        numericScale === "log" && metricSupportsLogScale(paretoYMetric);
+        numericScaleY === "log" && metricSupportsLogScale(paretoYMetric);
       const tmValuesPlot =
         treemapLog && tmValues.length > 1
           ? (() => {
@@ -872,6 +915,14 @@ export function PlotlyPage(): JSX.Element {
         hoverlabel: hoverLabel,
       };
 
+      const nArchHeat = categoryArchOrder.length;
+      const flexibleHeatmapHostPx = Math.min(920, Math.max(300, 236 + nArchHeat * 28));
+      const treemapLeafCount = designRowsForTechnology(categoryRowsAll, techNode).length;
+      const flexibleTreemapHostPx = Math.min(
+        960,
+        Math.max(280, 208 + Math.min(treemapLeafCount, 72) * 13),
+      );
+
       return {
         paretoData: paretoDataInner,
         paretoLayout: paretoLayoutInner,
@@ -891,6 +942,8 @@ export function PlotlyPage(): JSX.Element {
         treemapData: treemapDataInner,
         treemapLayout: treemapLayoutInner,
         treemapConfig: commonConfig,
+        flexibleHeatmapHostPx,
+        flexibleTreemapHostPx,
       };
     }, [narrow, theme, exploreAxes]);
 
@@ -902,6 +955,14 @@ export function PlotlyPage(): JSX.Element {
   const barRef = usePlotlyChart(barData, barLayout, barConfig);
 
   const aspectExtra = plotHostAspectClass(plotAspectMode);
+  const heatmapHostPlotStyle: CSSProperties = {
+    minHeight: flexibleHeatmapHostPx,
+    ...(plotAspectMode === "flexible" ? { height: flexibleHeatmapHostPx } : {}),
+  };
+  const treemapHostPlotStyle: CSSProperties = {
+    minHeight: flexibleTreemapHostPx,
+    ...(plotAspectMode === "flexible" ? { height: flexibleTreemapHostPx } : {}),
+  };
 
   useEffect(() => {
     const id = requestAnimationFrame(() => {
@@ -911,7 +972,7 @@ export function PlotlyPage(): JSX.Element {
       }
     });
     return () => cancelAnimationFrame(id);
-  }, [plotAspectMode]);
+  }, [plotAspectMode, flexibleHeatmapHostPx, flexibleTreemapHostPx]);
 
   return (
     <div>
@@ -921,48 +982,20 @@ export function PlotlyPage(): JSX.Element {
           <strong>Category</strong> filters the dataset to one design family (adder, voter, CORDIC); all charts below use
           only that family&apos;s architectures and rows.{" "}
           <strong>Bar / donut / scatter baseline</strong> chooses what stays fixed: architectures at one tech &amp; width;
-          sweep <strong>bit widths</strong> with <strong>Process</strong> fixed; or sweep <strong>process / PDK</strong> with{" "}
-          <strong>Bit width</strong> fixed. Pareto and 3D scatter use the same slice.{" "}
-          <strong>Process</strong> also anchors heatmap and treemap.{" "}
+          sweep <strong>bit widths</strong> with <strong>technology</strong> fixed; or sweep <strong>technology</strong> with{" "}
+          <strong>bit width</strong> fixed. Pareto and 3D scatter use the same slice.{" "}
+          <strong>Technology</strong> also anchors heatmap and treemap.{" "}
           <strong>X</strong> / <strong>Y</strong> / <strong>Z</strong> are distinct metrics: scatter and 3D use all three;
-          bar and donut use <strong>Y</strong>; treemap uses <strong>Y</strong> at the selected process; heatmap uses{" "}
+          bar and donut use <strong>Y</strong>; treemap uses <strong>Y</strong> at the selected technology; heatmap uses{" "}
           <strong>Z</strong> on an architecture × bit-width grid.{" "}
-          <strong>Plot aspect</strong> sets the frame for every chart so PNG exports match common mobile layouts (e.g.{" "}
-          <strong>4:3</strong> in portrait, <strong>16:9</strong> in landscape); <strong>Flexible</strong> keeps the old
-          viewport-based heights. <strong>Numeric scale</strong> applies log₁₀ to Pareto / 3D numeric axes, bar chart{" "}
-          <strong>Y</strong>, heatmap cell color (hover shows raw value), and treemap tile weights.
+          At the bottom of the panel: <strong>X</strong>, <strong>Y</strong>, and <strong>Z numeric scale</strong> each
+          choose linear vs log₁₀ independently (<strong>X</strong>/<strong>Y</strong> for Pareto and 3D; <strong>Y</strong>{" "}
+          also for bar and treemap; <strong>Z</strong> for heatmap color — hover still shows raw values).{" "}
+          <strong>Plot aspect</strong> (last control) sets the frame for every chart for PNG exports (e.g.{" "}
+          <strong>4:3</strong>, <strong>16:9</strong>); <strong>Flexible</strong> uses viewport-based heights. Heatmap and
+          treemap min-heights grow with row / leaf count; full height locking applies in <strong>Flexible</strong> mode.
         </p>
         <div className="axis-pickers">
-          <label className="axis-picker">
-            Numeric scale
-            <select
-              value={NUMERIC_SCALE_OPTIONS.some((o) => o.value === exploreAxes.numericScale) ? exploreAxes.numericScale : "linear"}
-              aria-label="Linear or log base 10 for numeric plot axes"
-              onChange={(e) =>
-                setExploreAxes((p) => ({ ...p, numericScale: e.target.value as NumericScaleMode }))
-              }
-            >
-              {NUMERIC_SCALE_OPTIONS.map((o) => (
-                <option key={o.value} value={o.value}>
-                  {o.label}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="axis-picker">
-            Plot aspect (all charts)
-            <select
-              value={PLOT_ASPECT_OPTIONS.some((o) => o.value === plotAspectMode) ? plotAspectMode : "flexible"}
-              aria-label="Aspect ratio for all plot frames and downloads"
-              onChange={(e) => setPlotAspectMode(e.target.value as PlotAspectMode)}
-            >
-              {PLOT_ASPECT_OPTIONS.map((o) => (
-                <option key={o.value} value={o.value}>
-                  {o.label}
-                </option>
-              ))}
-            </select>
-          </label>
           <label className="axis-picker">
             Category
             <select
@@ -1045,19 +1078,19 @@ export function PlotlyPage(): JSX.Element {
             </select>
           </label>
           <label className="axis-picker">
-            Process / PDK
+            Technology
             <select
               value={
-                (DESIGN_PROCESS_NODES as readonly string[]).includes(exploreAxes.processNode)
-                  ? exploreAxes.processNode
-                  : DESIGN_PROCESS_NODES[0]
+                (DESIGN_TECHNOLOGY_NODES as readonly string[]).includes(exploreAxes.technologyNode)
+                  ? exploreAxes.technologyNode
+                  : DESIGN_TECHNOLOGY_NODES[0]
               }
-              aria-label="Process node or PDK for heatmap treemap bar donut"
+              aria-label="Technology node for heatmap, treemap, bar, and donut"
               onChange={(e) =>
-                setExploreAxes((p) => ({ ...p, processNode: e.target.value }))
+                setExploreAxes((p) => ({ ...p, technologyNode: e.target.value }))
               }
             >
-              {DESIGN_PROCESS_NODES.map((node) => (
+              {DESIGN_TECHNOLOGY_NODES.map((node) => (
                 <option key={node} value={node}>
                   {node}
                 </option>
@@ -1087,13 +1120,87 @@ export function PlotlyPage(): JSX.Element {
               ))}
             </select>
           </label>
+          <label className="axis-picker">
+            X numeric scale (Pareto / 3D)
+            <select
+              value={
+                NUMERIC_SCALE_OPTIONS.some((o) => o.value === exploreAxes.numericScaleX)
+                  ? exploreAxes.numericScaleX
+                  : "linear"
+              }
+              aria-label="Linear or log base 10 for horizontal axis"
+              onChange={(e) =>
+                setExploreAxes((p) => ({ ...p, numericScaleX: e.target.value as NumericScaleMode }))
+              }
+            >
+              {NUMERIC_SCALE_OPTIONS.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="axis-picker">
+            Y numeric scale (Pareto / 3D / bar / treemap)
+            <select
+              value={
+                NUMERIC_SCALE_OPTIONS.some((o) => o.value === exploreAxes.numericScaleY)
+                  ? exploreAxes.numericScaleY
+                  : "linear"
+              }
+              aria-label="Linear or log base 10 for vertical value axis"
+              onChange={(e) =>
+                setExploreAxes((p) => ({ ...p, numericScaleY: e.target.value as NumericScaleMode }))
+              }
+            >
+              {NUMERIC_SCALE_OPTIONS.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="axis-picker">
+            Z numeric scale (heatmap color / 3D)
+            <select
+              value={
+                NUMERIC_SCALE_OPTIONS.some((o) => o.value === exploreAxes.numericScaleZ)
+                  ? exploreAxes.numericScaleZ
+                  : "linear"
+              }
+              aria-label="Linear or log base 10 for Z axis and heatmap color"
+              onChange={(e) =>
+                setExploreAxes((p) => ({ ...p, numericScaleZ: e.target.value as NumericScaleMode }))
+              }
+            >
+              {NUMERIC_SCALE_OPTIONS.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="axis-picker">
+            Plot aspect (all charts)
+            <select
+              value={PLOT_ASPECT_OPTIONS.some((o) => o.value === plotAspectMode) ? plotAspectMode : "flexible"}
+              aria-label="Aspect ratio for all plot frames and downloads"
+              onChange={(e) => setPlotAspectMode(e.target.value as PlotAspectMode)}
+            >
+              {PLOT_ASPECT_OPTIONS.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </select>
+          </label>
         </div>
       </div>
       <div className="chart-card">
         <h2>Pareto scatter</h2>
         <p className="hint">
-          Pinch/drag or mode-bar zoom. Points follow <strong>Bar / donut / scatter baseline</strong> (fixed tech &amp;
-          width, sweep bit width at fixed tech, or sweep tech at fixed width). Hover for details.{" "}
+          Pinch/drag or mode-bar zoom. Points follow <strong>Bar / donut / scatter baseline</strong> (fixed technology &amp;
+          width, sweep bit width at fixed technology, or sweep technology at fixed width). Hover for details.{" "}
         </p>
         <div className={`plot-host ${aspectExtra}`.trim()}>
           <div ref={paretoRef} style={{ width: "100%", height: "100%" }} />
@@ -1105,7 +1212,7 @@ export function PlotlyPage(): JSX.Element {
           WebGL cloud using <strong>X</strong> × <strong>Y</strong> × <strong>Z</strong> from above; same row slice as
           Pareto (see <strong>Bar / donut / scatter baseline</strong>). Drag to rotate; mode bar for PNG / reset camera.
         </p>
-        <div className={`plot-host plot-host--tall ${aspectExtra}`.trim()}>
+        <div className={`plot-host plot-host--3d ${aspectExtra}`.trim()}>
           <div ref={scatter3dRef} style={{ width: "100%", height: "100%" }} />
         </div>
       </div>
@@ -1113,9 +1220,9 @@ export function PlotlyPage(): JSX.Element {
         <h2>Heatmap</h2>
         <p className="hint">
           Cell color = <strong>Z</strong> metric across architecture × bit width at the selected{" "}
-          <strong>process</strong>.
+          <strong>technology</strong>.
         </p>
-        <div className={`plot-host ${aspectExtra}`.trim()}>
+        <div className={`plot-host ${aspectExtra}`.trim()} style={heatmapHostPlotStyle}>
           <div ref={heatmapRef} style={{ width: "100%", height: "100%" }} />
         </div>
       </div>
@@ -1123,27 +1230,35 @@ export function PlotlyPage(): JSX.Element {
         <h2>Treemap</h2>
         <p className="hint">
           Tile size from <strong>Y</strong> metric — root → each architecture×width leaf at the selected{" "}
-          <strong>process</strong>.
+          <strong>technology</strong>.
         </p>
-        <div className={`plot-host plot-host--short ${aspectExtra}`.trim()}>
+        <div
+          className={["plot-host", plotAspectMode !== "flexible" && "plot-host--short", aspectExtra]
+            .filter(Boolean)
+            .join(" ")}
+          style={treemapHostPlotStyle}
+        >
           <div ref={treemapRef} style={{ width: "100%", height: "100%" }} />
         </div>
       </div>
       <div className="chart-card">
         <h2>Donut (pie)</h2>
         <p className="hint">
-          Shares follow <strong>Bar / donut baseline</strong>: per architecture at fixed tech &amp; width, or pooled Σ{" "}
-          <strong>Y</strong> across architectures over bit widths (tech baseline) or over process corners (bit baseline).
+          Shares follow <strong>Bar / donut baseline</strong>: per architecture at fixed technology &amp; width, or pooled Σ{" "}
+          <strong>Y</strong> across architectures over bit widths (technology baseline) or over technology nodes (bit-width
+          baseline).
         </p>
         <div className={`plot-host plot-host--short ${aspectExtra}`.trim()}>
           <div ref={pieRef} style={{ width: "100%", height: "100%" }} />
         </div>
       </div>
       <div className="chart-card">
-        <h2>Grouped bar</h2>
+        <h2>{barSectionHeading}</h2>
         <p className="hint">
-          Layout follows <strong>Bar / donut baseline</strong> (architecture vs bit width vs process on the category axis).
-          Mode bar: zoom, pan, autoscale, PNG.
+          Uses the same <strong>Bar / donut / scatter baseline</strong> as Pareto and donut: one bar per architecture at the
+          chosen technology and bit width; or <strong>grouped</strong> bars across bit widths (technology baseline); or
+          grouped across technology (bit-width baseline). Values are <strong>Y</strong>. Mode bar: zoom, pan, autoscale,
+          PNG.
         </p>
         <div className={`plot-host ${aspectExtra}`.trim()}>
           <div ref={barRef} style={{ width: "100%", height: "100%" }} />

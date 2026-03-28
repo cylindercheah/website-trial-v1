@@ -3,6 +3,8 @@
     "architecture": "cell_majority",
     "bitWidth": 8,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 2167.814,
     "powerMw": 0.938,
     "areaUm2": 80
@@ -11,6 +13,8 @@
     "architecture": "cell_majority",
     "bitWidth": 8,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1679.181,
     "powerMw": 0.727,
     "areaUm2": 127.937
@@ -19,6 +23,8 @@
     "architecture": "cell_majority",
     "bitWidth": 8,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1419.167,
     "powerMw": 0.614,
     "areaUm2": 222.899
@@ -27,6 +33,8 @@
     "architecture": "cell_majority",
     "bitWidth": 8,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1187.361,
     "powerMw": 0.514,
     "areaUm2": 401.51
@@ -35,6 +43,8 @@
     "architecture": "cell_majority",
     "bitWidth": 8,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1003.503,
     "powerMw": 0.434,
     "areaUm2": 699.531
@@ -43,6 +53,8 @@
     "architecture": "cell_majority",
     "bitWidth": 8,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 938.691,
     "powerMw": 0.406,
     "areaUm2": 871.955
@@ -51,6 +63,8 @@
     "architecture": "cell_majority",
     "bitWidth": 8,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 800.518,
     "powerMw": 0.346,
     "areaUm2": 1474.665
@@ -59,6 +73,8 @@
     "architecture": "cell_majority",
     "bitWidth": 8,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 709.584,
     "powerMw": 0.307,
     "areaUm2": 2195.365
@@ -67,6 +83,8 @@
     "architecture": "cell_majority",
     "bitWidth": 8,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 593.68,
     "powerMw": 0.257,
     "areaUm2": 3954.53
@@ -75,6 +93,8 @@
     "architecture": "cell_majority",
     "bitWidth": 8,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 465.721,
     "powerMw": 0.202,
     "areaUm2": 8810.549
@@ -83,6 +103,8 @@
     "architecture": "cell_majority",
     "bitWidth": 8,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 395.787,
     "powerMw": 0.171,
     "areaUm2": 15072.874
@@ -91,6 +113,8 @@
     "architecture": "cell_majority",
     "bitWidth": 8,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 329.315,
     "powerMw": 0.142,
     "areaUm2": 27650.467
@@ -99,6 +123,8 @@
     "architecture": "cell_majority",
     "bitWidth": 8,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 279.864,
     "powerMw": 0.121,
     "areaUm2": 47303.75
@@ -107,6 +133,8 @@
     "architecture": "cell_majority",
     "bitWidth": 8,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 237.472,
     "powerMw": 0.103,
     "areaUm2": 81338.648
@@ -115,6 +143,8 @@
     "architecture": "cell_majority",
     "bitWidth": 8,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 200.701,
     "powerMw": 0.087,
     "areaUm2": 141712.515
@@ -123,6 +153,8 @@
     "architecture": "cell_majority",
     "bitWidth": 8,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 279.864,
     "powerMw": 0.121,
     "areaUm2": 47303.75
@@ -131,6 +163,8 @@
     "architecture": "cell_majority",
     "bitWidth": 8,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 329.315,
     "powerMw": 0.142,
     "areaUm2": 27650.467
@@ -139,6 +173,8 @@
     "architecture": "cell_majority",
     "bitWidth": 8,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 329.315,
     "powerMw": 0.142,
     "areaUm2": 27650.467
@@ -147,6 +183,8 @@
     "architecture": "cell_majority",
     "bitWidth": 16,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1700.832,
     "powerMw": 1.224,
     "areaUm2": 104.206
@@ -155,6 +193,8 @@
     "architecture": "cell_majority",
     "bitWidth": 16,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1317.459,
     "powerMw": 0.948,
     "areaUm2": 242.072
@@ -163,6 +203,8 @@
     "architecture": "cell_majority",
     "bitWidth": 16,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1113.456,
     "powerMw": 0.801,
     "areaUm2": 421.75
@@ -171,6 +213,8 @@
     "architecture": "cell_majority",
     "bitWidth": 16,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 931.584,
     "powerMw": 0.67,
     "areaUm2": 759.702
@@ -179,6 +223,8 @@
     "architecture": "cell_majority",
     "bitWidth": 16,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 787.332,
     "powerMw": 0.566,
     "areaUm2": 1323.594
@@ -187,6 +233,8 @@
     "architecture": "cell_majority",
     "bitWidth": 16,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 736.482,
     "powerMw": 0.53,
     "areaUm2": 1649.839
@@ -195,6 +243,8 @@
     "architecture": "cell_majority",
     "bitWidth": 16,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 628.074,
     "powerMw": 0.452,
     "areaUm2": 2790.236
@@ -203,6 +253,8 @@
     "architecture": "cell_majority",
     "bitWidth": 16,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 556.728,
     "powerMw": 0.401,
     "areaUm2": 4153.883
@@ -211,6 +263,8 @@
     "architecture": "cell_majority",
     "bitWidth": 16,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 465.792,
     "powerMw": 0.335,
     "areaUm2": 7482.427
@@ -219,6 +273,8 @@
     "architecture": "cell_majority",
     "bitWidth": 16,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 365.397,
     "powerMw": 0.263,
     "areaUm2": 16670.575
@@ -227,6 +283,8 @@
     "architecture": "cell_majority",
     "bitWidth": 16,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 310.528,
     "powerMw": 0.223,
     "areaUm2": 28519.616
@@ -235,6 +293,8 @@
     "architecture": "cell_majority",
     "bitWidth": 16,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 258.375,
     "powerMw": 0.186,
     "areaUm2": 52317.871
@@ -243,6 +303,8 @@
     "architecture": "cell_majority",
     "bitWidth": 16,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 219.577,
     "powerMw": 0.158,
     "areaUm2": 89504.148
@@ -251,6 +313,8 @@
     "architecture": "cell_majority",
     "bitWidth": 16,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 186.317,
     "powerMw": 0.134,
     "areaUm2": 153902.099
@@ -259,6 +323,8 @@
     "architecture": "cell_majority",
     "bitWidth": 16,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 157.466,
     "powerMw": 0.113,
     "areaUm2": 268136.417
@@ -267,6 +333,8 @@
     "architecture": "cell_majority",
     "bitWidth": 16,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 219.577,
     "powerMw": 0.158,
     "areaUm2": 89504.148
@@ -275,6 +343,8 @@
     "architecture": "cell_majority",
     "bitWidth": 16,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 258.375,
     "powerMw": 0.186,
     "areaUm2": 52317.871
@@ -283,6 +353,8 @@
     "architecture": "cell_majority",
     "bitWidth": 16,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 258.375,
     "powerMw": 0.186,
     "areaUm2": 52317.871
@@ -291,6 +363,8 @@
     "architecture": "cell_majority",
     "bitWidth": 32,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1334.446,
     "powerMw": 1.596,
     "areaUm2": 197.17
@@ -299,6 +373,8 @@
     "architecture": "cell_majority",
     "bitWidth": 32,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1033.657,
     "powerMw": 1.236,
     "areaUm2": 458.028
@@ -307,6 +383,8 @@
     "architecture": "cell_majority",
     "bitWidth": 32,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 873.6,
     "powerMw": 1.045,
     "areaUm2": 798
@@ -315,6 +393,8 @@
     "architecture": "cell_majority",
     "bitWidth": 32,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 730.906,
     "powerMw": 0.874,
     "areaUm2": 1437.445
@@ -323,6 +403,8 @@
     "architecture": "cell_majority",
     "bitWidth": 32,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 617.728,
     "powerMw": 0.739,
     "areaUm2": 2504.392
@@ -331,6 +413,8 @@
     "architecture": "cell_majority",
     "bitWidth": 32,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 577.832,
     "powerMw": 0.691,
     "areaUm2": 3121.685
@@ -339,6 +423,8 @@
     "architecture": "cell_majority",
     "bitWidth": 32,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 492.777,
     "powerMw": 0.589,
     "areaUm2": 5279.448
@@ -347,6 +433,8 @@
     "architecture": "cell_majority",
     "bitWidth": 32,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 436.8,
     "powerMw": 0.523,
     "areaUm2": 7859.626
@@ -355,6 +443,8 @@
     "architecture": "cell_majority",
     "bitWidth": 32,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 365.453,
     "powerMw": 0.437,
     "areaUm2": 14157.615
@@ -363,6 +453,8 @@
     "architecture": "cell_majority",
     "bitWidth": 32,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 286.685,
     "powerMw": 0.343,
     "areaUm2": 31542.649
@@ -371,6 +463,8 @@
     "architecture": "cell_majority",
     "bitWidth": 32,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 243.635,
     "powerMw": 0.291,
     "areaUm2": 53962.401
@@ -379,6 +473,8 @@
     "architecture": "cell_majority",
     "bitWidth": 32,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 202.717,
     "powerMw": 0.242,
     "areaUm2": 98991.443
@@ -387,6 +483,8 @@
     "architecture": "cell_majority",
     "bitWidth": 32,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 172.276,
     "powerMw": 0.206,
     "areaUm2": 169352.167
@@ -395,6 +493,8 @@
     "architecture": "cell_majority",
     "bitWidth": 32,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 146.181,
     "powerMw": 0.175,
     "areaUm2": 291200.516
@@ -403,6 +503,8 @@
     "architecture": "cell_majority",
     "bitWidth": 32,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 123.546,
     "powerMw": 0.148,
     "areaUm2": 507345.016
@@ -411,6 +513,8 @@
     "architecture": "cell_majority",
     "bitWidth": 32,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 172.276,
     "powerMw": 0.206,
     "areaUm2": 169352.167
@@ -419,6 +523,8 @@
     "architecture": "cell_majority",
     "bitWidth": 32,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 202.717,
     "powerMw": 0.242,
     "areaUm2": 98991.443
@@ -427,6 +533,8 @@
     "architecture": "cell_majority",
     "bitWidth": 32,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 202.717,
     "powerMw": 0.242,
     "areaUm2": 98991.443
@@ -435,6 +543,8 @@
     "architecture": "cell_majority",
     "bitWidth": 64,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1046.985,
     "powerMw": 2.082,
     "areaUm2": 373.069
@@ -443,6 +553,8 @@
     "architecture": "cell_majority",
     "bitWidth": 64,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 810.991,
     "powerMw": 1.613,
     "areaUm2": 866.641
@@ -451,6 +563,8 @@
     "architecture": "cell_majority",
     "bitWidth": 64,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 685.413,
     "powerMw": 1.363,
     "areaUm2": 1509.908
@@ -459,6 +573,8 @@
     "architecture": "cell_majority",
     "bitWidth": 64,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 573.457,
     "powerMw": 1.141,
     "areaUm2": 2719.811
@@ -467,6 +583,8 @@
     "architecture": "cell_majority",
     "bitWidth": 64,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 484.66,
     "powerMw": 0.964,
     "areaUm2": 4738.599
@@ -475,6 +593,8 @@
     "architecture": "cell_majority",
     "bitWidth": 64,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 453.358,
     "powerMw": 0.902,
     "areaUm2": 5906.588
@@ -483,6 +603,8 @@
     "architecture": "cell_majority",
     "bitWidth": 64,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 386.625,
     "powerMw": 0.769,
     "areaUm2": 9989.325
@@ -491,6 +613,8 @@
     "architecture": "cell_majority",
     "bitWidth": 64,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 342.706,
     "powerMw": 0.682,
     "areaUm2": 14871.318
@@ -499,6 +623,8 @@
     "architecture": "cell_majority",
     "bitWidth": 64,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 286.729,
     "powerMw": 0.57,
     "areaUm2": 26787.841
@@ -507,6 +633,8 @@
     "architecture": "cell_majority",
     "bitWidth": 64,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 224.928,
     "powerMw": 0.447,
     "areaUm2": 59682.329
@@ -515,6 +643,8 @@
     "architecture": "cell_majority",
     "bitWidth": 64,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 191.152,
     "powerMw": 0.38,
     "areaUm2": 102103.084
@@ -523,6 +653,8 @@
     "architecture": "cell_majority",
     "bitWidth": 64,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 159.048,
     "powerMw": 0.316,
     "areaUm2": 187303.224
@@ -531,6 +663,8 @@
     "architecture": "cell_majority",
     "bitWidth": 64,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 135.165,
     "powerMw": 0.269,
     "areaUm2": 320433.826
@@ -539,6 +673,8 @@
     "architecture": "cell_majority",
     "bitWidth": 64,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 114.691,
     "powerMw": 0.228,
     "areaUm2": 550984.949
@@ -547,6 +683,8 @@
     "architecture": "cell_majority",
     "bitWidth": 64,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 96.932,
     "powerMw": 0.193,
     "areaUm2": 959955.264
@@ -555,6 +693,8 @@
     "architecture": "cell_majority",
     "bitWidth": 64,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 135.165,
     "powerMw": 0.269,
     "areaUm2": 320433.826
@@ -563,6 +703,8 @@
     "architecture": "cell_majority",
     "bitWidth": 64,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 159.048,
     "powerMw": 0.316,
     "areaUm2": 187303.224
@@ -571,6 +713,8 @@
     "architecture": "cell_majority",
     "bitWidth": 64,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 159.048,
     "powerMw": 0.316,
     "areaUm2": 187303.224
@@ -579,6 +723,8 @@
     "architecture": "cell_majority",
     "bitWidth": 128,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 821.448,
     "powerMw": 2.716,
     "areaUm2": 705.889
@@ -587,6 +733,8 @@
     "architecture": "cell_majority",
     "bitWidth": 128,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 636.291,
     "powerMw": 2.104,
     "areaUm2": 1639.785
@@ -595,6 +743,8 @@
     "architecture": "cell_majority",
     "bitWidth": 128,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 537.764,
     "powerMw": 1.778,
     "areaUm2": 2856.92
@@ -603,6 +753,8 @@
     "architecture": "cell_majority",
     "bitWidth": 128,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 449.926,
     "powerMw": 1.488,
     "areaUm2": 5146.196
@@ -611,6 +763,8 @@
     "architecture": "cell_majority",
     "bitWidth": 128,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 380.256,
     "powerMw": 1.257,
     "areaUm2": 8965.976
@@ -619,6 +773,8 @@
     "architecture": "cell_majority",
     "bitWidth": 128,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 355.697,
     "powerMw": 1.176,
     "areaUm2": 11175.946
@@ -627,6 +783,8 @@
     "architecture": "cell_majority",
     "bitWidth": 128,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 303.34,
     "powerMw": 1.003,
     "areaUm2": 18900.955
@@ -635,6 +793,8 @@
     "architecture": "cell_majority",
     "bitWidth": 128,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 268.882,
     "powerMw": 0.889,
     "areaUm2": 28138.249
@@ -643,6 +803,8 @@
     "architecture": "cell_majority",
     "bitWidth": 128,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 224.963,
     "powerMw": 0.744,
     "areaUm2": 50685.683
@@ -651,6 +813,8 @@
     "architecture": "cell_majority",
     "bitWidth": 128,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 176.475,
     "powerMw": 0.584,
     "areaUm2": 112925.847
@@ -659,6 +823,8 @@
     "architecture": "cell_majority",
     "bitWidth": 128,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 149.975,
     "powerMw": 0.496,
     "areaUm2": 193190.808
@@ -667,6 +833,8 @@
     "architecture": "cell_majority",
     "bitWidth": 128,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 124.787,
     "powerMw": 0.413,
     "areaUm2": 354399.294
@@ -675,6 +843,8 @@
     "architecture": "cell_majority",
     "bitWidth": 128,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 106.048,
     "powerMw": 0.351,
     "areaUm2": 606297.742
@@ -683,6 +853,8 @@
     "architecture": "cell_majority",
     "bitWidth": 128,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 89.985,
     "powerMw": 0.298,
     "areaUm2": 1042527.049
@@ -691,6 +863,8 @@
     "architecture": "cell_majority",
     "bitWidth": 128,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 76.051,
     "powerMw": 0.251,
     "areaUm2": 1816346.036
@@ -699,6 +873,8 @@
     "architecture": "cell_majority",
     "bitWidth": 128,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 106.048,
     "powerMw": 0.351,
     "areaUm2": 606297.742
@@ -707,6 +883,8 @@
     "architecture": "cell_majority",
     "bitWidth": 128,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 124.787,
     "powerMw": 0.413,
     "areaUm2": 354399.294
@@ -715,6 +893,8 @@
     "architecture": "cell_majority",
     "bitWidth": 128,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 124.787,
     "powerMw": 0.413,
     "areaUm2": 354399.294
@@ -723,6 +903,8 @@
     "architecture": "cell_majority",
     "bitWidth": 256,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 644.495,
     "powerMw": 3.544,
     "areaUm2": 1335.623
@@ -731,6 +913,8 @@
     "architecture": "cell_majority",
     "bitWidth": 256,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 499.224,
     "powerMw": 2.745,
     "areaUm2": 3102.662
@@ -739,6 +923,8 @@
     "architecture": "cell_majority",
     "bitWidth": 256,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 421.921,
     "powerMw": 2.32,
     "areaUm2": 5405.622
@@ -747,6 +933,8 @@
     "architecture": "cell_majority",
     "bitWidth": 256,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 353.004,
     "powerMw": 1.941,
     "areaUm2": 9737.196
@@ -755,6 +943,8 @@
     "architecture": "cell_majority",
     "bitWidth": 256,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 298.343,
     "powerMw": 1.64,
     "areaUm2": 16964.66
@@ -763,6 +953,8 @@
     "architecture": "cell_majority",
     "bitWidth": 256,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 279.075,
     "powerMw": 1.534,
     "areaUm2": 21146.178
@@ -771,6 +963,8 @@
     "architecture": "cell_majority",
     "bitWidth": 256,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 237.996,
     "powerMw": 1.309,
     "areaUm2": 35762.785
@@ -779,6 +973,8 @@
     "architecture": "cell_majority",
     "bitWidth": 256,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 210.96,
     "powerMw": 1.16,
     "areaUm2": 53240.811
@@ -787,6 +983,8 @@
     "architecture": "cell_majority",
     "bitWidth": 256,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 176.502,
     "powerMw": 0.97,
     "areaUm2": 95903.156
@@ -795,6 +993,8 @@
     "architecture": "cell_majority",
     "bitWidth": 256,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 138.46,
     "powerMw": 0.761,
     "areaUm2": 213668.722
@@ -803,6 +1003,8 @@
     "architecture": "cell_majority",
     "bitWidth": 256,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 117.668,
     "powerMw": 0.647,
     "areaUm2": 365539.282
@@ -811,6 +1013,8 @@
     "architecture": "cell_majority",
     "bitWidth": 256,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 97.906,
     "powerMw": 0.538,
     "areaUm2": 670564.325
@@ -819,6 +1023,8 @@
     "architecture": "cell_majority",
     "bitWidth": 256,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 83.204,
     "powerMw": 0.457,
     "areaUm2": 1147185.23
@@ -827,6 +1033,8 @@
     "architecture": "cell_majority",
     "bitWidth": 256,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 70.601,
     "powerMw": 0.388,
     "areaUm2": 1972581.372
@@ -835,6 +1043,8 @@
     "architecture": "cell_majority",
     "bitWidth": 256,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 59.669,
     "powerMw": 0.328,
     "areaUm2": 3436736.114
@@ -843,6 +1053,8 @@
     "architecture": "cell_majority",
     "bitWidth": 256,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 83.204,
     "powerMw": 0.457,
     "areaUm2": 1147185.23
@@ -851,6 +1063,8 @@
     "architecture": "cell_majority",
     "bitWidth": 256,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 97.906,
     "powerMw": 0.538,
     "areaUm2": 670564.325
@@ -859,6 +1073,8 @@
     "architecture": "cell_majority",
     "bitWidth": 256,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 97.906,
     "powerMw": 0.538,
     "areaUm2": 670564.325
@@ -867,6 +1083,8 @@
     "architecture": "cell_majority",
     "bitWidth": 1024,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 396.733,
     "powerMw": 6.03,
     "areaUm2": 4781.665
@@ -875,6 +1093,8 @@
     "architecture": "cell_majority",
     "bitWidth": 1024,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 307.308,
     "powerMw": 4.671,
     "areaUm2": 11107.84
@@ -883,6 +1103,8 @@
     "architecture": "cell_majority",
     "bitWidth": 1024,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 259.723,
     "powerMw": 3.948,
     "areaUm2": 19352.669
@@ -891,6 +1113,8 @@
     "architecture": "cell_majority",
     "bitWidth": 1024,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 217.3,
     "powerMw": 3.303,
     "areaUm2": 34860.138
@@ -899,6 +1123,8 @@
     "architecture": "cell_majority",
     "bitWidth": 1024,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 183.652,
     "powerMw": 2.791,
     "areaUm2": 60735.186
@@ -907,6 +1133,8 @@
     "architecture": "cell_majority",
     "bitWidth": 1024,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 171.791,
     "powerMw": 2.611,
     "areaUm2": 75705.438
@@ -915,6 +1143,8 @@
     "architecture": "cell_majority",
     "bitWidth": 1024,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 146.503,
     "powerMw": 2.227,
     "areaUm2": 128034.358
@@ -923,6 +1153,8 @@
     "architecture": "cell_majority",
     "bitWidth": 1024,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 129.861,
     "powerMw": 1.974,
     "areaUm2": 190607.444
@@ -931,6 +1163,8 @@
     "architecture": "cell_majority",
     "bitWidth": 1024,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 108.65,
     "powerMw": 1.651,
     "areaUm2": 343342.916
@@ -939,6 +1173,8 @@
     "architecture": "cell_majority",
     "bitWidth": 1024,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 85.232,
     "powerMw": 1.295,
     "areaUm2": 764955.451
@@ -947,6 +1183,8 @@
     "architecture": "cell_majority",
     "bitWidth": 1024,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 72.433,
     "powerMw": 1.101,
     "areaUm2": 1308667.286
@@ -955,6 +1193,8 @@
     "architecture": "cell_majority",
     "bitWidth": 1024,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 60.268,
     "powerMw": 0.916,
     "areaUm2": 2400687.531
@@ -963,6 +1203,8 @@
     "architecture": "cell_majority",
     "bitWidth": 1024,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 51.218,
     "powerMw": 0.778,
     "areaUm2": 4107038.167
@@ -971,6 +1213,8 @@
     "architecture": "cell_majority",
     "bitWidth": 1024,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 43.46,
     "powerMw": 0.661,
     "areaUm2": 7062039.131
@@ -979,6 +1223,8 @@
     "architecture": "cell_majority",
     "bitWidth": 1024,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 36.73,
     "powerMw": 0.558,
     "areaUm2": 12303859.935
@@ -987,6 +1233,8 @@
     "architecture": "cell_majority",
     "bitWidth": 1024,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 51.218,
     "powerMw": 0.778,
     "areaUm2": 4107038.167
@@ -995,6 +1243,8 @@
     "architecture": "cell_majority",
     "bitWidth": 1024,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 60.268,
     "powerMw": 0.916,
     "areaUm2": 2400687.531
@@ -1003,6 +1253,8 @@
     "architecture": "cell_majority",
     "bitWidth": 1024,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 60.268,
     "powerMw": 0.916,
     "areaUm2": 2400687.531
@@ -1011,6 +1263,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 8,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1838.771,
     "powerMw": 1.228,
     "areaUm2": 80
@@ -1019,6 +1273,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 8,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1424.306,
     "powerMw": 0.951,
     "areaUm2": 175.072
@@ -1027,6 +1283,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 8,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1203.758,
     "powerMw": 0.804,
     "areaUm2": 305.019
@@ -1035,6 +1293,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 8,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1007.136,
     "powerMw": 0.673,
     "areaUm2": 549.434
@@ -1043,6 +1303,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 8,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 851.185,
     "powerMw": 0.568,
     "areaUm2": 957.253
@@ -1051,6 +1313,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 8,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 796.211,
     "powerMw": 0.532,
     "areaUm2": 1193.201
@@ -1059,6 +1323,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 8,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 679.011,
     "powerMw": 0.453,
     "areaUm2": 2017.963
@@ -1067,6 +1333,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 8,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 601.879,
     "powerMw": 0.402,
     "areaUm2": 3004.183
@@ -1075,6 +1343,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 8,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 503.568,
     "powerMw": 0.336,
     "areaUm2": 5411.463
@@ -1083,6 +1353,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 8,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 395.031,
     "powerMw": 0.264,
     "areaUm2": 12056.541
@@ -1091,6 +1363,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 8,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 335.712,
     "powerMw": 0.224,
     "areaUm2": 20626.038
@@ -1099,6 +1373,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 8,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 279.329,
     "powerMw": 0.187,
     "areaUm2": 37837.481
@@ -1107,6 +1383,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 8,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 237.384,
     "powerMw": 0.159,
     "areaUm2": 64731.447
@@ -1115,6 +1393,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 8,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 201.427,
     "powerMw": 0.135,
     "areaUm2": 111305.518
@@ -1123,6 +1403,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 8,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 170.237,
     "powerMw": 0.114,
     "areaUm2": 193922.389
@@ -1131,6 +1413,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 8,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 237.384,
     "powerMw": 0.159,
     "areaUm2": 64731.447
@@ -1139,6 +1423,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 8,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 279.329,
     "powerMw": 0.187,
     "areaUm2": 37837.481
@@ -1147,6 +1433,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 8,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 279.329,
     "powerMw": 0.187,
     "areaUm2": 37837.481
@@ -1155,6 +1443,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 16,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1442.67,
     "powerMw": 1.602,
     "areaUm2": 142.598
@@ -1163,6 +1453,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 16,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1117.488,
     "powerMw": 1.241,
     "areaUm2": 331.256
@@ -1171,6 +1463,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 16,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 944.449,
     "powerMw": 1.049,
     "areaUm2": 577.132
@@ -1179,6 +1473,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 16,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 790.183,
     "powerMw": 0.877,
     "areaUm2": 1039.593
@@ -1187,6 +1483,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 16,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 667.827,
     "powerMw": 0.742,
     "areaUm2": 1811.234
@@ -1195,6 +1493,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 16,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 624.695,
     "powerMw": 0.694,
     "areaUm2": 2257.674
@@ -1203,6 +1503,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 16,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 532.741,
     "powerMw": 0.592,
     "areaUm2": 3818.218
@@ -1211,6 +1513,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 16,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 472.225,
     "powerMw": 0.524,
     "areaUm2": 5684.261
@@ -1219,6 +1523,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 16,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 395.092,
     "powerMw": 0.439,
     "areaUm2": 10239.111
@@ -1227,6 +1533,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 16,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 309.935,
     "powerMw": 0.344,
     "areaUm2": 22812.365
@@ -1235,6 +1543,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 16,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 263.394,
     "powerMw": 0.292,
     "areaUm2": 39026.843
@@ -1243,6 +1553,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 16,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 219.157,
     "powerMw": 0.243,
     "areaUm2": 71592.876
@@ -1251,6 +1563,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 16,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 186.248,
     "powerMw": 0.207,
     "areaUm2": 122479.36
@@ -1259,6 +1573,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 16,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 158.037,
     "powerMw": 0.175,
     "areaUm2": 210602.873
@@ -1267,6 +1583,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 16,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 133.565,
     "powerMw": 0.148,
     "areaUm2": 366923.519
@@ -1275,6 +1593,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 16,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 186.248,
     "powerMw": 0.207,
     "areaUm2": 122479.36
@@ -1283,6 +1603,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 16,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 219.157,
     "powerMw": 0.243,
     "areaUm2": 71592.876
@@ -1291,6 +1613,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 16,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 219.157,
     "powerMw": 0.243,
     "areaUm2": 71592.876
@@ -1299,6 +1623,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 32,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1131.896,
     "powerMw": 2.09,
     "areaUm2": 269.812
@@ -1307,6 +1633,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 32,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 876.763,
     "powerMw": 1.619,
     "areaUm2": 626.775
@@ -1315,6 +1643,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 32,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 741,
     "powerMw": 1.368,
     "areaUm2": 1092
@@ -1323,6 +1653,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 32,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 619.965,
     "powerMw": 1.145,
     "areaUm2": 1967.029
@@ -1331,6 +1663,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 32,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 523.966,
     "powerMw": 0.967,
     "areaUm2": 3427.063
@@ -1339,6 +1673,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 32,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 490.125,
     "powerMw": 0.905,
     "areaUm2": 4271.78
@@ -1347,6 +1683,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 32,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 417.98,
     "powerMw": 0.772,
     "areaUm2": 7224.508
@@ -1355,6 +1693,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 32,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 370.5,
     "powerMw": 0.684,
     "areaUm2": 10755.278
@@ -1363,6 +1703,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 32,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 309.983,
     "powerMw": 0.572,
     "areaUm2": 19373.579
@@ -1371,6 +1713,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 32,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 243.17,
     "powerMw": 0.449,
     "areaUm2": 43163.625
@@ -1379,6 +1723,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 32,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 206.655,
     "powerMw": 0.382,
     "areaUm2": 73843.286
@@ -1387,6 +1733,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 32,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 171.947,
     "powerMw": 0.317,
     "areaUm2": 135461.975
@@ -1395,6 +1743,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 32,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 146.127,
     "powerMw": 0.27,
     "areaUm2": 231745.071
@@ -1403,6 +1753,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 32,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 123.993,
     "powerMw": 0.229,
     "areaUm2": 398484.916
@@ -1411,6 +1763,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 32,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 104.793,
     "powerMw": 0.193,
     "areaUm2": 694261.601
@@ -1419,6 +1773,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 32,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 146.127,
     "powerMw": 0.27,
     "areaUm2": 231745.071
@@ -1427,6 +1783,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 32,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 171.947,
     "powerMw": 0.317,
     "areaUm2": 135461.975
@@ -1435,6 +1793,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 32,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 171.947,
     "powerMw": 0.317,
     "areaUm2": 135461.975
@@ -1443,6 +1803,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 64,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 888.068,
     "powerMw": 2.726,
     "areaUm2": 510.515
@@ -1451,6 +1813,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 64,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 687.894,
     "powerMw": 2.112,
     "areaUm2": 1185.93
@@ -1459,6 +1823,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 64,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 581.377,
     "powerMw": 1.785,
     "areaUm2": 2066.19
@@ -1467,6 +1833,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 64,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 486.415,
     "powerMw": 1.493,
     "areaUm2": 3721.847
@@ -1475,6 +1843,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 64,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 411.095,
     "powerMw": 1.262,
     "areaUm2": 6484.399
@@ -1483,6 +1853,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 64,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 384.545,
     "powerMw": 1.18,
     "areaUm2": 8082.7
@@ -1491,6 +1863,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 64,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 327.941,
     "powerMw": 1.007,
     "areaUm2": 13669.603
@@ -1499,6 +1873,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 64,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 290.688,
     "powerMw": 0.892,
     "areaUm2": 20350.225
@@ -1507,6 +1883,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 64,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 243.207,
     "powerMw": 0.747,
     "areaUm2": 36657.045
@@ -1515,6 +1893,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 64,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 190.788,
     "powerMw": 0.586,
     "areaUm2": 81670.555
@@ -1523,6 +1903,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 64,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 162.138,
     "powerMw": 0.498,
     "areaUm2": 139720.01
@@ -1531,6 +1913,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 64,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 134.907,
     "powerMw": 0.414,
     "areaUm2": 256309.675
@@ -1539,6 +1923,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 64,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 114.649,
     "powerMw": 0.352,
     "areaUm2": 438488.393
@@ -1547,6 +1933,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 64,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 97.283,
     "powerMw": 0.299,
     "areaUm2": 753979.404
@@ -1555,6 +1943,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 64,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 82.219,
     "powerMw": 0.252,
     "areaUm2": 1313622.993
@@ -1563,6 +1953,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 64,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 114.649,
     "powerMw": 0.352,
     "areaUm2": 438488.393
@@ -1571,6 +1963,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 64,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 134.907,
     "powerMw": 0.414,
     "areaUm2": 256309.675
@@ -1579,6 +1973,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 64,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 134.907,
     "powerMw": 0.414,
     "areaUm2": 256309.675
@@ -1587,6 +1983,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 128,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 696.764,
     "powerMw": 3.556,
     "areaUm2": 965.953
@@ -1595,6 +1993,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 128,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 539.711,
     "powerMw": 2.754,
     "areaUm2": 2243.916
@@ -1603,6 +2003,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 128,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 456.139,
     "powerMw": 2.328,
     "areaUm2": 3909.47
@@ -1611,6 +2013,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 128,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 381.633,
     "powerMw": 1.948,
     "areaUm2": 7042.163
@@ -1619,6 +2023,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 128,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 322.539,
     "powerMw": 1.646,
     "areaUm2": 12269.23
@@ -1627,6 +2033,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 128,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 301.708,
     "powerMw": 1.54,
     "areaUm2": 15293.4
@@ -1635,6 +2043,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 128,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 257.297,
     "powerMw": 1.313,
     "areaUm2": 25864.464
@@ -1643,6 +2053,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 128,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 228.07,
     "powerMw": 1.164,
     "areaUm2": 38504.972
@@ -1651,6 +2063,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 128,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 190.817,
     "powerMw": 0.974,
     "areaUm2": 69359.356
@@ -1659,6 +2073,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 128,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 149.689,
     "powerMw": 0.764,
     "areaUm2": 154530.106
@@ -1667,6 +2083,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 128,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 127.211,
     "powerMw": 0.649,
     "areaUm2": 264366.368
@@ -1675,6 +2093,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 128,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 105.846,
     "powerMw": 0.54,
     "areaUm2": 484967.456
@@ -1683,6 +2103,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 128,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 89.952,
     "powerMw": 0.459,
     "areaUm2": 829670.594
@@ -1691,6 +2113,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 128,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 76.327,
     "powerMw": 0.39,
     "areaUm2": 1426615.961
@@ -1699,6 +2123,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 128,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 64.508,
     "powerMw": 0.329,
     "areaUm2": 2485526.155
@@ -1707,6 +2133,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 128,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 89.952,
     "powerMw": 0.459,
     "areaUm2": 829670.594
@@ -1715,6 +2143,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 128,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 105.846,
     "powerMw": 0.54,
     "areaUm2": 484967.456
@@ -1723,6 +2153,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 128,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 105.846,
     "powerMw": 0.54,
     "areaUm2": 484967.456
@@ -1731,6 +2163,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 256,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 546.67,
     "powerMw": 4.639,
     "areaUm2": 1827.695
@@ -1739,6 +2173,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 256,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 423.449,
     "powerMw": 3.593,
     "areaUm2": 4245.748
@@ -1747,6 +2183,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 256,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 357.879,
     "powerMw": 3.037,
     "areaUm2": 7397.167
@@ -1755,6 +2193,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 256,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 299.423,
     "powerMw": 2.541,
     "areaUm2": 13324.584
@@ -1763,6 +2203,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 256,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 253.059,
     "powerMw": 2.147,
     "areaUm2": 23214.799
@@ -1771,6 +2213,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 256,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 236.715,
     "powerMw": 2.009,
     "areaUm2": 28936.875
@@ -1779,6 +2223,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 256,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 201.871,
     "powerMw": 1.713,
     "areaUm2": 48938.548
@@ -1787,6 +2233,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 256,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 178.94,
     "powerMw": 1.518,
     "areaUm2": 72855.847
@@ -1795,6 +2243,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 256,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 149.712,
     "powerMw": 1.27,
     "areaUm2": 131235.898
@@ -1803,6 +2253,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 256,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 117.444,
     "powerMw": 0.997,
     "areaUm2": 292388.777
@@ -1811,6 +2263,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 256,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 99.808,
     "powerMw": 0.847,
     "areaUm2": 500211.648
@@ -1819,6 +2273,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 256,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 83.045,
     "powerMw": 0.705,
     "areaUm2": 917614.34
@@ -1827,6 +2283,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 256,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 70.575,
     "powerMw": 0.599,
     "areaUm2": 1569832.42
@@ -1835,6 +2293,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 256,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 59.885,
     "powerMw": 0.508,
     "areaUm2": 2699321.878
@@ -1843,6 +2303,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 256,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 50.612,
     "powerMw": 0.429,
     "areaUm2": 4702902.05
@@ -1851,6 +2313,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 256,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 70.575,
     "powerMw": 0.599,
     "areaUm2": 1569832.42
@@ -1859,6 +2323,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 256,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 83.045,
     "powerMw": 0.705,
     "areaUm2": 917614.34
@@ -1867,6 +2333,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 256,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 83.045,
     "powerMw": 0.705,
     "areaUm2": 917614.34
@@ -1875,6 +2343,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 1024,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 336.515,
     "powerMw": 7.894,
     "areaUm2": 6543.331
@@ -1883,6 +2353,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 1024,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 260.663,
     "powerMw": 6.115,
     "areaUm2": 15200.202
@@ -1891,6 +2363,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 1024,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 220.301,
     "powerMw": 5.168,
     "areaUm2": 26482.6
@@ -1899,6 +2373,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 1024,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 184.317,
     "powerMw": 4.324,
     "areaUm2": 47703.347
@@ -1907,6 +2383,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 1024,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 155.776,
     "powerMw": 3.654,
     "areaUm2": 83111.307
@@ -1915,6 +2393,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 1024,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 145.715,
     "powerMw": 3.418,
     "areaUm2": 103596.915
@@ -1923,6 +2403,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 1024,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 124.266,
     "powerMw": 2.915,
     "areaUm2": 175204.911
@@ -1931,6 +2413,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 1024,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 110.15,
     "powerMw": 2.584,
     "areaUm2": 260831.239
@@ -1939,6 +2423,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 1024,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 92.158,
     "powerMw": 2.162,
     "areaUm2": 469837.674
@@ -1947,6 +2433,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 1024,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 72.295,
     "powerMw": 1.696,
     "areaUm2": 1046781.144
@@ -1955,6 +2443,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 1024,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 61.439,
     "powerMw": 1.441,
     "areaUm2": 1790807.865
@@ -1963,6 +2453,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 1024,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 51.12,
     "powerMw": 1.199,
     "areaUm2": 3285151.358
@@ -1971,6 +2463,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 1024,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 43.444,
     "powerMw": 1.019,
     "areaUm2": 5620157.492
@@ -1979,6 +2473,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 1024,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 36.863,
     "powerMw": 0.865,
     "areaUm2": 9663843.022
@@ -1987,6 +2483,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 1024,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 31.155,
     "powerMw": 0.731,
     "areaUm2": 16836860.964
@@ -1995,6 +2493,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 1024,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 43.444,
     "powerMw": 1.019,
     "areaUm2": 5620157.492
@@ -2003,6 +2503,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 1024,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 51.12,
     "powerMw": 1.199,
     "areaUm2": 3285151.358
@@ -2011,6 +2513,8 @@
     "architecture": "tmr_vote",
     "bitWidth": 1024,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 51.12,
     "powerMw": 1.199,
     "areaUm2": 3285151.358
@@ -2019,6 +2523,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 8,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1587.15,
     "powerMw": 1.16,
     "areaUm2": 89.857
@@ -2027,6 +2533,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 8,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1229.401,
     "powerMw": 0.898,
     "areaUm2": 208.739
@@ -2035,6 +2543,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 8,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1039.033,
     "powerMw": 0.759,
     "areaUm2": 363.677
@@ -2043,6 +2553,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 8,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 869.318,
     "powerMw": 0.635,
     "areaUm2": 655.095
@@ -2051,6 +2563,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 8,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 734.707,
     "powerMw": 0.537,
     "areaUm2": 1141.341
@@ -2059,6 +2573,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 8,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 687.256,
     "powerMw": 0.502,
     "areaUm2": 1422.663
@@ -2067,6 +2583,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 8,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 586.094,
     "powerMw": 0.428,
     "areaUm2": 2406.032
@@ -2075,6 +2593,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 8,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 519.517,
     "powerMw": 0.38,
     "areaUm2": 3581.911
@@ -2083,6 +2603,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 8,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 434.659,
     "powerMw": 0.318,
     "areaUm2": 6452.129
@@ -2091,6 +2613,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 8,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 340.974,
     "powerMw": 0.249,
     "areaUm2": 14375.106
@@ -2099,6 +2623,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 8,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 289.773,
     "powerMw": 0.212,
     "areaUm2": 24592.584
@@ -2107,6 +2633,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 8,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 241.105,
     "powerMw": 0.176,
     "areaUm2": 45113.919
@@ -2115,6 +2643,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 8,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 204.9,
     "powerMw": 0.15,
     "areaUm2": 77179.802
@@ -2123,6 +2653,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 8,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 173.864,
     "powerMw": 0.127,
     "areaUm2": 132710.425
@@ -2131,6 +2663,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 8,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 146.941,
     "powerMw": 0.107,
     "areaUm2": 231215.157
@@ -2139,6 +2673,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 8,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 204.9,
     "powerMw": 0.15,
     "areaUm2": 77179.802
@@ -2147,6 +2683,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 8,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 241.105,
     "powerMw": 0.176,
     "areaUm2": 45113.919
@@ -2155,6 +2693,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 8,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 241.105,
     "powerMw": 0.176,
     "areaUm2": 45113.919
@@ -2163,6 +2703,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 16,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1245.252,
     "powerMw": 1.513,
     "areaUm2": 170.021
@@ -2171,6 +2713,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 16,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 964.568,
     "powerMw": 1.172,
     "areaUm2": 394.959
@@ -2179,6 +2723,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 16,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 815.209,
     "powerMw": 0.99,
     "areaUm2": 688.119
@@ -2187,6 +2733,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 16,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 682.053,
     "powerMw": 0.829,
     "areaUm2": 1239.515
@@ -2195,6 +2743,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 16,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 576.44,
     "powerMw": 0.7,
     "areaUm2": 2159.548
@@ -2203,6 +2753,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 16,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 539.21,
     "powerMw": 0.655,
     "areaUm2": 2691.842
@@ -2211,6 +2763,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 16,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 459.84,
     "powerMw": 0.559,
     "areaUm2": 4552.49
@@ -2219,6 +2773,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 16,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 407.604,
     "powerMw": 0.495,
     "areaUm2": 6777.388
@@ -2227,6 +2783,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 16,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 341.026,
     "powerMw": 0.414,
     "areaUm2": 12208.171
@@ -2235,6 +2793,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 16,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 267.523,
     "powerMw": 0.325,
     "areaUm2": 27199.358
@@ -2243,6 +2803,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 16,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 227.351,
     "powerMw": 0.276,
     "areaUm2": 46532.005
@@ -2251,6 +2813,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 16,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 189.167,
     "powerMw": 0.23,
     "areaUm2": 85360.736
@@ -2259,6 +2823,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 16,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 160.761,
     "powerMw": 0.195,
     "areaUm2": 146033.084
@@ -2267,6 +2833,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 16,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 136.411,
     "powerMw": 0.166,
     "areaUm2": 251103.425
@@ -2275,6 +2843,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 16,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 115.288,
     "powerMw": 0.14,
     "areaUm2": 437485.734
@@ -2283,6 +2853,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 16,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 160.761,
     "powerMw": 0.195,
     "areaUm2": 146033.084
@@ -2291,6 +2863,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 16,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 189.167,
     "powerMw": 0.23,
     "areaUm2": 85360.736
@@ -2299,6 +2873,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 16,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 189.167,
     "powerMw": 0.23,
     "areaUm2": 85360.736
@@ -2307,6 +2883,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 32,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 977.005,
     "powerMw": 1.974,
     "areaUm2": 321.699
@@ -2315,6 +2893,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 32,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 756.785,
     "powerMw": 1.529,
     "areaUm2": 747.308
@@ -2323,6 +2903,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 32,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 639.6,
     "powerMw": 1.292,
     "areaUm2": 1302
@@ -2331,6 +2913,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 32,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 535.128,
     "powerMw": 1.081,
     "areaUm2": 2345.304
@@ -2339,6 +2923,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 32,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 452.265,
     "powerMw": 0.914,
     "areaUm2": 4086.114
@@ -2347,6 +2933,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 32,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 423.056,
     "powerMw": 0.855,
     "areaUm2": 5093.276
@@ -2355,6 +2943,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 32,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 360.783,
     "powerMw": 0.729,
     "areaUm2": 8613.837
@@ -2363,6 +2953,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 32,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 319.8,
     "powerMw": 0.646,
     "areaUm2": 12823.6
@@ -2371,6 +2963,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 32,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 267.564,
     "powerMw": 0.54,
     "areaUm2": 23099.267
@@ -2379,6 +2973,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 32,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 209.894,
     "powerMw": 0.424,
     "areaUm2": 51464.322
@@ -2387,6 +2983,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 32,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 178.376,
     "powerMw": 0.36,
     "areaUm2": 88043.918
@@ -2395,6 +2993,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 32,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 148.418,
     "powerMw": 0.3,
     "areaUm2": 161512.355
@@ -2403,6 +3003,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 32,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 126.131,
     "powerMw": 0.255,
     "areaUm2": 276311.431
@@ -2411,6 +3013,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 32,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 107.026,
     "powerMw": 0.216,
     "areaUm2": 475116.631
@@ -2419,6 +3023,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 32,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 90.453,
     "powerMw": 0.183,
     "areaUm2": 827773.447
@@ -2427,6 +3033,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 32,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 126.131,
     "powerMw": 0.255,
     "areaUm2": 276311.431
@@ -2435,6 +3043,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 32,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 148.418,
     "powerMw": 0.3,
     "areaUm2": 161512.355
@@ -2443,6 +3053,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 32,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 148.418,
     "powerMw": 0.3,
     "areaUm2": 161512.355
@@ -2451,6 +3063,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 64,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 766.543,
     "powerMw": 2.575,
     "areaUm2": 608.691
@@ -2459,6 +3073,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 64,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 593.761,
     "powerMw": 1.994,
     "areaUm2": 1413.993
@@ -2467,6 +3083,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 64,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 501.82,
     "powerMw": 1.685,
     "areaUm2": 2463.534
@@ -2475,6 +3093,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 64,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 419.853,
     "powerMw": 1.41,
     "areaUm2": 4437.586
@@ -2483,6 +3103,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 64,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 354.84,
     "powerMw": 1.192,
     "areaUm2": 7731.399
@@ -2491,6 +3113,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 64,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 331.923,
     "powerMw": 1.115,
     "areaUm2": 9637.065
@@ -2499,6 +3123,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 64,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 283.065,
     "powerMw": 0.951,
     "areaUm2": 16298.372
@@ -2507,6 +3133,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 64,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 250.91,
     "powerMw": 0.843,
     "areaUm2": 24263.73
@@ -2515,6 +3143,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 64,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 209.926,
     "powerMw": 0.705,
     "areaUm2": 43706.477
@@ -2523,6 +3153,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 64,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 164.68,
     "powerMw": 0.553,
     "areaUm2": 97376.431
@@ -2531,6 +3163,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 64,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 139.951,
     "powerMw": 0.47,
     "areaUm2": 166589.243
@@ -2539,6 +3173,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 64,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 116.446,
     "powerMw": 0.391,
     "areaUm2": 305599.997
@@ -2547,6 +3183,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 64,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 98.96,
     "powerMw": 0.332,
     "areaUm2": 522813.084
@@ -2555,6 +3193,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 64,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 83.971,
     "powerMw": 0.282,
     "areaUm2": 898975.443
@@ -2563,6 +3203,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 64,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 70.968,
     "powerMw": 0.238,
     "areaUm2": 1566242.799
@@ -2571,6 +3213,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 64,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 98.96,
     "powerMw": 0.332,
     "areaUm2": 522813.084
@@ -2579,6 +3223,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 64,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 116.446,
     "powerMw": 0.391,
     "areaUm2": 305599.997
@@ -2587,6 +3233,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 64,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 116.446,
     "powerMw": 0.391,
     "areaUm2": 305599.997
@@ -2595,6 +3243,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 128,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 601.417,
     "powerMw": 3.358,
     "areaUm2": 1151.714
@@ -2603,6 +3253,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 128,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 465.856,
     "powerMw": 2.601,
     "areaUm2": 2675.438
@@ -2611,6 +3263,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 128,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 393.72,
     "powerMw": 2.199,
     "areaUm2": 4661.291
@@ -2619,6 +3273,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 128,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 329.41,
     "powerMw": 1.84,
     "areaUm2": 8396.425
@@ -2627,6 +3283,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 128,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 278.402,
     "powerMw": 1.555,
     "areaUm2": 14628.698
@@ -2635,6 +3293,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 128,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 260.421,
     "powerMw": 1.454,
     "areaUm2": 18234.438
@@ -2643,6 +3303,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 128,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 222.088,
     "powerMw": 1.24,
     "areaUm2": 30838.4
@@ -2651,6 +3313,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 128,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 196.86,
     "powerMw": 1.099,
     "areaUm2": 45909.775
@@ -2659,6 +3323,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 128,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 164.705,
     "powerMw": 0.92,
     "areaUm2": 82697.693
@@ -2667,6 +3333,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 128,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 129.205,
     "powerMw": 0.722,
     "areaUm2": 184247.434
@@ -2675,6 +3343,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 128,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 109.803,
     "powerMw": 0.613,
     "areaUm2": 315206.054
@@ -2683,6 +3353,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 128,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 91.362,
     "powerMw": 0.51,
     "areaUm2": 578230.428
@@ -2691,6 +3363,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 128,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 77.643,
     "powerMw": 0.434,
     "areaUm2": 989222.632
@@ -2699,6 +3373,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 128,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 65.882,
     "powerMw": 0.368,
     "areaUm2": 1700965.185
@@ -2707,6 +3383,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 128,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 55.68,
     "powerMw": 0.311,
     "areaUm2": 2963511.954
@@ -2715,6 +3393,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 128,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 77.643,
     "powerMw": 0.434,
     "areaUm2": 989222.632
@@ -2723,6 +3403,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 128,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 91.362,
     "powerMw": 0.51,
     "areaUm2": 578230.428
@@ -2731,6 +3413,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 128,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 91.362,
     "powerMw": 0.51,
     "areaUm2": 578230.428
@@ -2739,6 +3423,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 256,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 471.862,
     "powerMw": 4.381,
     "areaUm2": 2179.175
@@ -2747,6 +3433,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 256,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 365.503,
     "powerMw": 3.394,
     "areaUm2": 5062.237
@@ -2755,6 +3443,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 256,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 308.906,
     "powerMw": 2.868,
     "areaUm2": 8819.699
@@ -2763,6 +3453,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 256,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 258.45,
     "powerMw": 2.4,
     "areaUm2": 15887.004
@@ -2771,6 +3463,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 256,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 218.43,
     "powerMw": 2.028,
     "areaUm2": 27679.183
@@ -2779,6 +3473,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 256,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 204.322,
     "powerMw": 1.897,
     "areaUm2": 34501.659
@@ -2787,6 +3483,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 256,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 174.247,
     "powerMw": 1.618,
     "areaUm2": 58349.808
@@ -2795,6 +3493,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 256,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 154.453,
     "powerMw": 1.434,
     "areaUm2": 86866.587
@@ -2803,6 +3503,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 256,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 129.225,
     "powerMw": 1.2,
     "areaUm2": 156473.57
@@ -2811,6 +3513,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 256,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 101.372,
     "powerMw": 0.941,
     "areaUm2": 348617.388
@@ -2819,6 +3523,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 256,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 86.15,
     "powerMw": 0.8,
     "areaUm2": 596406.196
@@ -2827,6 +3533,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 256,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 71.681,
     "powerMw": 0.666,
     "areaUm2": 1094078.636
@@ -2835,6 +3543,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 256,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 60.917,
     "powerMw": 0.566,
     "areaUm2": 1871723.27
@@ -2843,6 +3553,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 256,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 51.69,
     "powerMw": 0.48,
     "areaUm2": 3218422.239
@@ -2851,6 +3563,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 256,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 43.686,
     "powerMw": 0.406,
     "areaUm2": 5607306.291
@@ -2859,6 +3573,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 256,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 60.917,
     "powerMw": 0.566,
     "areaUm2": 1871723.27
@@ -2867,6 +3583,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 256,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 71.681,
     "powerMw": 0.666,
     "areaUm2": 1094078.636
@@ -2875,6 +3593,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 256,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 71.681,
     "powerMw": 0.666,
     "areaUm2": 1094078.636
@@ -2883,6 +3603,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 1024,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 290.465,
     "powerMw": 7.455,
     "areaUm2": 7801.664
@@ -2891,6 +3613,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 1024,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 224.994,
     "powerMw": 5.775,
     "areaUm2": 18123.318
@@ -2899,6 +3623,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 1024,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 190.154,
     "powerMw": 4.881,
     "areaUm2": 31575.408
@@ -2907,6 +3633,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 1024,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 159.094,
     "powerMw": 4.084,
     "areaUm2": 56877.068
@@ -2915,6 +3643,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 1024,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 134.459,
     "powerMw": 3.451,
     "areaUm2": 99094.25
@@ -2923,6 +3653,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 1024,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 125.775,
     "powerMw": 3.228,
     "areaUm2": 123519.399
@@ -2931,6 +3663,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 1024,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 107.261,
     "powerMw": 2.753,
     "areaUm2": 208898.163
@@ -2939,6 +3673,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 1024,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 95.077,
     "powerMw": 2.44,
     "areaUm2": 310991.092
@@ -2947,6 +3683,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 1024,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 79.547,
     "powerMw": 2.042,
     "areaUm2": 560191.073
@@ -2955,6 +3693,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 1024,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 62.402,
     "powerMw": 1.602,
     "areaUm2": 1248085.21
@@ -2963,6 +3703,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 1024,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 53.031,
     "powerMw": 1.361,
     "areaUm2": 2135193.992
@@ -2971,6 +3713,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 1024,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 44.125,
     "powerMw": 1.133,
     "areaUm2": 3916911.234
@@ -2979,6 +3723,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 1024,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 37.499,
     "powerMw": 0.962,
     "areaUm2": 6700957.009
@@ -2987,6 +3733,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 1024,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 31.819,
     "powerMw": 0.817,
     "areaUm2": 11522274.372
@@ -2995,6 +3743,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 1024,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 26.892,
     "powerMw": 0.69,
     "areaUm2": 20074718.842
@@ -3003,6 +3753,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 1024,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 37.499,
     "powerMw": 0.962,
     "areaUm2": 6700957.009
@@ -3011,6 +3763,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 1024,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 44.125,
     "powerMw": 1.133,
     "areaUm2": 3916911.234
@@ -3019,6 +3773,8 @@
     "architecture": "cascaded_vote",
     "bitWidth": 1024,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 44.125,
     "powerMw": 1.133,
     "areaUm2": 3916911.234
@@ -3027,6 +3783,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 8,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1703.282,
     "powerMw": 1.33,
     "areaUm2": 102.901
@@ -3035,6 +3793,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 8,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1319.357,
     "powerMw": 1.03,
     "areaUm2": 239.04
@@ -3043,6 +3803,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 8,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1115.06,
     "powerMw": 0.871,
     "areaUm2": 416.469
@@ -3051,6 +3813,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 8,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 932.926,
     "powerMw": 0.729,
     "areaUm2": 750.189
@@ -3059,6 +3823,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 8,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 788.467,
     "powerMw": 0.616,
     "areaUm2": 1307.019
@@ -3067,6 +3833,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 8,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 737.543,
     "powerMw": 0.576,
     "areaUm2": 1629.178
@@ -3075,6 +3843,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 8,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 628.979,
     "powerMw": 0.491,
     "areaUm2": 2755.295
@@ -3083,6 +3853,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 8,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 557.53,
     "powerMw": 0.435,
     "areaUm2": 4101.866
@@ -3091,6 +3863,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 8,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 466.463,
     "powerMw": 0.364,
     "areaUm2": 7388.728
@@ -3099,6 +3873,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 8,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 365.924,
     "powerMw": 0.286,
     "areaUm2": 16461.815
@@ -3107,6 +3883,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 8,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 310.975,
     "powerMw": 0.243,
     "areaUm2": 28162.475
@@ -3115,6 +3893,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 8,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 258.747,
     "powerMw": 0.202,
     "areaUm2": 51662.714
@@ -3123,6 +3903,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 8,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 219.893,
     "powerMw": 0.172,
     "areaUm2": 88383.322
@@ -3131,6 +3913,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 8,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 186.585,
     "powerMw": 0.146,
     "areaUm2": 151974.842
@@ -3139,6 +3923,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 8,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 157.693,
     "powerMw": 0.123,
     "areaUm2": 264778.647
@@ -3147,6 +3933,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 8,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 219.893,
     "powerMw": 0.172,
     "areaUm2": 88383.322
@@ -3155,6 +3943,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 8,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 258.747,
     "powerMw": 0.202,
     "areaUm2": 51662.714
@@ -3163,6 +3953,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 8,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 258.747,
     "powerMw": 0.202,
     "areaUm2": 51662.714
@@ -3171,6 +3963,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 16,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1336.368,
     "powerMw": 1.735,
     "areaUm2": 194.701
@@ -3179,6 +3973,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 16,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1035.146,
     "powerMw": 1.344,
     "areaUm2": 452.292
@@ -3187,6 +3983,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 16,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 874.858,
     "powerMw": 1.136,
     "areaUm2": 788.007
@@ -3195,6 +3993,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 16,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 731.959,
     "powerMw": 0.951,
     "areaUm2": 1419.444
@@ -3203,6 +4003,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 16,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 618.618,
     "powerMw": 0.803,
     "areaUm2": 2473.031
@@ -3211,6 +4013,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 16,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 578.664,
     "powerMw": 0.751,
     "areaUm2": 3082.593
@@ -3219,6 +4023,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 16,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 493.487,
     "powerMw": 0.641,
     "areaUm2": 5213.336
@@ -3227,6 +4033,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 16,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 437.429,
     "powerMw": 0.568,
     "areaUm2": 7761.203
@@ -3235,6 +4043,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 16,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 365.98,
     "powerMw": 0.475,
     "areaUm2": 13980.325
@@ -3243,6 +4053,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 16,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 287.098,
     "powerMw": 0.373,
     "areaUm2": 31147.652
@@ -3251,6 +4063,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 16,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 243.986,
     "powerMw": 0.317,
     "areaUm2": 53286.65
@@ -3259,6 +4073,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 16,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 203.009,
     "powerMw": 0.264,
     "areaUm2": 97751.811
@@ -3267,6 +4083,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 16,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 172.524,
     "powerMw": 0.224,
     "areaUm2": 167231.434
@@ -3275,6 +4093,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 16,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 146.392,
     "powerMw": 0.19,
     "areaUm2": 287553.922
@@ -3283,6 +4103,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 16,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 123.724,
     "powerMw": 0.161,
     "areaUm2": 500991.727
@@ -3291,6 +4113,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 16,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 172.524,
     "powerMw": 0.224,
     "areaUm2": 167231.434
@@ -3299,6 +4123,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 16,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 203.009,
     "powerMw": 0.264,
     "areaUm2": 97751.811
@@ -3307,6 +4133,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 16,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 203.009,
     "powerMw": 0.264,
     "areaUm2": 97751.811
@@ -3315,6 +4143,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 32,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1048.493,
     "powerMw": 2.264,
     "areaUm2": 368.397
@@ -3323,6 +4153,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 32,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 812.159,
     "powerMw": 1.754,
     "areaUm2": 855.788
@@ -3331,6 +4163,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 32,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 686.4,
     "powerMw": 1.482,
     "areaUm2": 1491
@@ -3339,6 +4173,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 32,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 574.283,
     "powerMw": 1.24,
     "areaUm2": 2685.752
@@ -3347,6 +4183,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 32,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 485.358,
     "powerMw": 1.048,
     "areaUm2": 4679.26
@@ -3355,6 +4193,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 32,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 454.011,
     "powerMw": 0.98,
     "areaUm2": 5832.622
@@ -3363,6 +4203,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 32,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 387.182,
     "powerMw": 0.836,
     "areaUm2": 9864.233
@@ -3371,6 +4213,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 32,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 343.2,
     "powerMw": 0.741,
     "areaUm2": 14685.091
@@ -3379,6 +4223,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 32,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 287.142,
     "powerMw": 0.62,
     "areaUm2": 26452.387
@@ -3387,6 +4233,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 32,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 225.252,
     "powerMw": 0.486,
     "areaUm2": 58934.95
@@ -3395,6 +4243,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 32,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 191.428,
     "powerMw": 0.413,
     "areaUm2": 100824.486
@@ -3403,6 +4253,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 32,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 159.278,
     "powerMw": 0.344,
     "areaUm2": 184957.697
@@ -3411,6 +4263,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 32,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 135.36,
     "powerMw": 0.292,
     "areaUm2": 316421.155
@@ -3419,6 +4273,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 32,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 114.857,
     "powerMw": 0.248,
     "areaUm2": 544085.174
@@ -3427,6 +4283,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 32,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 97.072,
     "powerMw": 0.21,
     "areaUm2": 947934.109
@@ -3435,6 +4293,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 32,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 135.36,
     "powerMw": 0.292,
     "areaUm2": 316421.155
@@ -3443,6 +4303,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 32,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 159.278,
     "powerMw": 0.344,
     "areaUm2": 184957.697
@@ -3451,6 +4313,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 32,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 159.278,
     "powerMw": 0.344,
     "areaUm2": 184957.697
@@ -3459,6 +4323,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 64,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 822.631,
     "powerMw": 2.953,
     "areaUm2": 697.049
@@ -3467,6 +4333,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 64,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 637.207,
     "powerMw": 2.287,
     "areaUm2": 1619.25
@@ -3475,6 +4343,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 64,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 538.539,
     "powerMw": 1.933,
     "areaUm2": 2821.144
@@ -3483,6 +4353,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 64,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 450.574,
     "powerMw": 1.617,
     "areaUm2": 5081.752
@@ -3491,6 +4363,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 64,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 380.804,
     "powerMw": 1.367,
     "areaUm2": 8853.699
@@ -3499,6 +4373,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 64,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 356.21,
     "powerMw": 1.279,
     "areaUm2": 11035.994
@@ -3507,6 +4383,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 64,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 303.777,
     "powerMw": 1.091,
     "areaUm2": 18664.265
@@ -3515,6 +4393,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 64,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 269.269,
     "powerMw": 0.967,
     "areaUm2": 27785.884
@@ -3523,6 +4403,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 64,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 225.287,
     "powerMw": 0.809,
     "areaUm2": 50050.965
@@ -3531,6 +4413,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 64,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 176.73,
     "powerMw": 0.634,
     "areaUm2": 111511.719
@@ -3539,6 +4423,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 64,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 150.191,
     "powerMw": 0.539,
     "areaUm2": 190771.553
@@ -3547,6 +4433,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 64,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 124.967,
     "powerMw": 0.449,
     "areaUm2": 349961.287
@@ -3555,6 +4443,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 64,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 106.201,
     "powerMw": 0.381,
     "areaUm2": 598705.306
@@ -3563,6 +4453,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 64,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 90.115,
     "powerMw": 0.323,
     "areaUm2": 1029471.879
@@ -3571,6 +4463,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 64,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 76.161,
     "powerMw": 0.273,
     "areaUm2": 1793600.625
@@ -3579,6 +4473,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 64,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 106.201,
     "powerMw": 0.381,
     "areaUm2": 598705.306
@@ -3587,6 +4483,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 64,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 124.967,
     "powerMw": 0.449,
     "areaUm2": 349961.287
@@ -3595,6 +4493,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 64,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 124.967,
     "powerMw": 0.449,
     "areaUm2": 349961.287
@@ -3603,6 +4503,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 128,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 645.423,
     "powerMw": 3.852,
     "areaUm2": 1318.898
@@ -3611,6 +4513,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 128,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 499.943,
     "powerMw": 2.984,
     "areaUm2": 3063.808
@@ -3619,6 +4523,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 128,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 422.529,
     "powerMw": 2.522,
     "areaUm2": 5337.93
@@ -3627,6 +4533,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 128,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 353.513,
     "powerMw": 2.11,
     "areaUm2": 9615.261
@@ -3635,6 +4543,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 128,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 298.773,
     "powerMw": 1.783,
     "areaUm2": 16752.218
@@ -3643,6 +4553,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 128,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 279.477,
     "powerMw": 1.668,
     "areaUm2": 20881.373
@@ -3651,6 +4563,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 128,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 238.338,
     "powerMw": 1.423,
     "areaUm2": 35314.942
@@ -3659,6 +4573,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 128,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 211.264,
     "powerMw": 1.261,
     "areaUm2": 52574.097
@@ -3667,6 +4583,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 128,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 176.756,
     "powerMw": 1.055,
     "areaUm2": 94702.197
@@ -3675,6 +4593,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 128,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 138.659,
     "powerMw": 0.828,
     "areaUm2": 210993.03
@@ -3683,6 +4603,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 128,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 117.838,
     "powerMw": 0.703,
     "areaUm2": 360961.772
@@ -3691,6 +4613,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 128,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 98.047,
     "powerMw": 0.585,
     "areaUm2": 662167.103
@@ -3699,6 +4623,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 128,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 83.324,
     "powerMw": 0.497,
     "areaUm2": 1132819.465
@@ -3707,6 +4633,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 128,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 70.703,
     "powerMw": 0.422,
     "areaUm2": 1947879.486
@@ -3715,6 +4643,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 128,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 59.755,
     "powerMw": 0.357,
     "areaUm2": 3393699.173
@@ -3723,6 +4653,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 128,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 83.324,
     "powerMw": 0.497,
     "areaUm2": 1132819.465
@@ -3731,6 +4663,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 128,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 98.047,
     "powerMw": 0.585,
     "areaUm2": 662167.103
@@ -3739,6 +4673,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 128,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 98.047,
     "powerMw": 0.585,
     "areaUm2": 662167.103
@@ -3747,6 +4683,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 256,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 506.389,
     "powerMw": 5.025,
     "areaUm2": 2495.507
@@ -3755,6 +4693,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 256,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 392.247,
     "powerMw": 3.893,
     "areaUm2": 5797.078
@@ -3763,6 +4703,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 256,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 331.509,
     "powerMw": 3.29,
     "areaUm2": 10099.978
@@ -3771,6 +4713,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 256,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 277.361,
     "powerMw": 2.753,
     "areaUm2": 18193.182
@@ -3779,6 +4723,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 256,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 234.413,
     "powerMw": 2.326,
     "areaUm2": 31697.129
@@ -3787,6 +4733,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 256,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 219.273,
     "powerMw": 2.176,
     "areaUm2": 39509.964
@@ -3795,6 +4743,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 256,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 186.996,
     "powerMw": 1.856,
     "areaUm2": 66819.941
@@ -3803,6 +4753,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 256,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 165.755,
     "powerMw": 1.645,
     "areaUm2": 99476.253
@@ -3811,6 +4763,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 256,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 138.68,
     "powerMw": 1.376,
     "areaUm2": 179187.476
@@ -3819,6 +4773,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 256,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 108.79,
     "powerMw": 1.08,
     "areaUm2": 399223.138
@@ -3827,6 +4783,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 256,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 92.454,
     "powerMw": 0.918,
     "areaUm2": 682981.289
@@ -3835,6 +4793,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 256,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 76.926,
     "powerMw": 0.763,
     "areaUm2": 1252896.502
@@ -3843,6 +4803,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 256,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 65.375,
     "powerMw": 0.649,
     "areaUm2": 2143425.035
@@ -3851,6 +4813,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 256,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 55.472,
     "powerMw": 0.551,
     "areaUm2": 3685612.564
@@ -3859,6 +4823,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 256,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 46.883,
     "powerMw": 0.465,
     "areaUm2": 6421270.107
@@ -3867,6 +4833,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 256,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 65.375,
     "powerMw": 0.649,
     "areaUm2": 2143425.035
@@ -3875,6 +4843,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 256,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 76.926,
     "powerMw": 0.763,
     "areaUm2": 1252896.502
@@ -3883,6 +4853,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 256,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 76.926,
     "powerMw": 0.763,
     "areaUm2": 1252896.502
@@ -3891,6 +4863,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 1024,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 311.719,
     "powerMw": 8.552,
     "areaUm2": 8934.164
@@ -3899,6 +4873,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 1024,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 241.456,
     "powerMw": 6.624,
     "areaUm2": 20754.122
@@ -3907,6 +4883,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 1024,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 204.068,
     "powerMw": 5.599,
     "areaUm2": 36158.934
@@ -3915,6 +4893,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 1024,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 170.735,
     "powerMw": 4.684,
     "areaUm2": 65133.416
@@ -3923,6 +4903,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 1024,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 144.298,
     "powerMw": 3.959,
     "areaUm2": 113478.9
@@ -3931,6 +4913,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 1024,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 134.978,
     "powerMw": 3.703,
     "areaUm2": 141449.634
@@ -3939,6 +4923,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 1024,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 115.11,
     "powerMw": 3.158,
     "areaUm2": 239222.09
@@ -3947,6 +4933,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 1024,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 102.034,
     "powerMw": 2.799,
     "areaUm2": 356134.961
@@ -3955,6 +4943,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 1024,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 85.368,
     "powerMw": 2.342,
     "areaUm2": 641509.132
@@ -3963,6 +4953,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 1024,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 66.968,
     "powerMw": 1.837,
     "areaUm2": 1429258.869
@@ -3971,6 +4963,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 1024,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 56.912,
     "powerMw": 1.561,
     "areaUm2": 2445141.507
@@ -3979,6 +4973,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 1024,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 47.354,
     "powerMw": 1.299,
     "areaUm2": 4485495.123
@@ -3987,6 +4983,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 1024,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 40.243,
     "powerMw": 1.104,
     "areaUm2": 7673676.575
@@ -3995,6 +4993,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 1024,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 34.147,
     "powerMw": 0.937,
     "areaUm2": 13194862.587
@@ -4003,6 +5003,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 1024,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 28.86,
     "powerMw": 0.792,
     "areaUm2": 22988790.932
@@ -4011,6 +5013,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 1024,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 40.243,
     "powerMw": 1.104,
     "areaUm2": 7673676.575
@@ -4019,6 +5023,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 1024,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 47.354,
     "powerMw": 1.299,
     "areaUm2": 4485495.123
@@ -4027,6 +5033,8 @@
     "architecture": "weighted_vote",
     "bitWidth": 1024,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 47.354,
     "powerMw": 1.299,
     "areaUm2": 4485495.123
@@ -4035,6 +5043,8 @@
     "architecture": "tree_vote",
     "bitWidth": 8,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1935.548,
     "powerMw": 1.62,
     "areaUm2": 127.54
@@ -4043,6 +5053,8 @@
     "architecture": "tree_vote",
     "bitWidth": 8,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1499.269,
     "powerMw": 1.255,
     "areaUm2": 296.275
@@ -4051,6 +5063,8 @@
     "architecture": "tree_vote",
     "bitWidth": 8,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1267.114,
     "powerMw": 1.061,
     "areaUm2": 516.187
@@ -4059,6 +5073,8 @@
     "architecture": "tree_vote",
     "bitWidth": 8,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1060.143,
     "powerMw": 0.887,
     "areaUm2": 929.812
@@ -4067,6 +5083,8 @@
     "architecture": "tree_vote",
     "bitWidth": 8,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 895.985,
     "powerMw": 0.75,
     "areaUm2": 1619.967
@@ -4075,6 +5093,8 @@
     "architecture": "tree_vote",
     "bitWidth": 8,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 838.117,
     "powerMw": 0.702,
     "areaUm2": 2019.263
@@ -4083,6 +5103,8 @@
     "architecture": "tree_vote",
     "bitWidth": 8,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 714.749,
     "powerMw": 0.598,
     "areaUm2": 3415.014
@@ -4091,6 +5113,8 @@
     "architecture": "tree_vote",
     "bitWidth": 8,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 633.557,
     "powerMw": 0.53,
     "areaUm2": 5084.003
@@ -4099,6 +5123,8 @@
     "architecture": "tree_vote",
     "bitWidth": 8,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 530.072,
     "powerMw": 0.444,
     "areaUm2": 9157.86
@@ -4107,6 +5133,8 @@
     "architecture": "tree_vote",
     "bitWidth": 8,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 415.822,
     "powerMw": 0.348,
     "areaUm2": 20403.377
@@ -4115,6 +5143,8 @@
     "architecture": "tree_vote",
     "bitWidth": 8,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 353.381,
     "powerMw": 0.296,
     "areaUm2": 34905.603
@@ -4123,6 +5153,8 @@
     "architecture": "tree_vote",
     "bitWidth": 8,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 294.031,
     "powerMw": 0.246,
     "areaUm2": 64032.66
@@ -4131,6 +5163,8 @@
     "architecture": "tree_vote",
     "bitWidth": 8,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 249.878,
     "powerMw": 0.209,
     "areaUm2": 109545.525
@@ -4139,6 +5173,8 @@
     "architecture": "tree_vote",
     "bitWidth": 8,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 212.029,
     "powerMw": 0.177,
     "areaUm2": 188363.184
@@ -4147,6 +5183,8 @@
     "architecture": "tree_vote",
     "bitWidth": 8,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 179.197,
     "powerMw": 0.15,
     "areaUm2": 328176.351
@@ -4155,6 +5193,8 @@
     "architecture": "tree_vote",
     "bitWidth": 8,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 249.878,
     "powerMw": 0.209,
     "areaUm2": 109545.525
@@ -4163,6 +5203,8 @@
     "architecture": "tree_vote",
     "bitWidth": 8,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 294.031,
     "powerMw": 0.246,
     "areaUm2": 64032.66
@@ -4171,6 +5213,8 @@
     "architecture": "tree_vote",
     "bitWidth": 8,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 294.031,
     "powerMw": 0.246,
     "areaUm2": 64032.66
@@ -4179,6 +5223,8 @@
     "architecture": "tree_vote",
     "bitWidth": 16,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1518.6,
     "powerMw": 2.114,
     "areaUm2": 241.32
@@ -4187,6 +5233,8 @@
     "architecture": "tree_vote",
     "bitWidth": 16,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1176.303,
     "powerMw": 1.637,
     "areaUm2": 560.587
@@ -4195,6 +5243,8 @@
     "architecture": "tree_vote",
     "bitWidth": 16,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 994.157,
     "powerMw": 1.384,
     "areaUm2": 976.685
@@ -4203,6 +5253,8 @@
     "architecture": "tree_vote",
     "bitWidth": 16,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 831.772,
     "powerMw": 1.158,
     "areaUm2": 1759.311
@@ -4211,6 +5263,8 @@
     "architecture": "tree_vote",
     "bitWidth": 16,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 702.975,
     "powerMw": 0.978,
     "areaUm2": 3065.165
@@ -4219,6 +5273,8 @@
     "architecture": "tree_vote",
     "bitWidth": 16,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 657.573,
     "powerMw": 0.915,
     "areaUm2": 3820.679
@@ -4227,6 +5283,8 @@
     "architecture": "tree_vote",
     "bitWidth": 16,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 560.78,
     "powerMw": 0.78,
     "areaUm2": 6461.599
@@ -4235,6 +5293,8 @@
     "architecture": "tree_vote",
     "bitWidth": 16,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 497.079,
     "powerMw": 0.692,
     "areaUm2": 9619.519
@@ -4243,6 +5303,8 @@
     "architecture": "tree_vote",
     "bitWidth": 16,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 415.886,
     "powerMw": 0.579,
     "areaUm2": 17327.727
@@ -4251,6 +5313,8 @@
     "architecture": "tree_vote",
     "bitWidth": 16,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 326.248,
     "powerMw": 0.454,
     "areaUm2": 38605.541
@@ -4259,6 +5323,8 @@
     "architecture": "tree_vote",
     "bitWidth": 16,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 277.257,
     "powerMw": 0.386,
     "areaUm2": 66045.426
@@ -4267,6 +5333,8 @@
     "architecture": "tree_vote",
     "bitWidth": 16,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 230.692,
     "powerMw": 0.321,
     "areaUm2": 121157.174
@@ -4275,6 +5343,8 @@
     "architecture": "tree_vote",
     "bitWidth": 16,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 196.05,
     "powerMw": 0.273,
     "areaUm2": 207272.764
@@ -4283,6 +5353,8 @@
     "architecture": "tree_vote",
     "bitWidth": 16,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 166.354,
     "powerMw": 0.232,
     "areaUm2": 356404.861
@@ -4291,6 +5363,8 @@
     "architecture": "tree_vote",
     "bitWidth": 16,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 140.595,
     "powerMw": 0.196,
     "areaUm2": 620947.493
@@ -4299,6 +5373,8 @@
     "architecture": "tree_vote",
     "bitWidth": 16,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 196.05,
     "powerMw": 0.273,
     "areaUm2": 207272.764
@@ -4307,6 +5383,8 @@
     "architecture": "tree_vote",
     "bitWidth": 16,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 230.692,
     "powerMw": 0.321,
     "areaUm2": 121157.174
@@ -4315,6 +5393,8 @@
     "architecture": "tree_vote",
     "bitWidth": 16,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 230.692,
     "powerMw": 0.321,
     "areaUm2": 121157.174
@@ -4323,6 +5403,8 @@
     "architecture": "tree_vote",
     "bitWidth": 32,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 1191.47,
     "powerMw": 2.757,
     "areaUm2": 456.605
@@ -4331,6 +5413,8 @@
     "architecture": "tree_vote",
     "bitWidth": 32,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 922.908,
     "powerMw": 2.136,
     "areaUm2": 1060.695
@@ -4339,6 +5423,8 @@
     "architecture": "tree_vote",
     "bitWidth": 32,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 780,
     "powerMw": 1.805,
     "areaUm2": 1848
@@ -4347,6 +5433,8 @@
     "architecture": "tree_vote",
     "bitWidth": 32,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 652.595,
     "powerMw": 1.51,
     "areaUm2": 3328.819
@@ -4355,6 +5443,8 @@
     "architecture": "tree_vote",
     "bitWidth": 32,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 551.543,
     "powerMw": 1.276,
     "areaUm2": 5799.646
@@ -4363,6 +5453,8 @@
     "architecture": "tree_vote",
     "bitWidth": 32,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 515.922,
     "powerMw": 1.194,
     "areaUm2": 7229.166
@@ -4371,6 +5463,8 @@
     "architecture": "tree_vote",
     "bitWidth": 32,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 439.979,
     "powerMw": 1.018,
     "areaUm2": 12226.091
@@ -4379,6 +5473,8 @@
     "architecture": "tree_vote",
     "bitWidth": 32,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 390,
     "powerMw": 0.903,
     "areaUm2": 18201.239
@@ -4387,6 +5483,8 @@
     "architecture": "tree_vote",
     "bitWidth": 32,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 326.297,
     "powerMw": 0.755,
     "areaUm2": 32786.057
@@ -4395,6 +5493,8 @@
     "architecture": "tree_vote",
     "bitWidth": 32,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 255.969,
     "powerMw": 0.592,
     "areaUm2": 73046.135
@@ -4403,6 +5503,8 @@
     "architecture": "tree_vote",
     "bitWidth": 32,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 217.532,
     "powerMw": 0.503,
     "areaUm2": 124965.56
@@ -4411,6 +5513,8 @@
     "architecture": "tree_vote",
     "bitWidth": 32,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 180.997,
     "powerMw": 0.419,
     "areaUm2": 229243.343
@@ -4419,6 +5523,8 @@
     "architecture": "tree_vote",
     "bitWidth": 32,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 153.818,
     "powerMw": 0.356,
     "areaUm2": 392183.966
@@ -4427,6 +5533,8 @@
     "architecture": "tree_vote",
     "bitWidth": 32,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 130.519,
     "powerMw": 0.302,
     "areaUm2": 674359.089
@@ -4435,6 +5543,8 @@
     "architecture": "tree_vote",
     "bitWidth": 32,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 110.309,
     "powerMw": 0.255,
     "areaUm2": 1174904.248
@@ -4443,6 +5553,8 @@
     "architecture": "tree_vote",
     "bitWidth": 32,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 153.818,
     "powerMw": 0.356,
     "areaUm2": 392183.966
@@ -4451,6 +5563,8 @@
     "architecture": "tree_vote",
     "bitWidth": 32,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 180.997,
     "powerMw": 0.419,
     "areaUm2": 229243.343
@@ -4459,6 +5573,8 @@
     "architecture": "tree_vote",
     "bitWidth": 32,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 180.997,
     "powerMw": 0.419,
     "areaUm2": 229243.343
@@ -4467,6 +5583,8 @@
     "architecture": "tree_vote",
     "bitWidth": 64,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 934.808,
     "powerMw": 3.597,
     "areaUm2": 863.949
@@ -4475,6 +5593,8 @@
     "architecture": "tree_vote",
     "bitWidth": 64,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 724.099,
     "powerMw": 2.786,
     "areaUm2": 2006.958
@@ -4483,6 +5603,8 @@
     "architecture": "tree_vote",
     "bitWidth": 64,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 611.976,
     "powerMw": 2.355,
     "areaUm2": 3496.629
@@ -4491,6 +5613,8 @@
     "architecture": "tree_vote",
     "bitWidth": 64,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 512.016,
     "powerMw": 1.97,
     "areaUm2": 6298.51
@@ -4499,6 +5623,8 @@
     "architecture": "tree_vote",
     "bitWidth": 64,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 432.732,
     "powerMw": 1.665,
     "areaUm2": 10973.598
@@ -4507,6 +5633,8 @@
     "architecture": "tree_vote",
     "bitWidth": 64,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 404.784,
     "powerMw": 1.557,
     "areaUm2": 13678.415
@@ -4515,6 +5643,8 @@
     "architecture": "tree_vote",
     "bitWidth": 64,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 345.201,
     "powerMw": 1.328,
     "areaUm2": 23133.174
@@ -4523,6 +5653,8 @@
     "architecture": "tree_vote",
     "bitWidth": 64,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 305.988,
     "powerMw": 1.177,
     "areaUm2": 34438.843
@@ -4531,6 +5663,8 @@
     "architecture": "tree_vote",
     "bitWidth": 64,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 256.008,
     "powerMw": 0.985,
     "areaUm2": 62034.999
@@ -4539,6 +5673,8 @@
     "architecture": "tree_vote",
     "bitWidth": 64,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 200.829,
     "powerMw": 0.773,
     "areaUm2": 138211.708
@@ -4547,6 +5683,8 @@
     "architecture": "tree_vote",
     "bitWidth": 64,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 170.672,
     "powerMw": 0.657,
     "areaUm2": 236449.248
@@ -4555,6 +5693,8 @@
     "architecture": "tree_vote",
     "bitWidth": 64,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 142.008,
     "powerMw": 0.546,
     "areaUm2": 433754.834
@@ -4563,6 +5703,8 @@
     "architecture": "tree_vote",
     "bitWidth": 64,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 120.683,
     "powerMw": 0.464,
     "areaUm2": 742057.28
@@ -4571,6 +5713,8 @@
     "architecture": "tree_vote",
     "bitWidth": 64,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 102.403,
     "powerMw": 0.394,
     "areaUm2": 1275965.145
@@ -4579,6 +5723,8 @@
     "architecture": "tree_vote",
     "bitWidth": 64,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 86.546,
     "powerMw": 0.333,
     "areaUm2": 2223054.296
@@ -4587,6 +5733,8 @@
     "architecture": "tree_vote",
     "bitWidth": 64,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 120.683,
     "powerMw": 0.464,
     "areaUm2": 742057.28
@@ -4595,6 +5743,8 @@
     "architecture": "tree_vote",
     "bitWidth": 64,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 142.008,
     "powerMw": 0.546,
     "areaUm2": 433754.834
@@ -4603,6 +5753,8 @@
     "architecture": "tree_vote",
     "bitWidth": 64,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 142.008,
     "powerMw": 0.546,
     "areaUm2": 433754.834
@@ -4611,6 +5763,8 @@
     "architecture": "tree_vote",
     "bitWidth": 128,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 733.436,
     "powerMw": 4.692,
     "areaUm2": 1634.69
@@ -4619,6 +5773,8 @@
     "architecture": "tree_vote",
     "bitWidth": 128,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 568.117,
     "powerMw": 3.634,
     "areaUm2": 3797.396
@@ -4627,6 +5783,8 @@
     "architecture": "tree_vote",
     "bitWidth": 128,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 480.146,
     "powerMw": 3.072,
     "areaUm2": 6616.025
@@ -4635,6 +5793,8 @@
     "architecture": "tree_vote",
     "bitWidth": 128,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 401.719,
     "powerMw": 2.57,
     "areaUm2": 11917.506
@@ -4643,6 +5803,8 @@
     "architecture": "tree_vote",
     "bitWidth": 128,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 339.515,
     "powerMw": 2.172,
     "areaUm2": 20763.313
@@ -4651,6 +5813,8 @@
     "architecture": "tree_vote",
     "bitWidth": 128,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 317.587,
     "powerMw": 2.032,
     "areaUm2": 25881.138
@@ -4659,6 +5823,8 @@
     "architecture": "tree_vote",
     "bitWidth": 128,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 270.839,
     "powerMw": 1.733,
     "areaUm2": 43770.632
@@ -4667,6 +5833,8 @@
     "architecture": "tree_vote",
     "bitWidth": 128,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 240.073,
     "powerMw": 1.536,
     "areaUm2": 65162.261
@@ -4675,6 +5843,8 @@
     "architecture": "tree_vote",
     "bitWidth": 128,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 200.86,
     "powerMw": 1.285,
     "areaUm2": 117377.371
@@ -4683,6 +5853,8 @@
     "architecture": "tree_vote",
     "bitWidth": 128,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 157.567,
     "powerMw": 1.008,
     "areaUm2": 261512.487
@@ -4691,6 +5863,8 @@
     "architecture": "tree_vote",
     "bitWidth": 128,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 133.906,
     "powerMw": 0.857,
     "areaUm2": 447389.239
@@ -4699,6 +5873,8 @@
     "architecture": "tree_vote",
     "bitWidth": 128,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 111.417,
     "powerMw": 0.713,
     "areaUm2": 820714.156
@@ -4707,6 +5883,8 @@
     "architecture": "tree_vote",
     "bitWidth": 128,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 94.686,
     "powerMw": 0.606,
     "areaUm2": 1404057.929
@@ -4715,6 +5893,8 @@
     "architecture": "tree_vote",
     "bitWidth": 128,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 80.344,
     "powerMw": 0.514,
     "areaUm2": 2414273.165
@@ -4723,6 +5903,8 @@
     "architecture": "tree_vote",
     "bitWidth": 128,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 67.903,
     "powerMw": 0.434,
     "areaUm2": 4206275.032
@@ -4731,6 +5913,8 @@
     "architecture": "tree_vote",
     "bitWidth": 128,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 94.686,
     "powerMw": 0.606,
     "areaUm2": 1404057.929
@@ -4739,6 +5923,8 @@
     "architecture": "tree_vote",
     "bitWidth": 128,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 111.417,
     "powerMw": 0.713,
     "areaUm2": 820714.156
@@ -4747,6 +5933,8 @@
     "architecture": "tree_vote",
     "bitWidth": 128,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 111.417,
     "powerMw": 0.713,
     "areaUm2": 820714.156
@@ -4755,6 +5943,8 @@
     "architecture": "tree_vote",
     "bitWidth": 256,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 575.442,
     "powerMw": 6.121,
     "areaUm2": 3093.022
@@ -4763,6 +5953,8 @@
     "architecture": "tree_vote",
     "bitWidth": 256,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 445.735,
     "powerMw": 4.741,
     "areaUm2": 7185.111
@@ -4771,6 +5963,8 @@
     "architecture": "tree_vote",
     "bitWidth": 256,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 376.715,
     "powerMw": 4.007,
     "areaUm2": 12518.283
@@ -4779,6 +5973,8 @@
     "architecture": "tree_vote",
     "bitWidth": 256,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 315.183,
     "powerMw": 3.352,
     "areaUm2": 22549.296
@@ -4787,6 +5983,8 @@
     "architecture": "tree_vote",
     "bitWidth": 256,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 266.378,
     "powerMw": 2.833,
     "areaUm2": 39286.582
@@ -4795,6 +5993,8 @@
     "architecture": "tree_vote",
     "bitWidth": 256,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 249.174,
     "powerMw": 2.65,
     "areaUm2": 48970.097
@@ -4803,6 +6003,8 @@
     "architecture": "tree_vote",
     "bitWidth": 256,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 212.496,
     "powerMw": 2.26,
     "areaUm2": 82819.082
@@ -4811,6 +6013,8 @@
     "architecture": "tree_vote",
     "bitWidth": 256,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 188.358,
     "powerMw": 2.003,
     "areaUm2": 123294.51
@@ -4819,6 +6023,8 @@
     "architecture": "tree_vote",
     "bitWidth": 256,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 157.591,
     "powerMw": 1.676,
     "areaUm2": 222091.519
@@ -4827,6 +6033,8 @@
     "architecture": "tree_vote",
     "bitWidth": 256,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 123.625,
     "powerMw": 1.315,
     "areaUm2": 494811.777
@@ -4835,6 +6043,8 @@
     "architecture": "tree_vote",
     "bitWidth": 256,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 105.061,
     "powerMw": 1.117,
     "areaUm2": 846512.02
@@ -4843,6 +6053,8 @@
     "architecture": "tree_vote",
     "bitWidth": 256,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 87.416,
     "powerMw": 0.93,
     "areaUm2": 1552885.805
@@ -4851,6 +6063,8 @@
     "architecture": "tree_vote",
     "bitWidth": 256,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 74.289,
     "powerMw": 0.79,
     "areaUm2": 2656639.48
@@ -4859,6 +6073,8 @@
     "architecture": "tree_vote",
     "bitWidth": 256,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 63.037,
     "powerMw": 0.67,
     "areaUm2": 4568083.178
@@ -4867,6 +6083,8 @@
     "architecture": "tree_vote",
     "bitWidth": 256,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 53.276,
     "powerMw": 0.567,
     "areaUm2": 7958757.316
@@ -4875,6 +6093,8 @@
     "architecture": "tree_vote",
     "bitWidth": 256,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 74.289,
     "powerMw": 0.79,
     "areaUm2": 2656639.48
@@ -4883,6 +6103,8 @@
     "architecture": "tree_vote",
     "bitWidth": 256,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 87.416,
     "powerMw": 0.93,
     "areaUm2": 1552885.805
@@ -4891,6 +6113,8 @@
     "architecture": "tree_vote",
     "bitWidth": 256,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 87.416,
     "powerMw": 0.93,
     "areaUm2": 1552885.805
@@ -4899,6 +6123,8 @@
     "architecture": "tree_vote",
     "bitWidth": 1024,
     "processNode": "3nm",
+    "canonicalTechnology": "3nm",
+    "isNamedPdk": false,
     "fmaxMhz": 354.226,
     "powerMw": 10.416,
     "areaUm2": 11073.33
@@ -4907,6 +6133,8 @@
     "architecture": "tree_vote",
     "bitWidth": 1024,
     "processNode": "5nm",
+    "canonicalTechnology": "5nm",
+    "isNamedPdk": false,
     "fmaxMhz": 274.382,
     "powerMw": 8.068,
     "areaUm2": 25723.419
@@ -4915,6 +6143,8 @@
     "architecture": "tree_vote",
     "bitWidth": 1024,
     "processNode": "7nm",
+    "canonicalTechnology": "7nm",
+    "isNamedPdk": false,
     "fmaxMhz": 231.895,
     "powerMw": 6.819,
     "areaUm2": 44816.707
@@ -4923,6 +6153,8 @@
     "architecture": "tree_vote",
     "bitWidth": 1024,
     "processNode": "10nm",
+    "canonicalTechnology": "10nm",
+    "isNamedPdk": false,
     "fmaxMhz": 194.018,
     "powerMw": 5.705,
     "areaUm2": 80728.741
@@ -4931,6 +6163,8 @@
     "architecture": "tree_vote",
     "bitWidth": 1024,
     "processNode": "14nm",
+    "canonicalTechnology": "14nm",
+    "isNamedPdk": false,
     "fmaxMhz": 163.975,
     "powerMw": 4.822,
     "areaUm2": 140649.904
@@ -4939,6 +6173,8 @@
     "architecture": "tree_vote",
     "bitWidth": 1024,
     "processNode": "16nm",
+    "canonicalTechnology": "16nm",
+    "isNamedPdk": false,
     "fmaxMhz": 153.384,
     "powerMw": 4.51,
     "areaUm2": 175317.857
@@ -4947,6 +6183,8 @@
     "architecture": "tree_vote",
     "bitWidth": 1024,
     "processNode": "22nm",
+    "canonicalTechnology": "22nm",
+    "isNamedPdk": false,
     "fmaxMhz": 130.807,
     "powerMw": 3.846,
     "areaUm2": 296500.619
@@ -4955,6 +6193,8 @@
     "architecture": "tree_vote",
     "bitWidth": 1024,
     "processNode": "28nm",
+    "canonicalTechnology": "28nm",
+    "isNamedPdk": false,
     "fmaxMhz": 115.948,
     "powerMw": 3.409,
     "areaUm2": 441406.712
@@ -4963,6 +6203,8 @@
     "architecture": "tree_vote",
     "bitWidth": 1024,
     "processNode": "40nm",
+    "canonicalTechnology": "40nm",
+    "isNamedPdk": false,
     "fmaxMhz": 97.009,
     "powerMw": 2.852,
     "areaUm2": 795109.91
@@ -4971,6 +6213,8 @@
     "architecture": "tree_vote",
     "bitWidth": 1024,
     "processNode": "65nm",
+    "canonicalTechnology": "65nm",
+    "isNamedPdk": false,
     "fmaxMhz": 76.1,
     "powerMw": 2.238,
     "areaUm2": 1771475.782
@@ -4979,6 +6223,8 @@
     "architecture": "tree_vote",
     "bitWidth": 1024,
     "processNode": "90nm",
+    "canonicalTechnology": "90nm",
+    "isNamedPdk": false,
     "fmaxMhz": 64.673,
     "powerMw": 1.902,
     "areaUm2": 3030597.925
@@ -4987,6 +6233,8 @@
     "architecture": "tree_vote",
     "bitWidth": 1024,
     "processNode": "130nm",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": false,
     "fmaxMhz": 53.811,
     "powerMw": 1.582,
     "areaUm2": 5559486.913
@@ -4995,6 +6243,8 @@
     "architecture": "tree_vote",
     "bitWidth": 1024,
     "processNode": "180nm",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": false,
     "fmaxMhz": 45.73,
     "powerMw": 1.345,
     "areaUm2": 9511035.755
@@ -5003,6 +6253,8 @@
     "architecture": "tree_vote",
     "bitWidth": 1024,
     "processNode": "250nm",
+    "canonicalTechnology": "250nm",
+    "isNamedPdk": false,
     "fmaxMhz": 38.804,
     "powerMw": 1.141,
     "areaUm2": 16354195.883
@@ -5011,6 +6263,8 @@
     "architecture": "tree_vote",
     "bitWidth": 1024,
     "processNode": "350nm",
+    "canonicalTechnology": "350nm",
+    "isNamedPdk": false,
     "fmaxMhz": 32.795,
     "powerMw": 0.964,
     "areaUm2": 28493149.324
@@ -5019,6 +6273,8 @@
     "architecture": "tree_vote",
     "bitWidth": 1024,
     "processNode": "gf180",
+    "canonicalTechnology": "180nm",
+    "isNamedPdk": true,
     "fmaxMhz": 45.73,
     "powerMw": 1.345,
     "areaUm2": 9511035.755
@@ -5027,6 +6283,8 @@
     "architecture": "tree_vote",
     "bitWidth": 1024,
     "processNode": "sky130",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 53.811,
     "powerMw": 1.582,
     "areaUm2": 5559486.913
@@ -5035,6 +6293,8 @@
     "architecture": "tree_vote",
     "bitWidth": 1024,
     "processNode": "ihpsg13g2",
+    "canonicalTechnology": "130nm",
+    "isNamedPdk": true,
     "fmaxMhz": 53.811,
     "powerMw": 1.582,
     "areaUm2": 5559486.913

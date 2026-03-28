@@ -28,6 +28,7 @@ function listDataJsonFiles(dir) {
     .sort((a, b) => a.localeCompare(b, "en"));
 }
 
+/** JSON key `processNode` holds the technology node id (nm label or kit name). */
 const REQUIRED_KEYS = [
   "architecture",
   "bitWidth",
@@ -36,6 +37,72 @@ const REQUIRED_KEYS = [
   "powerMw",
   "areaUm2",
 ];
+
+/**
+ * Effective feature size (nm) per `processNode`. Keep in sync with `synthesize-design-json.mjs`.
+ * @type {Record<string, number>}
+ */
+const EFFECTIVE_NM_FALLBACK = {
+  "3nm": 3,
+  "5nm": 5,
+  "7nm": 7,
+  "10nm": 10,
+  "14nm": 14,
+  "16nm": 16,
+  "22nm": 22,
+  "28nm": 28,
+  "40nm": 40,
+  "65nm": 65,
+  "90nm": 90,
+  "130nm": 130,
+  "180nm": 180,
+  "250nm": 250,
+  "350nm": 350,
+  gf180: 180,
+  sky130: 130,
+  ihpsg13g2: 130,
+};
+
+/** Named kit ids (not plain Nnm labels). Keep in sync with `synthesize-design-json.mjs`. */
+const NAMED_KIT_IDS_FALLBACK = new Set(["gf180", "sky130", "ihpsg13g2"]);
+
+/**
+ * @param {string} processNode
+ * @returns {number | undefined}
+ */
+function effectiveNmForProcessNode(processNode) {
+  if (EFFECTIVE_NM_FALLBACK[processNode] !== undefined) {
+    return EFFECTIVE_NM_FALLBACK[processNode];
+  }
+  const m = /^(\d+)nm$/i.exec(processNode);
+  if (m) return parseInt(m[1], 10);
+  return undefined;
+}
+
+/**
+ * @param {Record<string, unknown>} row
+ * @param {string} processNode
+ * @returns {string}
+ */
+function canonicalTechnologyFromRow(row, processNode) {
+  if (row.canonicalTechnology != null && String(row.canonicalTechnology).trim() !== "") {
+    return String(row.canonicalTechnology);
+  }
+  const nm = effectiveNmForProcessNode(processNode);
+  if (nm !== undefined) return `${nm}nm`;
+  return processNode;
+}
+
+/**
+ * @param {Record<string, unknown>} row
+ * @param {string} processNode
+ * @returns {boolean}
+ */
+function isNamedPdkFromRow(row, processNode) {
+  if (typeof row.isNamedPdk === "boolean") return row.isNamedPdk;
+  if (NAMED_KIT_IDS_FALLBACK.has(processNode)) return true;
+  return !/^\d+nm$/i.test(processNode);
+}
 
 /**
  * @param {unknown} row
@@ -72,10 +139,13 @@ function readRowsArray(filePath) {
  * @param {string} family
  */
 function normalizeRow(row, family) {
+  const processNode = String(row.processNode);
   return {
     architecture: String(row.architecture),
     bitWidth: Number(row.bitWidth),
-    processNode: String(row.processNode),
+    processNode,
+    canonicalTechnology: canonicalTechnologyFromRow(row, processNode),
+    isNamedPdk: isNamedPdkFromRow(row, processNode),
     fmaxMhz: Number(row.fmaxMhz),
     powerMw: Number(row.powerMw),
     areaUm2: Number(row.areaUm2),
@@ -91,6 +161,8 @@ function formatTsRow(r) {
     `architecture: ${JSON.stringify(r.architecture)}`,
     `bitWidth: ${r.bitWidth}`,
     `processNode: ${JSON.stringify(r.processNode)}`,
+    `canonicalTechnology: ${JSON.stringify(r.canonicalTechnology)}`,
+    `isNamedPdk: ${r.isNamedPdk}`,
     `fmaxMhz: ${r.fmaxMhz}`,
     `powerMw: ${r.powerMw}`,
     `areaUm2: ${r.areaUm2}`,
