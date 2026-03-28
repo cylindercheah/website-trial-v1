@@ -215,6 +215,46 @@ main {
   }
 }
 
+/* Donut / compact charts — less vertical space than scatter or heatmap */
+.plot-host--short {
+  min-height: min(40dvh, 320px);
+  height: min(42dvh, 360px);
+}
+
+@media (max-width: 640px) {
+  .plot-host--short {
+    min-height: 280px;
+    height: min(44dvh, 340px);
+  }
+}
+
+@media (min-width: 768px) {
+  .plot-host--short {
+    min-height: 300px;
+    height: 360px;
+  }
+}
+
+/* 3D WebGL plots need a bit more vertical room */
+.plot-host--tall {
+  min-height: min(58dvh, 460px);
+  height: min(62dvh, 480px);
+}
+
+@media (max-width: 640px) {
+  .plot-host--tall {
+    min-height: 340px;
+    height: min(56dvh, 440px);
+  }
+}
+
+@media (min-width: 768px) {
+  .plot-host--tall {
+    min-height: 400px;
+    height: 460px;
+  }
+}
+
 .plot-host > div {
   width: 100% !important;
   height: 100% !important;

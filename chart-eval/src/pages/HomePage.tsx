@@ -4,10 +4,11 @@ export function HomePage(): JSX.Element {
       <div className="chart-card">
         <h2>Why this demo</h2>
         <p className="hint" style={{ marginBottom: "0.75rem" }}>
-          Compare <strong>Plotly.js</strong> and <strong>ECharts</strong> for the same
-          PPA-style visuals: Pareto scatter (Fmax vs power) and bit-width scaling.
-          Built with <strong>Vite + React</strong> (recommended in docs for JSON-driven
-          dashboards + GitHub Pages).
+          Compare <strong>Plotly.js</strong> (full bundle) and <strong>ECharts</strong> on
+          the same synthetic PPA set: classic Cartesian charts plus analytics-style views
+          (3D scatter, treemap, sankey, parcoords on Plotly; sunburst, treemap, radar,
+          funnel, boxplot on ECharts). Built with <strong>Vite + React</strong> for
+          GitHub Pages.
         </p>
         <ul style={{ margin: 0, paddingLeft: "1.25rem", color: "var(--text-secondary)" }}>
           <li>
@@ -15,9 +16,11 @@ export function HomePage(): JSX.Element {
             Pages without server rewrite rules.
           </li>
           <li>
-            <strong>Plotly</strong> includes a richer mode bar (zoom, pan, PNG download,
-            etc.). <strong>ECharts</strong> adds a small toolbox with PNG export on each
-            chart; interaction model differs from Plotly.
+            <strong>Plotly</strong>: mode bar (zoom, pan, autoscale, PNG) + x-axis{" "}
+            <strong>rangeslider</strong> on wide layouts for scatter/line.{" "}
+            <strong>ECharts</strong>: <code>toolbox</code> (rect zoom, reset, PNG),{" "}
+            <code>dataZoom</code>, <code>visualMap</code> on heatmap, <code>magicType</code>{" "}
+            on bar.
           </li>
           <li>
             Chart containers use <strong>min-height</strong> and{" "}
@@ -28,7 +31,8 @@ export function HomePage(): JSX.Element {
       <p className="note">
         <strong>Mobile:</strong> Both libraries support touch (pan/zoom). ECharts tends
         to feel snappier on low-end phones if you enable{" "}
-        <code>dataZoom</code> sliders; Plotly bundles are larger (slower first load).
+        <code>dataZoom</code> sliders; the full <code>plotly.js</code> bundle is larger
+        (slower first load) than <code>echarts</code>.
         Try both routes on a real device.
       </p>
     </div>

@@ -30,8 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # No npm cache here: setup-node fails if cache-dependency-path is missing from the
-      # repo. Re-enable after committing chart-eval/package-lock.json:
+      # No npm cache: optional once chart-eval/package-lock.json is committed again:
       #   cache: npm
       #   cache-dependency-path: chart-eval/package-lock.json
       - uses: actions/setup-node@v4
@@ -40,7 +39,7 @@ jobs:
 
       - name: Install and build
         run: |
-          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+          npm install
           npm run build
 
       - uses: actions/upload-pages-artifact@v3

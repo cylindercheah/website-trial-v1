@@ -18,7 +18,7 @@ export default function App(): ReactElement {
         <div className="app-header__titles">
           <h1>Plotly.js vs ECharts — evaluation demo</h1>
           <p>
-            Vite + React · PPA-style scatter + line chart · touch-friendly defaults
+            Vite + React · full Plotly + ECharts analytics gallery · touch-friendly defaults
           </p>
         </div>
         <ThemeToggle />

@@ -1,10 +1,64 @@
 import { useMemo } from "react";
 import ReactECharts from "echarts-for-react";
-import type { EChartsOption } from "echarts";
+import type { EChartsOption, ToolboxComponentOption } from "echarts";
 import { useNarrowScreen } from "../hooks/useNarrowScreen";
-import { ADDER_DEMO_ROWS, architectureColor } from "../data/samplePpa";
-import { getChartPalette } from "../theme/chartPalette";
+import {
+  ADDER_DEMO_ROWS,
+  architectureColor,
+  fmaxMhzHeatmapGrid,
+  formatArchLabel,
+  funnelStepsByFmax,
+  ppaHierarchyTree,
+  radarMetrics64Normalized,
+  rowsByBitWidthOrdered,
+  syntheticPowerBoxByArch64,
+} from "../data/samplePpa";
+import { getChartPalette, type ChartPalette, type ThemeMode } from "../theme/chartPalette";
 import { useTheme } from "../theme/ThemeContext";
+
+function echartsToolbox(
+  palette: ChartPalette,
+  theme: ThemeMode,
+  narrow: boolean,
+  pngName: string,
+  opts?: {
+    dataZoom?: { xAxisIndex?: number[] | false; yAxisIndex?: number[] | false };
+    magicType?: { type: ("line" | "bar" | "stack")[] };
+  },
+): ToolboxComponentOption {
+  const bg = theme === "dark" ? "#131b26" : "#fafafa";
+  return {
+    right: narrow ? 4 : 8,
+    top: narrow ? 4 : 8,
+    iconStyle: { borderColor: palette.textMuted },
+    emphasis: { iconStyle: { borderColor: palette.text } },
+    feature: {
+      ...(opts?.dataZoom
+        ? {
+            dataZoom: {
+              xAxisIndex: opts.dataZoom.xAxisIndex ?? false,
+              yAxisIndex: opts.dataZoom.yAxisIndex ?? false,
+              filterMode: "none",
+            },
+          }
+        : {}),
+      ...(opts?.magicType
+        ? {
+            magicType: {
+              type: opts.magicType.type,
+              title: { line: "Line", bar: "Bar", stack: "Stack" },
+            },
+          }
+        : {}),
+      restore: { title: "Reset zoom" },
+      saveAsImage: {
+        title: "Save as PNG",
+        name: pngName,
+        backgroundColor: bg,
+      },
+    },
+  };
+}
 
 type ScatterDatum = {
   value: [number, number];
@@ -51,21 +105,11 @@ export function EChartsPage(): JSX.Element {
         textStyle: { fontSize: narrow ? 12 : 14, color: palette.text },
       },
       grid: narrow
-        ? { left: "14%", right: "8%", top: "20%", bottom: "38%", containLabel: true }
-        : { left: "12%", right: "6%", top: "18%", bottom: "22%", containLabel: true },
-      toolbox: {
-        right: narrow ? 4 : 8,
-        top: narrow ? 4 : 8,
-        iconStyle: { borderColor: palette.textMuted },
-        emphasis: { iconStyle: { borderColor: palette.text } },
-        feature: {
-          saveAsImage: {
-            title: "Save as PNG",
-            name: "echarts-pareto",
-            backgroundColor: theme === "dark" ? "#131b26" : "#fafafa",
-          },
-        },
-      },
+        ? { left: "14%", right: "8%", top: "20%", bottom: "44%", containLabel: true }
+        : { left: "12%", right: "6%", top: "18%", bottom: "30%", containLabel: true },
+      toolbox: echartsToolbox(palette, theme, narrow, "echarts-pareto", {
+        dataZoom: { xAxisIndex: [0], yAxisIndex: [0] },
+      }),
       tooltip: {
         trigger: "item",
         backgroundColor: palette.tooltipBg,
@@ -111,11 +155,23 @@ export function EChartsPage(): JSX.Element {
         splitLine: { lineStyle: { color: palette.grid, type: "dashed" } },
       },
       series,
+      dataZoom: [
+        { type: "inside", xAxisIndex: 0, yAxisIndex: 0, filterMode: "none" },
+        {
+          type: "slider",
+          xAxisIndex: 0,
+          filterMode: "none",
+          height: narrow ? 32 : 22,
+          bottom: narrow ? 8 : 36,
+          moveHandleSize: narrow ? 10 : 7,
+          textStyle: { color: palette.textMuted, fontSize: narrow ? 9 : 11 },
+        },
+      ],
       media: [
         {
           query: { maxWidth: 640 },
           option: {
-            grid: { bottom: "40%", left: "16%", right: "10%" },
+            grid: { bottom: "46%", left: "16%", right: "10%" },
             legend: {
               bottom: 4,
               type: "scroll",
@@ -147,19 +203,9 @@ export function EChartsPage(): JSX.Element {
       grid: narrow
         ? { left: "16%", right: "18%", top: "20%", bottom: "42%", containLabel: true }
         : { left: "12%", right: "14%", top: "18%", bottom: "24%", containLabel: true },
-      toolbox: {
-        right: narrow ? 4 : 8,
-        top: narrow ? 4 : 8,
-        iconStyle: { borderColor: palette.textMuted },
-        emphasis: { iconStyle: { borderColor: palette.text } },
-        feature: {
-          saveAsImage: {
-            title: "Save as PNG",
-            name: "echarts-scaling",
-            backgroundColor: theme === "dark" ? "#131b26" : "#fafafa",
-          },
-        },
-      },
+      toolbox: echartsToolbox(palette, theme, narrow, "echarts-scaling", {
+        dataZoom: { xAxisIndex: [0], yAxisIndex: false },
+      }),
       tooltip: {
         trigger: "axis",
         backgroundColor: palette.tooltipBg,
@@ -255,13 +301,450 @@ export function EChartsPage(): JSX.Element {
     };
   }, [narrow, theme]);
 
+  const barOption = useMemo((): EChartsOption => {
+    const palette = getChartPalette(theme);
+    const rows64 = rowsByBitWidthOrdered(64);
+    return {
+      backgroundColor: "transparent",
+      textStyle: { color: palette.text, fontSize: narrow ? 10 : 12 },
+      title: {
+        text: narrow ? "Power @ 64b (bar)" : "Power at 64-bit width (by architecture)",
+        left: "center",
+        textStyle: { fontSize: narrow ? 12 : 14, color: palette.text },
+      },
+      grid: narrow
+        ? { left: "14%", right: "10%", top: "22%", bottom: "32%", containLabel: true }
+        : { left: "10%", right: "8%", top: "18%", bottom: "20%", containLabel: true },
+      toolbox: echartsToolbox(palette, theme, narrow, "echarts-bar-64", {
+        dataZoom: { xAxisIndex: [0], yAxisIndex: false },
+        magicType: { type: ["line", "bar"] },
+      }),
+      tooltip: {
+        trigger: "axis",
+        backgroundColor: palette.tooltipBg,
+        borderColor: palette.tooltipBorder,
+        borderWidth: 1,
+        textStyle: { color: palette.text, fontSize: 12 },
+        axisPointer: { type: "shadow" },
+      },
+      xAxis: {
+        type: "category",
+        data: rows64.map((r) => formatArchLabel(r.architecture)),
+        name: "Architecture",
+        nameTextStyle: { color: palette.text },
+        axisLabel: { rotate: narrow ? 28 : 16, color: palette.textMuted },
+        axisLine: { lineStyle: { color: palette.gridStrong } },
+      },
+      yAxis: {
+        type: "value",
+        name: "Power (mW)",
+        nameTextStyle: { color: palette.text },
+        axisLabel: { color: palette.textMuted },
+        splitLine: { lineStyle: { color: palette.grid, type: "dashed" } },
+      },
+      series: [
+        {
+          name: "Power (mW)",
+          type: "bar",
+          barMaxWidth: narrow ? 36 : 48,
+          data: rows64.map((r) => ({
+            value: r.powerMw,
+            itemStyle: { color: architectureColor(r.architecture) },
+          })),
+          label: {
+            show: true,
+            position: "top",
+            color: palette.textMuted,
+            fontSize: narrow ? 9 : 10,
+            formatter: (p) => {
+              const v = (p as { value?: number }).value;
+              return v != null ? `${v} mW` : "";
+            },
+          },
+        },
+      ],
+      dataZoom: [
+        { type: "inside", xAxisIndex: 0, filterMode: "none" },
+        {
+          type: "slider",
+          xAxisIndex: 0,
+          filterMode: "none",
+          height: narrow ? 26 : 20,
+          bottom: narrow ? 6 : 10,
+          moveHandleSize: narrow ? 10 : 7,
+          textStyle: { color: palette.textMuted, fontSize: narrow ? 9 : 11 },
+        },
+      ],
+    };
+  }, [narrow, theme]);
+
+  const heatmapOption = useMemo((): EChartsOption => {
+    const palette = getChartPalette(theme);
+    const { z, colLabels, rowLabels } = fmaxMhzHeatmapGrid();
+    const cells: [number, number, number][] = [];
+    for (let i = 0; i < z.length; i++) {
+      for (let j = 0; j < z[i].length; j++) {
+        cells.push([j, i, z[i][j]]);
+      }
+    }
+    const flat = z.flat();
+    const vmin = Math.min(...flat);
+    const vmax = Math.max(...flat);
+
+    return {
+      backgroundColor: "transparent",
+      textStyle: { color: palette.text, fontSize: narrow ? 10 : 12 },
+      title: {
+        text: narrow ? "Fmax heatmap" : "Fmax (MHz) — architecture × bit width",
+        left: "center",
+        textStyle: { fontSize: narrow ? 12 : 14, color: palette.text },
+      },
+      grid: narrow
+        ? { left: "12%", right: "18%", top: "22%", bottom: "28%", containLabel: true }
+        : { left: "10%", right: "22%", top: "18%", bottom: "18%", containLabel: true },
+      toolbox: echartsToolbox(palette, theme, narrow, "echarts-heatmap", {
+        dataZoom: { xAxisIndex: [0], yAxisIndex: [0] },
+      }),
+      tooltip: {
+        position: "top",
+        backgroundColor: palette.tooltipBg,
+        borderColor: palette.tooltipBorder,
+        borderWidth: 1,
+        textStyle: { color: palette.text, fontSize: 12 },
+        formatter: (params: unknown) => {
+          const p = params as { value?: [number, number, number]; data?: [number, number, number] };
+          const v = p.value ?? p.data;
+          if (!v) return "";
+          const [xi, yi, val] = v;
+          const bw = colLabels[xi];
+          const arch = rowLabels[yi];
+          return `${arch}<br/>${bw} b · Fmax ${val} MHz`;
+        },
+      },
+      xAxis: {
+        type: "category",
+        data: colLabels,
+        name: "Bit width",
+        nameLocation: "middle",
+        nameGap: narrow ? 24 : 28,
+        nameTextStyle: { color: palette.text },
+        axisLabel: { color: palette.textMuted },
+        splitArea: { show: true },
+      },
+      yAxis: {
+        type: "category",
+        data: rowLabels,
+        name: "Architecture",
+        nameTextStyle: { color: palette.text },
+        axisLabel: { color: palette.textMuted },
+        splitArea: { show: true },
+      },
+      visualMap: {
+        min: vmin,
+        max: vmax,
+        calculable: true,
+        orient: "vertical",
+        right: narrow ? 2 : 8,
+        top: "middle",
+        itemHeight: narrow ? 120 : 160,
+        textStyle: { color: palette.textMuted, fontSize: narrow ? 9 : 11 },
+        inRange: {
+          color: ["#313695", "#4575b4", "#abd9e9", "#fee090", "#d73027", "#a50026"],
+        },
+      },
+      series: [
+        {
+          type: "heatmap",
+          data: cells,
+          label: {
+            show: true,
+            color: palette.text,
+            fontSize: narrow ? 9 : 11,
+            formatter: (p) => {
+              const raw = (p as { value?: unknown; data?: unknown }).value ?? (p as { data?: unknown }).data;
+              const triple = Array.isArray(raw) ? (raw as [number, number, number]) : undefined;
+              return triple?.[2] != null ? String(triple[2]) : "";
+            },
+          },
+          emphasis: {
+            itemStyle: { shadowBlur: 12, shadowColor: "rgba(0,0,0,0.35)" },
+          },
+        },
+      ],
+      dataZoom: [
+        { type: "inside", xAxisIndex: 0, yAxisIndex: 0, filterMode: "none" },
+        {
+          type: "slider",
+          xAxisIndex: 0,
+          filterMode: "none",
+          height: narrow ? 22 : 18,
+          bottom: narrow ? 4 : 8,
+          textStyle: { color: palette.textMuted, fontSize: narrow ? 9 : 11 },
+        },
+      ],
+    };
+  }, [narrow, theme]);
+
+  const pieOption = useMemo((): EChartsOption => {
+    const palette = getChartPalette(theme);
+    const rows64 = rowsByBitWidthOrdered(64);
+    return {
+      backgroundColor: "transparent",
+      textStyle: { color: palette.text, fontSize: narrow ? 10 : 12 },
+      title: {
+        text: narrow ? "Power share @ 64b" : "Power share at 64-bit width (donut)",
+        left: "center",
+        textStyle: { fontSize: narrow ? 12 : 14, color: palette.text },
+      },
+      toolbox: echartsToolbox(palette, theme, narrow, "echarts-pie-64"),
+      tooltip: {
+        trigger: "item",
+        backgroundColor: palette.tooltipBg,
+        borderColor: palette.tooltipBorder,
+        borderWidth: 1,
+        textStyle: { color: palette.text, fontSize: 12 },
+        formatter: "{b}<br/>{c} mW ({d}%)",
+      },
+      legend: {
+        bottom: 4,
+        type: "scroll",
+        textStyle: { color: palette.textMuted, fontSize: narrow ? 9 : 11 },
+      },
+      series: [
+        {
+          name: "Power",
+          type: "pie",
+          radius: narrow ? ["36%", "58%"] : ["40%", "66%"],
+          center: ["50%", "46%"],
+          data: rows64.map((r) => ({
+            name: formatArchLabel(r.architecture),
+            value: r.powerMw,
+            itemStyle: { color: architectureColor(r.architecture) },
+          })),
+          label: { color: palette.text, fontSize: narrow ? 9 : 11 },
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 12,
+              shadowOffsetX: 0,
+              shadowColor: "rgba(0,0,0,0.35)",
+            },
+          },
+        },
+      ],
+    };
+  }, [narrow, theme]);
+
+  const sunburstOption = useMemo((): EChartsOption => {
+    const palette = getChartPalette(theme);
+    const tree = ppaHierarchyTree("areaUm2");
+    return {
+      backgroundColor: "transparent",
+      textStyle: { color: palette.text, fontSize: narrow ? 10 : 12 },
+      title: {
+        text: narrow ? "Sunburst (area)" : "Hierarchy: die area (µm²)",
+        left: "center",
+        textStyle: { fontSize: narrow ? 12 : 14, color: palette.text },
+      },
+      toolbox: echartsToolbox(palette, theme, narrow, "echarts-sunburst"),
+      series: [
+        {
+          type: "sunburst",
+          data: [tree],
+          radius: [0, "92%"],
+          label: { color: palette.text, fontSize: narrow ? 9 : 10 },
+          itemStyle: {
+            borderRadius: 6,
+            borderWidth: 1,
+            borderColor: palette.plotBg,
+          },
+          emphasis: { focus: "ancestor" },
+        },
+      ],
+    };
+  }, [narrow, theme]);
+
+  const echartsTreemapOption = useMemo((): EChartsOption => {
+    const palette = getChartPalette(theme);
+    const tree = ppaHierarchyTree("powerMw");
+    return {
+      backgroundColor: "transparent",
+      textStyle: { color: palette.text, fontSize: narrow ? 10 : 12 },
+      title: {
+        text: narrow ? "Treemap (power)" : "Treemap: power (mW) by arch × width",
+        left: "center",
+        textStyle: { fontSize: narrow ? 12 : 14, color: palette.text },
+      },
+      toolbox: echartsToolbox(palette, theme, narrow, "echarts-treemap"),
+      series: [
+        {
+          type: "treemap",
+          roam: true,
+          gapWidth: 2,
+          breadcrumb: { itemStyle: { color: palette.textMuted } },
+          label: { show: true, color: palette.text, fontSize: narrow ? 9 : 10 },
+          upperLabel: { show: true, color: palette.textMuted, fontSize: 10 },
+          itemStyle: { borderColor: palette.gridStrong, borderWidth: 1 },
+          data: [tree],
+        },
+      ],
+    };
+  }, [narrow, theme]);
+
+  const radarOption = useMemo((): EChartsOption => {
+    const palette = getChartPalette(theme);
+    const { indicators, series: radarSeries } = radarMetrics64Normalized();
+    return {
+      backgroundColor: "transparent",
+      textStyle: { color: palette.text, fontSize: narrow ? 10 : 12 },
+      title: {
+        text: narrow ? "Radar @ 64b" : "Multi-metric profile @ 64b (normalized %)",
+        left: "center",
+        textStyle: { fontSize: narrow ? 12 : 14, color: palette.text },
+      },
+      toolbox: echartsToolbox(palette, theme, narrow, "echarts-radar"),
+      legend: {
+        bottom: 0,
+        type: "scroll",
+        textStyle: { color: palette.textMuted, fontSize: narrow ? 9 : 10 },
+      },
+      radar: {
+        indicator: indicators,
+        radius: narrow ? "58%" : "62%",
+        center: ["50%", "46%"],
+        splitLine: { lineStyle: { color: palette.grid } },
+        splitArea: { show: true },
+        axisName: { color: palette.textMuted, fontSize: narrow ? 9 : 10 },
+      },
+      series: [
+        {
+          type: "radar",
+          data: radarSeries.map((s) => ({
+            name: s.name,
+            value: s.value,
+            areaStyle: { opacity: 0.15, color: s.color },
+            lineStyle: { width: 2, color: s.color },
+            itemStyle: { color: s.color },
+          })),
+        },
+      ],
+    };
+  }, [narrow, theme]);
+
+  const funnelOption = useMemo((): EChartsOption => {
+    const palette = getChartPalette(theme);
+    const steps = funnelStepsByFmax();
+    return {
+      backgroundColor: "transparent",
+      textStyle: { color: palette.text, fontSize: narrow ? 10 : 12 },
+      title: {
+        text: narrow ? "Funnel (Fmax)" : "Designs ranked by Fmax (MHz)",
+        left: "center",
+        textStyle: { fontSize: narrow ? 12 : 14, color: palette.text },
+      },
+      toolbox: echartsToolbox(palette, theme, narrow, "echarts-funnel"),
+      tooltip: {
+        trigger: "item",
+        backgroundColor: palette.tooltipBg,
+        borderColor: palette.tooltipBorder,
+        borderWidth: 1,
+        textStyle: { color: palette.text, fontSize: 12 },
+        formatter: "{b}<br/>{c} MHz",
+      },
+      series: [
+        {
+          type: "funnel",
+          sort: "descending",
+          gap: 2,
+          minSize: "12%",
+          maxSize: "88%",
+          label: { color: palette.text, fontSize: narrow ? 9 : 10 },
+          data: steps.map((s) => ({
+            name: s.name,
+            value: s.value,
+            itemStyle: { color: architectureColor(s.architecture) },
+          })),
+        },
+      ],
+    };
+  }, [narrow, theme]);
+
+  const boxplotOption = useMemo((): EChartsOption => {
+    const palette = getChartPalette(theme);
+    const { categories, stats } = syntheticPowerBoxByArch64();
+    return {
+      backgroundColor: "transparent",
+      textStyle: { color: palette.text, fontSize: narrow ? 10 : 12 },
+      title: {
+        text: narrow ? "Power box @ 64b" : "Synthetic power bands @ 64b (boxplot)",
+        left: "center",
+        textStyle: { fontSize: narrow ? 12 : 14, color: palette.text },
+      },
+      grid: narrow
+        ? { left: "14%", right: "10%", top: "22%", bottom: "32%", containLabel: true }
+        : { left: "12%", right: "8%", top: "18%", bottom: "22%", containLabel: true },
+      toolbox: echartsToolbox(palette, theme, narrow, "echarts-boxplot", {
+        dataZoom: { xAxisIndex: [0], yAxisIndex: false },
+      }),
+      tooltip: {
+        trigger: "item",
+        backgroundColor: palette.tooltipBg,
+        borderColor: palette.tooltipBorder,
+        borderWidth: 1,
+        textStyle: { color: palette.text, fontSize: 12 },
+      },
+      xAxis: {
+        type: "category",
+        data: categories,
+        boundaryGap: true,
+        name: "Architecture",
+        nameTextStyle: { color: palette.text },
+        axisLabel: { color: palette.textMuted, fontSize: narrow ? 9 : 10 },
+        splitLine: { show: false },
+      },
+      yAxis: {
+        type: "value",
+        name: "Power (mW)",
+        nameTextStyle: { color: palette.text },
+        axisLabel: { color: palette.textMuted },
+        splitLine: { lineStyle: { color: palette.grid, type: "dashed" } },
+      },
+      dataZoom: [
+        { type: "inside", xAxisIndex: 0, filterMode: "none" },
+        {
+          type: "slider",
+          xAxisIndex: 0,
+          filterMode: "none",
+          height: narrow ? 24 : 18,
+          bottom: narrow ? 6 : 10,
+          textStyle: { color: palette.textMuted, fontSize: narrow ? 9 : 11 },
+        },
+      ],
+      series: [
+        {
+          type: "boxplot",
+          data: stats,
+          itemStyle: {
+            color: palette.accentOrange,
+            borderColor: palette.textMuted,
+          },
+          emphasis: {
+            itemStyle: {
+              borderColor: palette.text,
+              shadowBlur: 8,
+            },
+          },
+        },
+      ],
+    };
+  }, [narrow, theme]);
+
   return (
     <div>
       <div className="chart-card">
         <h2>Pareto scatter</h2>
         <p className="hint">
-          Drag inside chart to zoom; legend scroll on small screens. Pinch works with
-          inside zoom on many mobile browsers.
+          Toolbox: rectangle <strong>dataZoom</strong>, <strong>reset</strong>, PNG. Chart:
+          inside zoom + bottom slider (x). Legend scrolls on small screens.
         </p>
         <div className="plot-host">
           <ReactECharts
@@ -277,7 +760,8 @@ export function EChartsPage(): JSX.Element {
       <div className="chart-card">
         <h2>Dual-axis line + slider</h2>
         <p className="hint">
-          Bottom <strong>dataZoom</strong> slider helps fat-finger navigation on phones.
+          Same scaling series as Plotly. Toolbox adds x-only rectangle zoom + reset; bottom
+          slider for phones.
         </p>
         <div className="plot-host">
           <ReactECharts
@@ -290,10 +774,138 @@ export function EChartsPage(): JSX.Element {
           />
         </div>
       </div>
+      <div className="chart-card">
+        <h2>Grouped bar</h2>
+        <p className="hint">
+          64-bit power by architecture. <strong>magicType</strong> toggles line/bar;
+          slider + inside zoom on categories.
+        </p>
+        <div className="plot-host">
+          <ReactECharts
+            key={narrow ? "bar-narrow" : "bar-wide"}
+            option={barOption}
+            style={{ height: "100%", width: "100%" }}
+            opts={{ renderer: "canvas" }}
+            notMerge
+            lazyUpdate
+          />
+        </div>
+      </div>
+      <div className="chart-card">
+        <h2>Heatmap</h2>
+        <p className="hint">
+          Fmax grid with <strong>visualMap</strong>, cell labels, and 2D zoom (inside +
+          slider).
+        </p>
+        <div className="plot-host">
+          <ReactECharts
+            key={narrow ? "heat-narrow" : "heat-wide"}
+            option={heatmapOption}
+            style={{ height: "100%", width: "100%" }}
+            opts={{ renderer: "canvas" }}
+            notMerge
+            lazyUpdate
+          />
+        </div>
+      </div>
+      <div className="chart-card">
+        <h2>Donut (pie)</h2>
+        <p className="hint">Power mix at 64b — pairs with the bar chart.</p>
+        <div className="plot-host plot-host--short">
+          <ReactECharts
+            key={narrow ? "pie-narrow" : "pie-wide"}
+            option={pieOption}
+            style={{ height: "100%", width: "100%" }}
+            opts={{ renderer: "canvas" }}
+            notMerge
+            lazyUpdate
+          />
+        </div>
+      </div>
+      <div className="chart-card">
+        <h2>Sunburst</h2>
+        <p className="hint">
+          Radial hierarchy for die <strong>area</strong> (µm²): architecture → bit width.
+        </p>
+        <div className="plot-host plot-host--short">
+          <ReactECharts
+            key={narrow ? "sun-narrow" : "sun-wide"}
+            option={sunburstOption}
+            style={{ height: "100%", width: "100%" }}
+            opts={{ renderer: "canvas" }}
+            notMerge
+            lazyUpdate
+          />
+        </div>
+      </div>
+      <div className="chart-card">
+        <h2>Treemap</h2>
+        <p className="hint">
+          Rectangular layout for <strong>power</strong> (mW); pinch/drag <code>roam</code> on
+          touch.
+        </p>
+        <div className="plot-host plot-host--short">
+          <ReactECharts
+            key={narrow ? "tree-narrow" : "tree-wide"}
+            option={echartsTreemapOption}
+            style={{ height: "100%", width: "100%" }}
+            opts={{ renderer: "canvas" }}
+            notMerge
+            lazyUpdate
+          />
+        </div>
+      </div>
+      <div className="chart-card">
+        <h2>Radar</h2>
+        <p className="hint">
+          Normalized Fmax / power / area @ 64b — compare architectures on one web.
+        </p>
+        <div className="plot-host plot-host--short">
+          <ReactECharts
+            key={narrow ? "radar-narrow" : "radar-wide"}
+            option={radarOption}
+            style={{ height: "100%", width: "100%" }}
+            opts={{ renderer: "canvas" }}
+            notMerge
+            lazyUpdate
+          />
+        </div>
+      </div>
+      <div className="chart-card">
+        <h2>Funnel</h2>
+        <p className="hint">Throughput-style ordering by peak Fmax (MHz) across all eight designs.</p>
+        <div className="plot-host plot-host--short">
+          <ReactECharts
+            key={narrow ? "fun-narrow" : "fun-wide"}
+            option={funnelOption}
+            style={{ height: "100%", width: "100%" }}
+            opts={{ renderer: "canvas" }}
+            notMerge
+            lazyUpdate
+          />
+        </div>
+      </div>
+      <div className="chart-card">
+        <h2>Boxplot</h2>
+        <p className="hint">
+          Illustrative power quartiles @ 64b (synthetic spread — not silicon measurements).
+        </p>
+        <div className="plot-host">
+          <ReactECharts
+            key={narrow ? "box-narrow" : "box-wide"}
+            option={boxplotOption}
+            style={{ height: "100%", width: "100%" }}
+            opts={{ renderer: "canvas" }}
+            notMerge
+            lazyUpdate
+          />
+        </div>
+      </div>
       <p className="note">
-        ECharts: smaller initial payload than full Plotly, strong performance on mobile
-        canvas; <code>media</code> + <code>dataZoom</code> are ideal for responsive
-        dashboards.
+        ECharts: lighter than full Plotly for many dashboards; this page adds hierarchy (
+        <code>sunburst</code>, <code>treemap</code>), <code>radar</code>, <code>funnel</code>,
+        and <code>boxplot</code> alongside the earlier Cartesian charts. 3D WebGL in ECharts
+        needs <code>echarts-gl</code> — here, 3D is shown on the Plotly route only.
       </p>
     </div>
   );
