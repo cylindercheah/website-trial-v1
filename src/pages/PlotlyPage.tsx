@@ -30,12 +30,11 @@ import { useNarrowScreen } from "../hooks/useNarrowScreen";
 import {
   type DesignRow,
   DESIGN_ROWS,
-  DESIGN_TECHNOLOGY_NODES,
   architectureColor,
   seriesRgbByIndex,
   designArchOrderForRows,
   designBitWidthsForRows,
-  designRowsForFamily,
+  designRowsForCategory,
   designRowsForTechnology,
   designTechnologyNodesForRows,
   findDesignRow,
@@ -137,7 +136,7 @@ export function PlotlyPage(): JSX.Element {
     ? exploreAxes.category
     : DESIGN_CATEGORIES[0].id;
   const categoryRowsForExplore = useMemo(
-    () => designRowsForFamily(DESIGN_ROWS, categoryForUi),
+    () => designRowsForCategory(DESIGN_ROWS, categoryForUi),
     [categoryForUi],
   );
   const exploreCategoryArchOrder = useMemo(
@@ -157,7 +156,31 @@ export function PlotlyPage(): JSX.Element {
     setExploreArchitectureSelection([...exploreCategoryArchOrder]);
   }, [categoryForUi, exploreCategoryArchOrder]);
 
-  const bitWidthOptions = designBitWidthsForRows(categoryRowsForExplore);
+  const bitWidthOptions = useMemo(
+    () => designBitWidthsForRows(categoryRowsForExplore),
+    [categoryRowsForExplore],
+  );
+  const technologyOptions = useMemo(
+    () => designTechnologyNodesForRows(categoryRowsForExplore),
+    [categoryRowsForExplore],
+  );
+
+  /** Keep exploration slice aligned with JSON: only process nodes / bit widths present in this category. */
+  useEffect(() => {
+    setExploreAxes((prev) => {
+      const techOk =
+        technologyOptions.length > 0 && technologyOptions.includes(prev.technologyNode);
+      const bwOk = bitWidthOptions.length > 0 && bitWidthOptions.includes(prev.bitWidth);
+      const technologyNode = techOk
+        ? prev.technologyNode
+        : technologyOptions[0] ?? prev.technologyNode;
+      const bitWidth = bwOk ? prev.bitWidth : bitWidthOptions[0] ?? prev.bitWidth;
+      if (technologyNode === prev.technologyNode && bitWidth === prev.bitWidth) {
+        return prev;
+      }
+      return { ...prev, technologyNode, bitWidth };
+    });
+  }, [categoryForUi, technologyOptions, bitWidthOptions]);
   const barDonutBaselineUi: BarDonutBaselineMode =
     exploreAxes.barDonutBaseline === "bitWidth" || exploreAxes.barDonutBaseline === "technology"
       ? exploreAxes.barDonutBaseline
@@ -228,13 +251,10 @@ export function PlotlyPage(): JSX.Element {
           customdata: raw,
         };
       };
-      const techNode = (DESIGN_TECHNOLOGY_NODES as readonly string[]).includes(ex.technologyNode)
-        ? ex.technologyNode
-        : DESIGN_TECHNOLOGY_NODES[0];
       const category = DESIGN_CATEGORIES.some((c) => c.id === ex.category)
         ? ex.category
         : DESIGN_CATEGORIES[0].id;
-      const categoryRowsAll = designRowsForFamily(DESIGN_ROWS, category);
+      const categoryRowsAll = designRowsForCategory(DESIGN_ROWS, category);
       const effectiveArchOrder = exploreEffectiveArchOrder;
       const categoryRowsFiltered = categoryRowsAll.filter((r) =>
         effectiveArchOrder.includes(r.architecture),
@@ -244,6 +264,12 @@ export function PlotlyPage(): JSX.Element {
       const plotBitWidth = (categoryBitWidths as readonly number[]).includes(ex.bitWidth)
         ? ex.bitWidth
         : categoryBitWidths[0];
+      /** Technology node for this category’s JSON rows (not the global merged node list). */
+      const techNode =
+        categoryTechnologyNodes.length > 0 &&
+        (categoryTechnologyNodes as readonly string[]).includes(ex.technologyNode)
+          ? ex.technologyNode
+          : categoryTechnologyNodes[0] ?? ex.technologyNode;
       const barBaseline: BarDonutBaselineMode =
         ex.barDonutBaseline === "bitWidth" || ex.barDonutBaseline === "technology"
           ? ex.barDonutBaseline
@@ -663,8 +689,8 @@ export function PlotlyPage(): JSX.Element {
         pieTitleNarrow = `Σ ${scatterAxisTitle(paretoYMetric)} by bit width @ ${techNode}`;
         pieTitleWide = `${scatterAxisTitle(paretoYMetric)} pooled across architectures @ ${techNode}`;
       } else {
-        const pieLabels = [...DESIGN_TECHNOLOGY_NODES];
-        const pieValues = DESIGN_TECHNOLOGY_NODES.map((proc) =>
+        const pieLabels = [...categoryTechnologyNodes];
+        const pieValues = categoryTechnologyNodes.map((proc) =>
           effectiveArchOrder.reduce((s, arch) => s + metricAtArchBwProc(arch, plotBitWidth, proc), 0),
         );
         pieDataInner = [
@@ -1010,8 +1036,9 @@ export function PlotlyPage(): JSX.Element {
         <h2>Explore metrics</h2>
         <div className="hint-block">
           <p className="hint">
-            <strong>Category</strong> filters the dataset to one design family; all charts below use only that
-            family&apos;s architectures and rows.
+            <strong>Category</strong> filters the dataset; <strong>Technology</strong> and{" "}
+            <strong>Bit width</strong> choices come from that category&apos;s JSON rows (they update when you
+            change category).
           </p>
           <p className="hint">
             <strong>Bar / donut / scatter baseline</strong> chooses what stays fixed: architectures at one tech &amp;
@@ -1062,19 +1089,36 @@ export function PlotlyPage(): JSX.Element {
             >
               <div className="explore-arch-filter__header">
                 <span className="explore-arch-filter__title">Designs to include</span>
-                <button
-                  type="button"
-                  className="explore-arch-filter__action"
-                  onClick={() =>
-                    setExploreArchitectureSelection([...exploreCategoryArchOrder])
-                  }
-                >
-                  Select all
-                </button>
+                <div className="explore-arch-filter__actions">
+                  <button
+                    type="button"
+                    className="explore-arch-filter__action"
+                    aria-label="Include all designs in charts"
+                    onClick={() =>
+                      setExploreArchitectureSelection([...exploreCategoryArchOrder])
+                    }
+                  >
+                    Select all
+                  </button>
+                  <button
+                    type="button"
+                    className="explore-arch-filter__action"
+                    aria-label="Include only the first design in list order"
+                    onClick={() => {
+                      const first = exploreCategoryArchOrder[0];
+                      if (first !== undefined) {
+                        setExploreArchitectureSelection([first]);
+                      }
+                    }}
+                  >
+                    Unselect all
+                  </button>
+                </div>
               </div>
               <p className="explore-arch-filter__hint">
                 This category has many architecture variants; uncheck to hide designs from Pareto, 3D, heatmap,
-                treemap, donut, and bar charts. At least one stays selected.
+                treemap, donut, and bar charts. At least one design stays selected.{" "}
+                <strong>Unselect all</strong> keeps only the first design in list order.
               </p>
               <div className="explore-arch-filter__list">
                 {exploreCategoryArchOrder.map((arch) => {
@@ -1164,16 +1208,17 @@ export function PlotlyPage(): JSX.Element {
             Technology
             <select
               value={
-                (DESIGN_TECHNOLOGY_NODES as readonly string[]).includes(exploreAxes.technologyNode)
+                technologyOptions.length > 0 &&
+                technologyOptions.includes(exploreAxes.technologyNode)
                   ? exploreAxes.technologyNode
-                  : DESIGN_TECHNOLOGY_NODES[0]
+                  : technologyOptions[0] ?? exploreAxes.technologyNode
               }
               aria-label="Technology node for heatmap, treemap, bar, and donut"
               onChange={(e) =>
                 setExploreAxes((p) => ({ ...p, technologyNode: e.target.value }))
               }
             >
-              {DESIGN_TECHNOLOGY_NODES.map((node) => (
+              {technologyOptions.map((node) => (
                 <option key={node} value={node}>
                   {node}
                 </option>

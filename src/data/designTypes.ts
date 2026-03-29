@@ -15,6 +15,6 @@ export type DesignRow = {
   fmaxMhz: number;
   powerMw: number;
   areaUm2: number;
-  /** Block / dataset name from the JSON file (e.g. adder, voter, cordic). */
-  designFamily?: string;
+  /** Category id: merged JSON file stem, or overridden per row (see `generate-design-data.mjs`). */
+  category?: string;
 };

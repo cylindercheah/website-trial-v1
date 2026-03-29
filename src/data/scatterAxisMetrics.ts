@@ -4,17 +4,20 @@
 
 import {
   type DesignRow,
-  type DesignFamilyId,
-  DESIGN_FAMILIES,
+  type DesignCategoryId,
+  DESIGN_CATEGORY_IDS,
   DESIGN_ROWS,
   DESIGN_ARCH_ORDER,
   DESIGN_BIT_WIDTHS,
   DEFAULT_TECHNOLOGY_NODE,
+  defaultExploreSliceForCategory,
   designRowsForTechnology,
   designBitWidthsForRows,
   formatArchLabel,
   DESIGN_ROOT_LABEL,
 } from "./design";
+
+export type { DesignCategoryId } from "./design";
 
 export type ScatterAxisMetric = "fmaxMhz" | "powerMw" | "areaUm2" | "bitWidth" | "architecture";
 
@@ -130,10 +133,7 @@ export function scatterArchitectureTickAxis(
   };
 }
 
-/** Explore panel category — same ids as `designFamily` on each row. */
-export type DesignCategoryId = DesignFamilyId;
-
-/** Human-readable category label from a family id (filename stem or explicit `designFamily`). */
+/** Human-readable category label from a category id (filename stem or explicit row `category`). */
 export function designCategoryDefaultLabel(id: string): string {
   const titled = id
     .split(/[_-]+/)
@@ -143,9 +143,9 @@ export function designCategoryDefaultLabel(id: string): string {
   return titled ? `${titled} (dataset)` : id;
 }
 
-/** Built from DESIGN_FAMILIES emitted at codegen (add a data/*.json file and rebuild). */
+/** Built from DESIGN_CATEGORY_IDS emitted at codegen (add a data/*.json file and rebuild). */
 export const DESIGN_CATEGORIES: readonly { id: DesignCategoryId; label: string }[] =
-  DESIGN_FAMILIES.map((id) => ({
+  DESIGN_CATEGORY_IDS.map((id) => ({
     id,
     label: designCategoryDefaultLabel(id),
   }));
@@ -243,17 +243,18 @@ export type ExploreAxesState = {
   z: ScatterAxisMetric;
 };
 
-/** Prefer "adder" when present so demos stay stable; else first merged family. */
+/** First merged category id (stable default for Explore). */
 function defaultExploreCategory(): DesignCategoryId {
-  const ids = DESIGN_FAMILIES as readonly string[];
-  if (ids.includes("adder")) return "adder" as DesignCategoryId;
-  return DESIGN_FAMILIES[0];
+  return DESIGN_CATEGORY_IDS[0];
 }
 
+const _defaultExploreCategory = defaultExploreCategory();
+const _defaultExploreSlice = defaultExploreSliceForCategory(_defaultExploreCategory);
+
 export const DEFAULT_EXPLORE_AXES: ExploreAxesState = {
-  category: defaultExploreCategory(),
-  technologyNode: DEFAULT_TECHNOLOGY_NODE,
-  bitWidth: 64,
+  category: _defaultExploreCategory,
+  technologyNode: _defaultExploreSlice.technologyNode,
+  bitWidth: _defaultExploreSlice.bitWidth,
   barDonutBaseline: "architecture",
   numericScaleX: "linear",
   numericScaleY: "linear",

@@ -11,7 +11,8 @@
  * - a JSON array of design objects `[{...}, {...}]` (all designs in one file), or
  * - `{ "rows": [ ... ] }` (same as above), or
  * - a single design object `{ ... }` (one design per file).
- * Rows are tagged with `designFamily` from the filename (stem) unless already set on the object.
+ * Rows are tagged with `category` from the filename (stem) unless `category` or legacy `designFamily`
+ * is set on the object.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -189,14 +190,26 @@ function readRowsArray(filePath) {
 }
 
 /**
+ * Category id: explicit `category`, else legacy `designFamily`, else JSON file stem.
+ *
  * @param {Record<string, unknown>} row
- * @param {string} family
+ * @param {string} fileStem
+ */
+function categoryFromRow(row, fileStem) {
+  if (row.category != null) return String(row.category);
+  if (row.designFamily != null) return String(row.designFamily);
+  return fileStem;
+}
+
+/**
+ * @param {Record<string, unknown>} row
+ * @param {string} fileStem
  * @param {{
  *   effectiveNmByProcessNode: Record<string, number>;
  *   namedKitIds: Set<string>;
  * }} tech
  */
-function normalizeRow(row, family, tech) {
+function normalizeRow(row, fileStem, tech) {
   const processNode = String(row.processNode);
   return {
     architecture: String(row.architecture),
@@ -207,7 +220,7 @@ function normalizeRow(row, family, tech) {
     fmaxMhz: Number(row.fmaxMhz),
     powerMw: Number(row.powerMw),
     areaUm2: Number(row.areaUm2),
-    designFamily: row.designFamily != null ? String(row.designFamily) : family,
+    category: categoryFromRow(row, fileStem),
   };
 }
 
@@ -224,7 +237,7 @@ function formatTsRow(r) {
     `fmaxMhz: ${r.fmaxMhz}`,
     `powerMw: ${r.powerMw}`,
     `areaUm2: ${r.areaUm2}`,
-    `designFamily: ${JSON.stringify(r.designFamily)}`,
+    `category: ${JSON.stringify(r.category)}`,
   ];
   return `  { ${parts.join(", ")} }`;
 }
@@ -233,10 +246,10 @@ function formatTsRow(r) {
  * @param {ReturnType<typeof normalizeRow>[]} rows
  * @returns {string[]}
  */
-function uniqueFamiliesSorted(rows) {
+function uniqueCategoryIdsSorted(rows) {
   const set = new Set();
   for (const r of rows) {
-    if (r.designFamily) set.add(r.designFamily);
+    if (r.category) set.add(r.category);
   }
   return [...set].sort((a, b) => a.localeCompare(b, "en"));
 }
@@ -256,11 +269,11 @@ function main() {
 
   for (const name of inputFiles) {
     const filePath = path.join(dataDir, name);
-    const family = path.basename(name, ".json");
+    const fileStem = path.basename(name, ".json");
     const rows = readRowsArray(filePath);
     for (const row of rows) {
       assertRow(row, name);
-      combined.push(normalizeRow(row, family, tech));
+      combined.push(normalizeRow(row, fileStem, tech));
     }
   }
 
@@ -270,12 +283,12 @@ function main() {
     );
   }
 
-  const families = uniqueFamiliesSorted(combined);
-  if (families.length === 0) {
-    throw new Error(`[generate-design-data] rows missing designFamily after normalize`);
+  const categoryIds = uniqueCategoryIdsSorted(combined);
+  if (categoryIds.length === 0) {
+    throw new Error(`[generate-design-data] rows missing category after normalize`);
   }
 
-  const familiesTs = families.map((f) => tsStringLiteral(f)).join(", ");
+  const categoryIdsTs = categoryIds.map((id) => tsStringLiteral(id)).join(", ");
   const sourceList = inputFiles.length ? inputFiles.join(", ") : "(none)";
   const namedKitSorted = [...tech.namedKitIds].sort((a, b) => a.localeCompare(b, "en"));
   const namedKitTs = namedKitSorted.map((id) => tsStringLiteral(id)).join(", ");
@@ -290,10 +303,10 @@ function main() {
 
 import type { DesignRow } from "./designTypes";
 
-/** Distinct \`designFamily\` values present in the merged rows (sorted). */
-export const DESIGN_FAMILIES = [${familiesTs}] as const;
+/** Distinct \`category\` values present in the merged rows (sorted). */
+export const DESIGN_CATEGORY_IDS = [${categoryIdsTs}] as const;
 
-export type DesignFamilyId = (typeof DESIGN_FAMILIES)[number];
+export type DesignCategoryId = (typeof DESIGN_CATEGORY_IDS)[number];
 
 /** From \`data/technology-map.json\` — UI default and row filter baseline. */
 export const DEFAULT_TECHNOLOGY_NODE = ${defaultNodeTs};
@@ -309,7 +322,7 @@ ${combined.map(formatTsRow).join(",\n")}
   fs.mkdirSync(path.dirname(outFile), { recursive: true });
   fs.writeFileSync(outFile, header, "utf8");
   console.log(
-    `[generate-design-data] merged ${inputFiles.length} file(s) → ${combined.length} rows, families: ${families.join(", ")} → ${path.relative(root, outFile)}`,
+    `[generate-design-data] merged ${inputFiles.length} file(s) → ${combined.length} rows, categories: ${categoryIds.join(", ")} → ${path.relative(root, outFile)}`,
   );
 }
 

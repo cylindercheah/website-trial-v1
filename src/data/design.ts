@@ -3,27 +3,27 @@
 import type { DesignRow } from "./designTypes";
 import {
   DEFAULT_TECHNOLOGY_NODE,
-  DESIGN_FAMILIES,
+  DESIGN_CATEGORY_IDS,
   DESIGN_ROWS,
   NAMED_KIT_PROCESS_NODES,
-  type DesignFamilyId,
+  type DesignCategoryId,
 } from "./generatedDesignRows";
 
 export type { DesignRow } from "./designTypes";
-export type { DesignFamilyId } from "./generatedDesignRows";
+export type { DesignCategoryId } from "./generatedDesignRows";
 export {
   DEFAULT_TECHNOLOGY_NODE,
-  DESIGN_FAMILIES,
+  DESIGN_CATEGORY_IDS,
   DESIGN_ROWS,
   NAMED_KIT_PROCESS_NODES,
 };
 
-/** Rows whose `designFamily` matches (empty if field missing). */
-export function designRowsForFamily(
+/** Rows whose `category` matches (empty if field missing). */
+export function designRowsForCategory(
   rows: readonly DesignRow[],
-  family: DesignFamilyId,
+  category: DesignCategoryId,
 ): DesignRow[] {
-  return rows.filter((r) => r.designFamily === family);
+  return rows.filter((r) => r.category === category);
 }
 
 /** Architectures in first-seen order within the given row set. */
@@ -147,6 +147,22 @@ export function designTechnologyNodesForRows(rows: readonly DesignRow[]): string
   return uniqueTechnologyNodesSorted(rows);
 }
 
+/**
+ * First available technology node and bit width for a category (same ordering as Explore dropdowns).
+ * Used for initial Explore panel state; falls back to global defaults only if the category has no rows.
+ */
+export function defaultExploreSliceForCategory(
+  category: DesignCategoryId,
+): { technologyNode: string; bitWidth: number } {
+  const rows = designRowsForCategory(DESIGN_ROWS, category);
+  const tech = designTechnologyNodesForRows(rows);
+  const bws = designBitWidthsForRows(rows);
+  return {
+    technologyNode: tech[0] ?? DEFAULT_TECHNOLOGY_NODE,
+    bitWidth: bws.length > 0 ? bws[0] : DESIGN_BIT_WIDTHS[0] ?? 1,
+  };
+}
+
 /** Human-readable label for legend / category axes (e.g. `kogge_stone` → Kogge Stone). */
 export function formatArchLabel(arch: string): string {
   return arch
@@ -157,12 +173,12 @@ export function formatArchLabel(arch: string): string {
 
 /** Rows for a single bit width and technology node, ordered by `archOrder`. */
 export function rowsByBitWidthOrderedIn(
-  familyRows: readonly DesignRow[],
+  categoryRows: readonly DesignRow[],
   archOrder: readonly string[],
   bitWidth: number,
   technologyNode: string = DEFAULT_TECHNOLOGY_NODE,
 ): DesignRow[] {
-  const slice = designRowsForTechnology(familyRows, technologyNode);
+  const slice = designRowsForTechnology(categoryRows, technologyNode);
   const byArch = new Map(
     slice.filter((r) => r.bitWidth === bitWidth).map((r) => [r.architecture, r]),
   );
