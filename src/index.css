@@ -231,6 +231,75 @@ main {
   min-width: 9.5rem;
 }
 
+.chart-card .explore-arch-filter {
+  flex: 1 1 100%;
+  min-width: 0;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background: var(--plot-inset-bg, #fafafa);
+}
+
+.chart-card .explore-arch-filter__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.35rem;
+}
+
+.chart-card .explore-arch-filter__title {
+  font-size: clamp(0.75rem, 2.8vw, 0.8125rem);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.chart-card .explore-arch-filter__action {
+  font: inherit;
+  font-size: clamp(0.6875rem, 2.5vw, 0.75rem);
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.chart-card .explore-arch-filter__action:hover {
+  border-color: var(--accent);
+}
+
+.chart-card .explore-arch-filter__hint {
+  font-size: clamp(0.6875rem, 2.5vw, 0.75rem);
+  color: var(--text-secondary);
+  margin: 0 0 0.45rem;
+  line-height: 1.4;
+}
+
+.chart-card .explore-arch-filter__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr));
+  gap: 0.35rem 0.75rem;
+  max-height: 11rem;
+  overflow-y: auto;
+  padding-right: 0.15rem;
+}
+
+.chart-card .explore-arch-filter__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  font-size: clamp(0.6875rem, 2.5vw, 0.75rem);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.chart-card .explore-arch-filter__item input {
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+}
+
 .plot-host {
   width: 100%;
   min-width: 0;

@@ -173,15 +173,24 @@ export function designCategoryChartTitle(id: DesignCategoryId): string {
   return designCategoryLabel(id).replace(/\s*\(dataset\)\s*$/i, "").trim();
 }
 
-/** Parenthetical for Pareto / 3D titles — matches bar/donut / scatter baseline. */
-export function scatterBaselineTitleQualifier(mode: BarDonutBaselineMode): string {
+/**
+ * Parenthetical for Pareto / 3D titles — shows the actual fixed technology and/or bit width
+ * (matches bar/donut / scatter baseline).
+ */
+export function scatterBaselineTitleQualifier(
+  mode: BarDonutBaselineMode,
+  technologyNode: string,
+  bitWidth: number,
+): string {
+  const tech = technologyNode.trim() || "—";
+  const bw = `${bitWidth}b`;
   if (mode === "architecture") {
-    return "(Fixed Technology & Bit Width)";
+    return `(${tech} · ${bw})`;
   }
   if (mode === "bitWidth") {
-    return "(Fixed Technology)";
+    return `(${tech})`;
   }
-  return "(Fixed Bit Width)";
+  return `(${bw})`;
 }
 
 /** Linear vs log₁₀ for numeric chart axes and magnitudes (architecture index stays linear). */

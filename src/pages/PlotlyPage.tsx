@@ -90,6 +90,9 @@ import {
 } from "../theme/chartPalette";
 import { useTheme } from "../theme/ThemeContext";
 
+/** When a category has more than this many architectures, show design-type checkboxes in Explore metrics. */
+const EXPLORE_ARCHITECTURE_FILTER_THRESHOLD = 5;
+
 function usePlotlyChart(
   data: Data[],
   layout: Partial<Layout>,
@@ -128,11 +131,33 @@ export function PlotlyPage(): JSX.Element {
   const { theme } = useTheme();
   const [exploreAxes, setExploreAxes] = useState<ExploreAxesState>(DEFAULT_EXPLORE_AXES);
   const [plotAspectMode, setPlotAspectMode] = useState<PlotAspectMode>("flexible");
+  const [exploreArchitectureSelection, setExploreArchitectureSelection] = useState<string[]>([]);
 
   const categoryForUi = DESIGN_CATEGORIES.some((c) => c.id === exploreAxes.category)
     ? exploreAxes.category
     : DESIGN_CATEGORIES[0].id;
-  const bitWidthOptions = designBitWidthsForRows(designRowsForFamily(DESIGN_ROWS, categoryForUi));
+  const categoryRowsForExplore = useMemo(
+    () => designRowsForFamily(DESIGN_ROWS, categoryForUi),
+    [categoryForUi],
+  );
+  const exploreCategoryArchOrder = useMemo(
+    () => designArchOrderForRows(categoryRowsForExplore),
+    [categoryRowsForExplore],
+  );
+  const exploreEffectiveArchOrder = useMemo(() => {
+    const full = exploreCategoryArchOrder;
+    if (full.length <= EXPLORE_ARCHITECTURE_FILTER_THRESHOLD) return full;
+    if (exploreArchitectureSelection.length === 0) return full;
+    const sel = new Set(exploreArchitectureSelection);
+    const filtered = full.filter((a) => sel.has(a));
+    return filtered.length > 0 ? filtered : full;
+  }, [exploreCategoryArchOrder, exploreArchitectureSelection]);
+
+  useEffect(() => {
+    setExploreArchitectureSelection([...exploreCategoryArchOrder]);
+  }, [categoryForUi, exploreCategoryArchOrder]);
+
+  const bitWidthOptions = designBitWidthsForRows(categoryRowsForExplore);
   const barDonutBaselineUi: BarDonutBaselineMode =
     exploreAxes.barDonutBaseline === "bitWidth" || exploreAxes.barDonutBaseline === "technology"
       ? exploreAxes.barDonutBaseline
@@ -141,6 +166,21 @@ export function PlotlyPage(): JSX.Element {
 
   const onExploreAxisChange = (key: ExploreAxisKey, m: ScatterAxisMetric) => {
     setExploreAxes((prev) => syncExploreAxes(prev, key, m));
+  };
+
+  const toggleExploreArchitecture = (arch: string, next: boolean) => {
+    setExploreArchitectureSelection((prev) => {
+      const resolved =
+        prev.length === 0 ? [...exploreCategoryArchOrder] : [...prev];
+      const sel = new Set(resolved);
+      if (next) {
+        sel.add(arch);
+      } else {
+        if (sel.size <= 1) return resolved;
+        sel.delete(arch);
+      }
+      return exploreCategoryArchOrder.filter((a) => sel.has(a));
+    });
   };
 
   const {
@@ -195,7 +235,10 @@ export function PlotlyPage(): JSX.Element {
         ? ex.category
         : DESIGN_CATEGORIES[0].id;
       const categoryRowsAll = designRowsForFamily(DESIGN_ROWS, category);
-      const categoryArchOrder = designArchOrderForRows(categoryRowsAll);
+      const effectiveArchOrder = exploreEffectiveArchOrder;
+      const categoryRowsFiltered = categoryRowsAll.filter((r) =>
+        effectiveArchOrder.includes(r.architecture),
+      );
       const categoryBitWidths = designBitWidthsForRows(categoryRowsAll);
       const categoryTechnologyNodes = designTechnologyNodesForRows(categoryRowsAll);
       const plotBitWidth = (categoryBitWidths as readonly number[]).includes(ex.bitWidth)
@@ -208,13 +251,13 @@ export function PlotlyPage(): JSX.Element {
       /** Rows shown in Pareto + 3D scatter — same slice semantics as bar/donut baseline. */
       const scatterRows: DesignRow[] =
         barBaseline === "architecture"
-          ? categoryRowsAll.filter(
+          ? categoryRowsFiltered.filter(
               (r) => r.processNode === techNode && r.bitWidth === plotBitWidth,
             )
           : barBaseline === "bitWidth"
-            ? designRowsForTechnology(categoryRowsAll, techNode)
-            : categoryRowsAll.filter((r) => r.bitWidth === plotBitWidth);
-      const rowsFiltered = designRowsForTechnology(categoryRowsAll, techNode);
+            ? designRowsForTechnology(categoryRowsFiltered, techNode)
+            : categoryRowsFiltered.filter((r) => r.bitWidth === plotBitWidth);
+      const rowsFiltered = designRowsForTechnology(categoryRowsFiltered, techNode);
       const palette = getChartPalette(theme);
       const scatterMarkerStroke = chartScatterMarkerStrokeRgb(theme);
       const plotSurfaceBg = plotInsetBackground(theme);
@@ -241,7 +284,7 @@ export function PlotlyPage(): JSX.Element {
       }
 
       const paretoDataInner: Data[] = [];
-      for (const arch of categoryArchOrder) {
+      for (const arch of effectiveArchOrder) {
         const rows = byArch.get(arch);
         if (!rows?.length) continue;
         const label = formatArchLabel(arch);
@@ -249,8 +292,8 @@ export function PlotlyPage(): JSX.Element {
           type: "scatter",
           mode: "markers",
           name: label,
-          x: rows.map((r) => scatterAxisValue(paretoXMetric, r, categoryArchOrder)),
-          y: rows.map((r) => scatterAxisValue(paretoYMetric, r, categoryArchOrder)),
+          x: rows.map((r) => scatterAxisValue(paretoXMetric, r, effectiveArchOrder)),
+          y: rows.map((r) => scatterAxisValue(paretoYMetric, r, effectiveArchOrder)),
           text: rows.map((r) => scatter2dPointHoverHtml(r)),
           hovertemplate: "%{text}<extra></extra>",
           marker: {
@@ -262,13 +305,13 @@ export function PlotlyPage(): JSX.Element {
         });
       }
 
-      const paretoXRange = scatterAxisRange(paretoXMetric, categoryArchOrder);
-      const paretoYRange = scatterAxisRange(paretoYMetric, categoryArchOrder);
+      const paretoXRange = scatterAxisRange(paretoXMetric, effectiveArchOrder);
+      const paretoYRange = scatterAxisRange(paretoYMetric, effectiveArchOrder);
       const paretoXArchTicks =
-        paretoXMetric === "architecture" ? scatterArchitectureTickAxis(categoryArchOrder) : {};
+        paretoXMetric === "architecture" ? scatterArchitectureTickAxis(effectiveArchOrder) : {};
       const paretoYArchTicks =
-        paretoYMetric === "architecture" ? scatterArchitectureTickAxis(categoryArchOrder) : {};
-      const scatterSliceTitle = scatterBaselineTitleQualifier(barBaseline);
+        paretoYMetric === "architecture" ? scatterArchitectureTickAxis(effectiveArchOrder) : {};
+      const scatterSliceTitle = scatterBaselineTitleQualifier(barBaseline, techNode, plotBitWidth);
       const categoryChartTitle = designCategoryChartTitle(category);
       const paretoTitleText = `${categoryChartTitle}: ${scatterAxisTitle(paretoYMetric)} Vs ${scatterAxisTitle(paretoXMetric)} ${scatterSliceTitle}`;
       const paretoTitleNarrow = plotlyBold(paretoTitleText);
@@ -365,15 +408,15 @@ export function PlotlyPage(): JSX.Element {
 
       const metricAtArchBwProc = (arch: string, bw: number, proc: string): number => {
         const row = findDesignRow(arch, bw, proc);
-        return row ? scatterAxisValue(paretoYMetric, row, categoryArchOrder) : 0;
+        return row ? scatterAxisValue(paretoYMetric, row, effectiveArchOrder) : 0;
       };
 
       const pieSliceColors = (count: number): string[] =>
         Array.from({ length: count }, (_, i) => seriesRgbByIndex(i));
 
       const rowsAtBw = rowsByBitWidthOrderedIn(
-        categoryRowsAll,
-        categoryArchOrder,
+        categoryRowsFiltered,
+        effectiveArchOrder,
         plotBitWidth,
         techNode,
       );
@@ -398,7 +441,7 @@ export function PlotlyPage(): JSX.Element {
       let barTitleWide: string;
 
       if (barBaseline === "architecture") {
-        const rawBarY = rowsAtBw.map((r) => scatterAxisValue(paretoYMetric, r, categoryArchOrder));
+        const rawBarY = rowsAtBw.map((r) => scatterAxisValue(paretoYMetric, r, effectiveArchOrder));
         const { y: barYArch, customdata: barCdArch } = barYWithLog(rawBarY);
         barDataInner = [
           {
@@ -408,7 +451,7 @@ export function PlotlyPage(): JSX.Element {
             y: barYArch,
             ...(barCdArch ? { customdata: barCdArch } : {}),
             text: rowsAtBw.map((r) =>
-              plotlyBold(formatBarInsideValue(scatterAxisValue(paretoYMetric, r, categoryArchOrder))),
+              plotlyBold(formatBarInsideValue(scatterAxisValue(paretoYMetric, r, effectiveArchOrder))),
             ),
             textposition: "auto",
             textfont: barInsideTextFont,
@@ -425,7 +468,7 @@ export function PlotlyPage(): JSX.Element {
         barTitleWide = `${scatterAxisTitle(paretoYMetric)} at ${plotBitWidth}-bit width (by architecture)`;
       } else if (barBaseline === "bitWidth") {
         const xCat = categoryBitWidths.map((bw) => `${bw}b`);
-        barDataInner = categoryArchOrder.map((arch) => {
+        barDataInner = effectiveArchOrder.map((arch) => {
           const label = formatArchLabel(arch);
           const rawY = categoryBitWidths.map((bw) => metricAtArchBwProc(arch, bw, techNode));
           const { y: yPlot, customdata: cd } = barYWithLog(rawY);
@@ -451,7 +494,7 @@ export function PlotlyPage(): JSX.Element {
         barTitleWide = `${scatterAxisTitle(paretoYMetric)} by bit width (technology baseline ${techNode})`;
       } else {
         const xCat = [...categoryTechnologyNodes];
-        barDataInner = categoryArchOrder.map((arch) => {
+        barDataInner = effectiveArchOrder.map((arch) => {
           const label = formatArchLabel(arch);
           const rawY = categoryTechnologyNodes.map((proc) =>
             metricAtArchBwProc(arch, plotBitWidth, proc),
@@ -582,7 +625,7 @@ export function PlotlyPage(): JSX.Element {
           {
             type: "pie",
             labels: rowsAtBw.map((r) => formatArchLabel(r.architecture)),
-            values: rowsAtBw.map((r) => scatterAxisValue(paretoYMetric, r, categoryArchOrder)),
+            values: rowsAtBw.map((r) => scatterAxisValue(paretoYMetric, r, effectiveArchOrder)),
             marker: {
               colors: rowsAtBw.map((r) => architectureColor(r.architecture)),
               line: { color: CHART_MARKER_OUTLINE_RGB, width: CHART_LINE_WIDTH },
@@ -599,7 +642,7 @@ export function PlotlyPage(): JSX.Element {
       } else if (barBaseline === "bitWidth") {
         const pieLabels = categoryBitWidths.map((bw) => `${bw}b`);
         const pieValues = categoryBitWidths.map((bw) =>
-          categoryArchOrder.reduce((s, arch) => s + metricAtArchBwProc(arch, bw, techNode), 0),
+          effectiveArchOrder.reduce((s, arch) => s + metricAtArchBwProc(arch, bw, techNode), 0),
         );
         pieDataInner = [
           {
@@ -622,7 +665,7 @@ export function PlotlyPage(): JSX.Element {
       } else {
         const pieLabels = [...DESIGN_TECHNOLOGY_NODES];
         const pieValues = DESIGN_TECHNOLOGY_NODES.map((proc) =>
-          categoryArchOrder.reduce((s, arch) => s + metricAtArchBwProc(arch, plotBitWidth, proc), 0),
+          effectiveArchOrder.reduce((s, arch) => s + metricAtArchBwProc(arch, plotBitWidth, proc), 0),
         );
         pieDataInner = [
           {
@@ -676,8 +719,8 @@ export function PlotlyPage(): JSX.Element {
         paretoZMetric,
         techNode,
         {
-          sourceRows: categoryRowsAll,
-          archOrder: categoryArchOrder,
+          sourceRows: categoryRowsFiltered,
+          archOrder: effectiveArchOrder,
           bitWidths: categoryBitWidths,
         },
       );
@@ -776,7 +819,7 @@ export function PlotlyPage(): JSX.Element {
           metric,
           scatterRows,
           6,
-          categoryArchOrder,
+          effectiveArchOrder,
           categoryBitWidths,
           scale,
         ),
@@ -784,16 +827,16 @@ export function PlotlyPage(): JSX.Element {
       });
 
       const scatter3dDataInner: Data[] = [];
-      for (const arch of categoryArchOrder) {
+      for (const arch of effectiveArchOrder) {
         const rows = byArch.get(arch);
         if (!rows?.length) continue;
         scatter3dDataInner.push({
           type: "scatter3d",
           mode: "markers",
           name: formatArchLabel(arch),
-          x: rows.map((r) => scatterAxisValue(paretoXMetric, r, categoryArchOrder)),
-          y: rows.map((r) => scatterAxisValue(paretoYMetric, r, categoryArchOrder)),
-          z: rows.map((r) => scatterAxisValue(paretoZMetric, r, categoryArchOrder)),
+          x: rows.map((r) => scatterAxisValue(paretoXMetric, r, effectiveArchOrder)),
+          y: rows.map((r) => scatterAxisValue(paretoYMetric, r, effectiveArchOrder)),
+          z: rows.map((r) => scatterAxisValue(paretoZMetric, r, effectiveArchOrder)),
           text: rows.map((r) => scatter3dPointHoverHtml(r)),
           hovertemplate: "%{text}<extra></extra>",
           marker: {
@@ -853,8 +896,8 @@ export function PlotlyPage(): JSX.Element {
         scatterAxisTreemapFlat(
           paretoYMetric,
           techNode,
-          categoryRowsAll,
-          categoryArchOrder,
+          categoryRowsFiltered,
+          effectiveArchOrder,
         );
       const treemapLog =
         numericScaleY === "log" && metricSupportsLogScale(paretoYMetric);
@@ -902,7 +945,7 @@ export function PlotlyPage(): JSX.Element {
         hoverlabel: hoverLabel,
       };
 
-      const nArchHeat = categoryArchOrder.length;
+      const nArchHeat = effectiveArchOrder.length;
       const flexibleHeatmapHostPx = Math.min(920, Math.max(300, 236 + nArchHeat * 28));
       const treemapLeafCount = designRowsForTechnology(categoryRowsAll, techNode).length;
       const flexibleTreemapHostPx = Math.min(
@@ -932,7 +975,7 @@ export function PlotlyPage(): JSX.Element {
         flexibleHeatmapHostPx,
         flexibleTreemapHostPx,
       };
-    }, [narrow, theme, exploreAxes]);
+    }, [narrow, theme, exploreAxes, exploreEffectiveArchOrder]);
 
   const paretoRef = usePlotlyChart(paretoData, paretoLayout, paretoConfig);
   const scatter3dRef = usePlotlyChart(scatter3dData, scatter3dLayout, scatter3dConfig);
@@ -1011,6 +1054,47 @@ export function PlotlyPage(): JSX.Element {
               ))}
             </select>
           </label>
+          {exploreCategoryArchOrder.length > EXPLORE_ARCHITECTURE_FILTER_THRESHOLD ? (
+            <div
+              className="explore-arch-filter"
+              role="group"
+              aria-label="Designs to include in charts for this category"
+            >
+              <div className="explore-arch-filter__header">
+                <span className="explore-arch-filter__title">Designs to include</span>
+                <button
+                  type="button"
+                  className="explore-arch-filter__action"
+                  onClick={() =>
+                    setExploreArchitectureSelection([...exploreCategoryArchOrder])
+                  }
+                >
+                  Select all
+                </button>
+              </div>
+              <p className="explore-arch-filter__hint">
+                This category has many architecture variants; uncheck to hide designs from Pareto, 3D, heatmap,
+                treemap, donut, and bar charts. At least one stays selected.
+              </p>
+              <div className="explore-arch-filter__list">
+                {exploreCategoryArchOrder.map((arch) => {
+                  const checked =
+                    exploreArchitectureSelection.length === 0 ||
+                    exploreArchitectureSelection.includes(arch);
+                  return (
+                    <label key={arch} className="explore-arch-filter__item">
+                      <input
+                        type="checkbox"
+                        checked={checked}
+                        onChange={(e) => toggleExploreArchitecture(arch, e.target.checked)}
+                      />
+                      <span>{formatArchLabel(arch)}</span>
+                    </label>
+                  );
+                })}
+              </div>
+            </div>
+          ) : null}
           <label className="axis-picker">
             Bar / donut / scatter baseline
             <select
