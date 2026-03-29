@@ -646,6 +646,10 @@ export function PlotlyPage(): JSX.Element {
       let pieTitleNarrow: string;
       let pieTitleWide: string;
 
+      /** Inside slices: white on saturated fills. Outside (Plotly auto): theme axis title color on paper/plot bg. */
+      const pieInsideTextFont = plotAxisFont("#ffffff", narrow);
+      const pieOutsideTextFont = plotAxisFont(palette.rgbAxisTitle, narrow);
+
       if (barBaseline === "architecture") {
         pieDataInner = [
           {
@@ -658,7 +662,8 @@ export function PlotlyPage(): JSX.Element {
             },
             hole: 0.38,
             textinfo: "label+percent",
-            textfont: plotAxisFont("#ffffff", narrow),
+            insidetextfont: pieInsideTextFont,
+            outsidetextfont: pieOutsideTextFont,
             hovertemplate:
               "<b>%{label}</b><br><b>Value:</b> %{value:.3g}<br><b>Share:</b> %{percent}<extra></extra>",
           },
@@ -681,7 +686,8 @@ export function PlotlyPage(): JSX.Element {
             },
             hole: 0.38,
             textinfo: "label+percent",
-            textfont: plotAxisFont("#ffffff", narrow),
+            insidetextfont: pieInsideTextFont,
+            outsidetextfont: pieOutsideTextFont,
             hovertemplate:
               "<b>%{label}</b><br><b>Σ architectures:</b> %{value:.3g}<br><b>Share:</b> %{percent}<extra></extra>",
           },
@@ -704,7 +710,8 @@ export function PlotlyPage(): JSX.Element {
             },
             hole: 0.38,
             textinfo: "label+percent",
-            textfont: plotAxisFont("#ffffff", narrow),
+            insidetextfont: pieInsideTextFont,
+            outsidetextfont: pieOutsideTextFont,
             hovertemplate:
               "<b>%{label}</b><br><b>Σ architectures:</b> %{value:.3g}<br><b>Share:</b> %{percent}<extra></extra>",
           },
