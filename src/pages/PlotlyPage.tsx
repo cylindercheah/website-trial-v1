@@ -425,6 +425,7 @@ export function PlotlyPage(): JSX.Element {
         responsive: true,
         displayModeBar: true,
         scrollZoom: true,
+        doubleClick: "reset",
         displaylogo: false,
         ...(narrow
           ? { modeBarButtonsToRemove: ["lasso2d", "select2d"] as const }
@@ -459,7 +460,9 @@ export function PlotlyPage(): JSX.Element {
         return Number.parseFloat(v.toPrecision(3)).toString();
       };
 
+      /** Grouped/single bar: white inside colored bars; theme color when Plotly places labels outside (`textposition: auto`). */
       const barInsideTextFont = { ...plotAxisFont("#ffffff", narrow), weight: "bold" as const };
+      const barOutsideTextFont = { ...plotAxisFont(palette.rgbAxisTitle, narrow), weight: "bold" as const };
 
       let barDataInner: Data[];
       let barXTitle: string;
@@ -480,14 +483,15 @@ export function PlotlyPage(): JSX.Element {
               plotlyBold(formatBarInsideValue(scatterAxisValue(paretoYMetric, r, effectiveArchOrder))),
             ),
             textposition: "auto",
-            textfont: barInsideTextFont,
+            insidetextfont: barInsideTextFont,
+            outsidetextfont: barOutsideTextFont,
             marker: {
               color: rowsAtBw.map((r) => architectureColor(r.architecture)),
               line: barLine,
             },
             hovertemplate:
               `<b>%{x}</b><br><b>${scatterAxisTitle(paretoYMetric)}:</b> ${barHoverYToken}<extra></extra>`,
-          },
+          } as Data,
         ];
         barXTitle = "Architecture";
         barTitleNarrow = `${scatterAxisTitle(paretoYMetric)} @ ${plotBitWidth}b (bar)`;
@@ -506,14 +510,15 @@ export function PlotlyPage(): JSX.Element {
             ...(cd ? { customdata: cd } : {}),
             text: rawY.map((v) => plotlyBold(formatBarInsideValue(v))),
             textposition: "auto",
-            textfont: barInsideTextFont,
+            insidetextfont: barInsideTextFont,
+            outsidetextfont: barOutsideTextFont,
             marker: {
               color: architectureColor(arch),
               line: barLine,
             },
             hovertemplate:
               `<b>${label}</b><br>%{x}<br><b>${scatterAxisTitle(paretoYMetric)}:</b> ${barHoverYToken}<extra></extra>`,
-          };
+          } as Data;
         });
         barXTitle = "Bit width";
         barTitleNarrow = `${scatterAxisTitle(paretoYMetric)} vs bit width @ ${techNode}`;
@@ -534,14 +539,15 @@ export function PlotlyPage(): JSX.Element {
             ...(cd ? { customdata: cd } : {}),
             text: rawY.map((v) => plotlyBold(formatBarInsideValue(v))),
             textposition: "auto",
-            textfont: barInsideTextFont,
+            insidetextfont: barInsideTextFont,
+            outsidetextfont: barOutsideTextFont,
             marker: {
               color: architectureColor(arch),
               line: barLine,
             },
             hovertemplate:
               `<b>${label}</b><br>%{x}<br><b>${scatterAxisTitle(paretoYMetric)}:</b> ${barHoverYToken}<extra></extra>`,
-          };
+          } as Data;
         });
         barXTitle = "Technology";
         barTitleNarrow = `${scatterAxisTitle(paretoYMetric)} vs technology @ ${plotBitWidth}b`;
@@ -720,8 +726,31 @@ export function PlotlyPage(): JSX.Element {
         pieTitleWide = `${scatterAxisTitle(paretoYMetric)} pooled across architectures @ ${plotBitWidth}b`;
       }
 
+      /**
+       * Donut traces sit on Plotly's cartesian subplot; default pie layouts often fix axis ranges, which
+       * disables box/scroll zoom. Hidden axes with `fixedrange: false` match Pareto scatter interaction.
+       */
+      const pieZoomLayout: Partial<Layout> = {
+        dragmode: "zoom",
+        xaxis: {
+          visible: false,
+          fixedrange: false,
+          showgrid: false,
+          zeroline: false,
+        },
+        yaxis: {
+          visible: false,
+          fixedrange: false,
+          showgrid: false,
+          zeroline: false,
+          scaleanchor: "x",
+          scaleratio: 1,
+        },
+      };
+
       const pieLayoutInner: Partial<Layout> = narrow
         ? {
+            ...pieZoomLayout,
             autosize: true,
             margin: { l: 12, r: 12, t: 20, b: 12 },
             paper_bgcolor: plotSurfaceBg,
@@ -735,6 +764,7 @@ export function PlotlyPage(): JSX.Element {
             hoverlabel: hoverLabel,
           }
         : {
+            ...pieZoomLayout,
             autosize: true,
             margin: { l: 16, r: 16, t: 36, b: 16 },
             paper_bgcolor: plotSurfaceBg,
@@ -1379,7 +1409,8 @@ export function PlotlyPage(): JSX.Element {
       <div className="chart-card">
         <h2>Donut (pie)</h2>
         <p className="hint">
-          Shares follow <strong>Bar / donut baseline</strong>: per architecture at fixed technology &amp; width, or pooled Σ{" "}
+          Pinch/drag or mode-bar zoom like Pareto scatter; double-click resets the view. Shares follow{" "}
+          <strong>Bar / donut baseline</strong>: per architecture at fixed technology &amp; width, or pooled Σ{" "}
           <strong>Y</strong> across architectures over bit widths (technology baseline) or over technology nodes (bit-width
           baseline).
         </p>
