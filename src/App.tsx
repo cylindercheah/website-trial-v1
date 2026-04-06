@@ -7,6 +7,9 @@ import { HomePage } from "./pages/HomePage";
 const PlotlyPage = lazy(async () => ({
   default: (await import("./pages/PlotlyPage")).PlotlyPage,
 }));
+const AnalogPage = lazy(async () => ({
+  default: (await import("./pages/AnalogPage")).AnalogPage,
+}));
 
 export default function App(): ReactElement {
   return (
@@ -31,6 +34,12 @@ export default function App(): ReactElement {
         >
           Digital Circuits
         </NavLink>
+        <NavLink
+          to="/analog"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
+          Analog Circuits
+        </NavLink>
       </nav>
       <main>
         <Suspense
@@ -43,6 +52,7 @@ export default function App(): ReactElement {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/plotly" element={<PlotlyPage />} />
+            <Route path="/analog" element={<AnalogPage />} />
           </Routes>
         </Suspense>
       </main>

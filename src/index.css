@@ -231,6 +231,37 @@ main {
   min-width: 9.5rem;
 }
 
+.chart-card .axis-picker input[type="number"] {
+  font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.35rem 0.5rem;
+  width: 6.5rem;
+}
+
+.analog-controls {
+  align-items: flex-end;
+}
+
+.analog-type-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.55rem;
+}
+
+.analog-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--text-secondary);
+}
+
+.analog-checkbox input {
+  margin: 0;
+}
+
 .chart-card .explore-arch-filter {
   flex: 1 1 100%;
   min-width: 0;
@@ -398,6 +429,70 @@ main {
 .plot-host > div {
   width: 100% !important;
   height: 100% !important;
+}
+
+.analog-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background: var(--plot-inset-bg, #fafafa);
+}
+
+.analog-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1200px;
+}
+
+.analog-table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--surface-elevated);
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  padding: 0.5rem 0.55rem;
+  z-index: 1;
+}
+
+.analog-table tbody td {
+  border-top: 1px solid var(--border-subtle);
+  padding: 0.48rem 0.55rem;
+  font-size: 0.78rem;
+  color: var(--text);
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.analog-table tbody tr:hover {
+  background: rgba(0, 113, 227, 0.05);
+}
+
+.analog-table th button {
+  font: inherit;
+  color: inherit;
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.analog-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.22rem;
+}
+
+.analog-tag {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.05rem 0.4rem;
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  background: var(--surface);
 }
 
 /*
