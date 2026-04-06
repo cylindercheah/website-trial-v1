@@ -15,6 +15,7 @@ import {
   plotlySceneAxis,
   type ThemeMode,
 } from "../theme/chartPalette";
+import { seriesRgbByIndex } from "./design";
 import { hasMetrics, metricLabel, metricValue } from "./analogMetrics";
 
 export type AxisScaleMode = "linear" | "log";
@@ -50,9 +51,9 @@ type Scatter3DOptions = {
 };
 
 const TYPE_COLOR: Record<AnalogReferenceType, string> = {
-  "2T": "rgb(0, 113, 227)",
-  SCM: "rgb(255, 149, 0)",
-  Hybrid: "rgb(81, 156, 66)",
+  "2T": seriesRgbByIndex(0),
+  SCM: seriesRgbByIndex(1),
+  Hybrid: seriesRgbByIndex(2),
 };
 
 const TYPE_SYMBOL: Record<AnalogReferenceType, string> = {
@@ -173,7 +174,7 @@ export function buildAnalogScatter3D(opts: Scatter3DOptions): PlotBundle {
     text: grouped[t].map(scatterHover),
     hovertemplate: "%{text}<extra></extra>",
     marker: {
-      size: 6,
+      size: 12,
       color: TYPE_COLOR[t],
       symbol: TYPE_SYMBOL[t],
       opacity: 0.95,
@@ -183,7 +184,7 @@ export function buildAnalogScatter3D(opts: Scatter3DOptions): PlotBundle {
 
   const layout: Partial<Layout> = {
     autosize: true,
-    margin: opts.narrow ? { l: 8, r: 8, t: 36, b: 8 } : { l: 16, r: 16, t: 44, b: 16 },
+    margin: opts.narrow ? { l: 8, r: 8, t: 28, b: 8 } : { l: 14, r: 14, t: 34, b: 14 },
     title: { text: `<b>${opts.title}</b>`, font: plotFont(palette.rgbAxisTitle) },
     paper_bgcolor: plotInsetBackground(opts.theme),
     font: plotFont(palette.rgbAxisTitle),
@@ -200,16 +201,19 @@ export function buildAnalogScatter3D(opts: Scatter3DOptions): PlotBundle {
       xaxis: {
         ...plotlySceneAxis(palette, "grey"),
         title: { text: metricLabel(opts.xMetric), font: plotAxisFont(palette.rgbAxisTitle, opts.narrow) },
+        tickfont: plotAxisFont(palette.axisValueLabelRgb, opts.narrow),
         type: axisType(opts.xScale),
       },
       yaxis: {
         ...plotlySceneAxis(palette, "black"),
         title: { text: metricLabel(opts.yMetric), font: plotAxisFont(palette.rgbAxisTitle, opts.narrow) },
+        tickfont: plotAxisFont(palette.axisValueLabelRgb, opts.narrow),
         type: axisType(opts.yScale),
       },
       zaxis: {
         ...plotlySceneAxis(palette, "grey"),
         title: { text: metricLabel(opts.zMetric), font: plotAxisFont(palette.rgbAxisTitle, opts.narrow) },
+        tickfont: plotAxisFont(palette.axisValueLabelRgb, opts.narrow),
         type: axisType(opts.zScale),
       },
       bgcolor: "rgba(0,0,0,0)",
@@ -236,8 +240,6 @@ export function buildAnalogCoverageHeatmap(
   const z = types.map((type) =>
     years.map((year) => rows.filter((r) => r.type === type && r.year === year).length),
   );
-  const total = years.map((year) => rows.filter((r) => r.year === year).length);
-
   const data: Data[] = [
     {
       type: "heatmap",
@@ -248,21 +250,11 @@ export function buildAnalogCoverageHeatmap(
       hovertemplate: "Type: %{y}<br>Year: %{x}<br>Count: %{z}<extra></extra>",
       colorbar: { title: { text: "Papers", font: plotAxisFont(palette.rgbAxisTitle, narrow) } },
     },
-    {
-      type: "scatter",
-      x: years,
-      y: total.map(() => "Total"),
-      mode: "text",
-      text: total.map(String),
-      textfont: plotAxisFont(palette.rgbAxisTitle, narrow),
-      hovertemplate: "Year %{x}<br>Total papers: %{text}<extra></extra>",
-      showlegend: false,
-    },
   ];
 
   const layout: Partial<Layout> = {
     autosize: true,
-    margin: narrow ? { l: 48, r: 18, t: 44, b: 52 } : { l: 64, r: 28, t: 52, b: 62 },
+    margin: narrow ? { l: 56, r: 18, t: 36, b: 46 } : { l: 76, r: 28, t: 44, b: 52 },
     title: { text: "<b>Publication Coverage by Year and Type</b>", font: plotFont(palette.rgbAxisTitle) },
     paper_bgcolor: plotInsetBackground(theme),
     plot_bgcolor: plotInsetBackground(theme),
@@ -273,6 +265,7 @@ export function buildAnalogCoverageHeatmap(
       tickfont: plotAxisFont(palette.axisValueLabelRgb, narrow),
       gridcolor: palette.axisGridGreyRgb,
       zeroline: false,
+      automargin: true,
     },
     yaxis: {
       ...plotlyAxisFrameY(palette),
@@ -280,6 +273,7 @@ export function buildAnalogCoverageHeatmap(
       tickfont: plotAxisFont(palette.axisValueLabelRgb, narrow),
       gridcolor: palette.axisGridBlackRgb,
       zeroline: false,
+      automargin: true,
     },
   };
 

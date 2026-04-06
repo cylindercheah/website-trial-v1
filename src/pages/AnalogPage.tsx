@@ -432,7 +432,7 @@ export function AnalogPage(): JSX.Element {
       <div className="chart-card">
         <h2>Coverage Heatmap</h2>
         <p className="hint">Paper count by publication year and topology type under current filters.</p>
-        <div className="plot-host">
+        <div className="plot-host plot-host--short">
           <div ref={heatmapRef} style={{ width: "100%", height: "100%" }} />
         </div>
       </div>
